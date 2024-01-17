@@ -3,9 +3,10 @@ using UnityEngine;
 public class characterControls : MonoBehaviour
 {
     [Header("Movement Variables")]
-    [Tooltip("The players movementSpeed")]
+    [Tooltip("The players run speed")]
     [SerializeField]
-    private float movementSpeed = 5.0f;
+    private float runSpeed = 8.0f;
+    private float movementSpeed;
     [Tooltip("Whether the player can run or not(hub related)")]
     [SerializeField]
     private bool canRun;
@@ -48,19 +49,20 @@ public class characterControls : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
+        HandleAnimation();
     }
 
     private void HandleMovement()
     {
         if (canRun && Input.GetButton("Sprint"))
         {
-            movementSpeed = 8;
+            movementSpeed = runSpeed;
         }
         else
         {
             movementSpeed = 5;
         }
-
+        
         float verticalSpeed = Input.GetAxis(verticalMoveInput) * movementSpeed;
         float horizontalSpeed = Input.GetAxis(horizontalMoveInput) * movementSpeed;
 
@@ -78,5 +80,17 @@ public class characterControls : MonoBehaviour
         verticalRotation -= Input.GetAxis(mouseYInput) * mouseSensitivity;
         verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
         playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+    }
+
+    private void HandleAnimation()
+    {
+        if (characterController.velocity.magnitude == 0)
+        {
+            playerAnimator.SetFloat("Movespeed", 0);
+        }
+        else
+        {
+            playerAnimator.SetFloat("Movespeed", movementSpeed);
+        }
     }
 }

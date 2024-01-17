@@ -2579,8 +2579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a17741fa792ce14f9affc2cb1fc6917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  canRun: 0
+  runSpeed: 10
+  canRun: 1
   mouseSensitivity: 2
   upDownRange: 60
   horizontalMoveInput: Horizontal
