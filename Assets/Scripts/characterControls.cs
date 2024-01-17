@@ -2,26 +2,34 @@ using UnityEngine;
 
 public class characterControls : MonoBehaviour
 {
-    [Header("Movement Speeds")]
+    [Header("Movement Speed")]
+    [Tooltip("The players movementSpeed")]
     [SerializeField]
-    private float walkSpeed = 3.0f;
+    private float walkSpeed = 5.0f;
 
     [Header("Look Sensitivity")]
+    [Tooltip("Mouse sensitivity for the camera")]
     [SerializeField]
     private float mouseSensitivity = 2.0f;
+    [Tooltip("The range of motion for the camera's up and down")]
     [SerializeField]
     private float upDownRange = 80.0f;
 
     [Header("Inputs Customization")]
+    [Tooltip("The input for horizontal character movement")]
     [SerializeField]
     private string horizontalMoveInput = "Horizontal";
+    [Tooltip("The input for vertical character movement")]
     [SerializeField]
     private string verticalMoveInput = "Vertical";
+    [Tooltip("The input for horizontal camera control")]
     [SerializeField]
     private string mouseXInput = "Mouse X";
+    [Tooltip("The input for vertical camera control")]
     [SerializeField]
     private string mouseYInput = "Mouse Y";
 
+    [Tooltip("The player's camera")]
     [SerializeField]
     private Camera playerCamera;
 
