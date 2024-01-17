@@ -2579,7 +2579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a17741fa792ce14f9affc2cb1fc6917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
+  movementSpeed: 5
+  canRun: 0
   mouseSensitivity: 2
   upDownRange: 60
   horizontalMoveInput: Horizontal
@@ -2587,6 +2588,8 @@ MonoBehaviour:
   mouseXInput: Mouse X
   mouseYInput: Mouse Y
   playerCamera: {fileID: 1652963635}
+  playerAnimator: {fileID: 1742098355077959230}
+  characterController: {fileID: 698650318}
 --- !u!1 &703713265
 GameObject:
   m_ObjectHideFlags: 0
@@ -6315,7 +6318,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
