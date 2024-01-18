@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class characterControls : MonoBehaviour
 {
+    #region Variables Section
     [Header("Movement Variables")]
     [Tooltip("The players run speed")]
     [SerializeField]
@@ -11,13 +12,18 @@ public class characterControls : MonoBehaviour
     [SerializeField]
     private bool canRun;
 
-    [Header("Look Sensitivity")]
+    [Header("Camera Controls")]
     [Tooltip("Mouse sensitivity for the camera")]
     [SerializeField]
     private float mouseSensitivity = 2.0f;
     [Tooltip("The range of motion for the camera's up and down")]
     [SerializeField]
     private float upDownRange = 80.0f;
+    [Tooltip("Radius for final point of raycast(better detection)")]
+    [SerializeField]
+    public float sphereRadius;
+    [SerializeField]
+    private LayerMask thingsToAvoid;
 
     [Header("Inputs Customization")]
     [Tooltip("The input button for horizontal character movement")]
@@ -44,12 +50,14 @@ public class characterControls : MonoBehaviour
     [Tooltip("Controls the players actual movement")]
     [SerializeField]
     private CharacterController characterController;
+    #endregion
 
     private void Update()
     {
         HandleMovement();
         HandleRotation();
         HandleAnimation();
+        HandleRaySphereCast();
     }
 
     private void HandleMovement()
@@ -92,5 +100,20 @@ public class characterControls : MonoBehaviour
         {
             playerAnimator.SetFloat("Movespeed", movementSpeed);
         }
+    }
+
+    private void HandleRaySphereCast()
+    {
+        RaycastHit HitInfo;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out HitInfo, 100.0f, thingsToAvoid))
+        {
+            if (Physics.CheckSphere(HitInfo.point, sphereRadius))
+            {
+                
+            }
+        }
+
+        Vector3 direction = HitInfo.point - playerCamera.transform.position;
+        Debug.DrawRay(playerCamera.transform.position, direction, Color.yellow);
     }
 }
