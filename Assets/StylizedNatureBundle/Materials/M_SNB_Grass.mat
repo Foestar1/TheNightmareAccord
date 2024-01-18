@@ -2,14 +2,18 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_SNB_Grass
   m_Shader: {fileID: 4800000, guid: f7835d26e94875f47848e4600cd0ab70, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _TRANSLUCENCY1_ON _TRANSLUCENCY_ON
+  m_ValidKeywords:
+  - _TRANSLUCENCY_ON
+  m_InvalidKeywords:
+  - _ALPHATEST_ON
+  - _TRANSLUCENCY1_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -83,6 +87,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
     - _BumpScale: 1
@@ -160,7 +165,7 @@ Material:
     - _FlowerInsideColor02: {r: 1, g: 0.9507267, b: 0.6084906, a: 0}
     - _FlowerMainColor01: {r: 1, g: 0.9637498, b: 0.759434, a: 0}
     - _FlowerMainColor02: {r: 1, g: 0.70334506, b: 0.15566015, a: 0}
-    - _GrassColor: {r: 0.43923545, g: 0.735849, b: 0.21172985, a: 1}
+    - _GrassColor: {r: 0.49246958, g: 0.6509434, b: 0.371529, a: 1}
     - _GrassColorVariation: {r: 0.5264154, g: 0.7264151, b: 0.21586864, a: 0}
     - _HeightColor: {r: 0.7004818, g: 0.8867924, b: 0.4141151, a: 1}
     - _SSSColor: {r: 1, g: 0.9439245, b: 0.5801887, a: 0}
