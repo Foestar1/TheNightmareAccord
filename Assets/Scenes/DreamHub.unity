@@ -2585,9 +2585,6 @@ MonoBehaviour:
   upDownRange: 60
   radius: 5
   interactableDistance: 5
-  thingsToAvoid:
-    serializedVersion: 2
-    m_Bits: 1
   horizontalMoveInput: Horizontal
   verticalMoveInput: Vertical
   mouseXInput: Mouse X
