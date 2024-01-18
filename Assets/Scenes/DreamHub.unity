@@ -2583,7 +2583,8 @@ MonoBehaviour:
   canRun: 1
   mouseSensitivity: 2
   upDownRange: 60
-  sphereRadius: 0
+  radius: 5
+  interactableDistance: 5
   thingsToAvoid:
     serializedVersion: 2
     m_Bits: 1
@@ -9149,9 +9150,10 @@ GameObject:
   - component: {fileID: 1848610984621936081}
   - component: {fileID: 1860168571671233245}
   - component: {fileID: 1871962907053921785}
+  - component: {fileID: 1871962907053921786}
   m_Layer: 0
   m_Name: Flower_03_b (1)
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9206,6 +9208,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &1871962907053921786
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850398476989057257}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.31689444
+  m_Height: 1.0411651
+  m_Direction: 1
+  m_Center: {x: -0.000000035348275, y: 0.52715135, z: -0.00000007693336}
 --- !u!4 &1924020159461718457
 Transform:
   m_ObjectHideFlags: 0
@@ -9302,9 +9318,10 @@ GameObject:
   - component: {fileID: 2012665188134117325}
   - component: {fileID: 1988722705264709825}
   - component: {fileID: 1996068728531961829}
+  - component: {fileID: 2012665188134117326}
   m_Layer: 0
   m_Name: Flower_03_b (2)
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9324,6 +9341,20 @@ Transform:
   m_Father: {fileID: 166277657}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -198.901, z: 73.155}
+--- !u!136 &2012665188134117326
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009755704249457397}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3168946
+  m_Height: 1.0411651
+  m_Direction: 1
+  m_Center: {x: -0.00000009426207, y: 0.5271508, z: -0.000000061223034}
 --- !u!1 &2141662006863915920
 GameObject:
   m_ObjectHideFlags: 0
@@ -10534,9 +10565,10 @@ GameObject:
   - component: {fileID: 7003353534253060247}
   - component: {fileID: 7009809387936587675}
   - component: {fileID: 7020532732863170751}
+  - component: {fileID: 7020532732863170752}
   m_Layer: 0
   m_Name: Flower_03_b
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10591,6 +10623,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &7020532732863170752
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7006073343778264495}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.31689438
+  m_Height: 1.0411649
+  m_Direction: 1
+  m_Center: {x: 0.00000035762787, y: 0.5271522, z: -0.000000029802322}
 --- !u!1 &7101144372560610769
 GameObject:
   m_ObjectHideFlags: 0

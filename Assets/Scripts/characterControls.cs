@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class characterControls : MonoBehaviour
 {
@@ -21,9 +22,10 @@ public class characterControls : MonoBehaviour
     private float upDownRange = 80.0f;
     [Tooltip("Radius for final point of raycast(better detection)")]
     [SerializeField]
-    public float sphereRadius;
+    public float radius;
+    [Tooltip("The distance required to see an interactable")]
     [SerializeField]
-    private LayerMask thingsToAvoid;
+    private float interactableDistance;
 
     [Header("Inputs Customization")]
     [Tooltip("The input button for horizontal character movement")]
@@ -60,6 +62,7 @@ public class characterControls : MonoBehaviour
         HandleRaySphereCast();
     }
 
+    #region custom functions
     private void HandleMovement()
     {
         if (canRun && Input.GetButton("Sprint"))
@@ -105,15 +108,37 @@ public class characterControls : MonoBehaviour
     private void HandleRaySphereCast()
     {
         RaycastHit HitInfo;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out HitInfo, 100.0f, thingsToAvoid))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out HitInfo, 100.0f))
         {
-            if (Physics.CheckSphere(HitInfo.point, sphereRadius))
+            //find all colliders near the point
+            Collider[] hitColliders = Physics.OverlapSphere(HitInfo.point, radius);
+            //make a list
+            List<GameObject> interactablesNearby = new List<GameObject>();
+
+            //check it twice, jk. check it once
+            foreach (var hitCollider in hitColliders)
             {
-                
+                // Check if the collider has the "Interactable" tag
+                if (hitCollider.tag == "Interactable")
+                {
+                    float distance = Vector3.Distance(this.transform.position, hitCollider.transform.position);
+                    if (distance < interactableDistance)
+                    {
+                        //add to list if is interactable
+                        interactablesNearby.Add(hitCollider.gameObject);
+                    }
+                }
+            }
+
+            //we have interactables
+            if (interactablesNearby.Count > 0)
+            {
+                Debug.Log("We see a rose close by");
             }
         }
 
         Vector3 direction = HitInfo.point - playerCamera.transform.position;
         Debug.DrawRay(playerCamera.transform.position, direction, Color.yellow);
     }
+    #endregion
 }
