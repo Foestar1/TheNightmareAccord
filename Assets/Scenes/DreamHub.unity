@@ -2580,7 +2580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 10
-  canRun: 1
+  canRun: 0
   mouseSensitivity: 2
   upDownRange: 60
   radius: 5
