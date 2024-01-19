@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class characterControls : MonoBehaviour
 {
@@ -20,12 +21,11 @@ public class characterControls : MonoBehaviour
     [Tooltip("The range of motion for the camera's up and down")]
     [SerializeField]
     private float upDownRange = 80.0f;
-    [Tooltip("Radius for final point of raycast(better detection)")]
-    [SerializeField]
-    public float radius;
     [Tooltip("The distance required to see an interactable")]
     [SerializeField]
     private float interactableDistance;
+    private GameObject playerCrosshair;
+    private GameObject interactionButton;
 
     [Header("Inputs Customization")]
     [Tooltip("The input button for horizontal character movement")]
@@ -55,6 +55,9 @@ public class characterControls : MonoBehaviour
     [Tooltip("The characters Teddy bear hanging in their hands")]
     [SerializeField]
     private GameObject TeddyObject;
+    [Tooltip("The colors for the crosshair depending on what we hover over")]
+    [SerializeField]
+    private Color[] CrosshairColors;
     #endregion
 
     private void Awake()
@@ -71,6 +74,7 @@ public class characterControls : MonoBehaviour
 
     private void Update()
     {
+        HandleUI();
         HandleMovement();
         HandleRotation();
         HandleAnimation();
@@ -78,6 +82,20 @@ public class characterControls : MonoBehaviour
     }
 
     #region custom functions
+    private void HandleUI()
+    {
+        if (playerCrosshair == null)
+        {
+            playerCrosshair = GameObject.Find("Crosshair");
+        }
+
+        if (interactionButton == null)
+        {
+            interactionButton = GameObject.Find("InteractionButton");
+            interactionButton.SetActive(false);
+        }
+    }
+
     private void HandleMovement()
     {
         if (canRun && Input.GetButton("Sprint"))
@@ -125,30 +143,42 @@ public class characterControls : MonoBehaviour
         RaycastHit HitInfo;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out HitInfo, 100.0f))
         {
-            //find all colliders near the point
-            Collider[] hitColliders = Physics.OverlapSphere(HitInfo.point, radius);
-            //make a list
-            List<GameObject> interactablesNearby = new List<GameObject>();
 
-            //check it twice, jk. check it once
-            foreach (var hitCollider in hitColliders)
+            // Check if the collider has the "Interactable" tag
+            if (HitInfo.transform.tag == "Interactable")
             {
-                // Check if the collider has the "Interactable" tag
-                if (hitCollider.tag == "Interactable")
+                float distance = Vector3.Distance(playerCamera.transform.position, HitInfo.transform.position);
+                if (distance < interactableDistance)
                 {
-                    float distance = Vector3.Distance(this.transform.position, hitCollider.transform.position);
-                    if (distance < interactableDistance)
-                    {
-                        //add to list if is interactable
-                        interactablesNearby.Add(hitCollider.gameObject);
-                    }
+                    interactionButton.SetActive(true);
+                    playerCrosshair.GetComponent<Image>().color = CrosshairColors[2];
+                }
+                else
+                {
+                    playerCrosshair.GetComponent<Image>().color = CrosshairColors[0];
+                    interactionButton.SetActive(false);
                 }
             }
-
-            //we have interactables
-            if (interactablesNearby.Count > 0)
+            else
             {
-                Debug.Log("We see a rose close by");
+                interactionButton.SetActive(false);
+
+                if (HitInfo.transform.tag == "Enemy")
+                {
+                    float distance = Vector3.Distance(playerCamera.transform.position, HitInfo.transform.position);
+                    if (distance < interactableDistance * 4)
+                    {
+                        playerCrosshair.GetComponent<Image>().color = CrosshairColors[1];
+                    }
+                    else
+                    {
+                        playerCrosshair.GetComponent<Image>().color = CrosshairColors[0];
+                    }
+                }
+                else
+                {
+                    playerCrosshair.GetComponent<Image>().color = CrosshairColors[0];
+                }
             }
         }
 
