@@ -52,7 +52,22 @@ public class characterControls : MonoBehaviour
     [Tooltip("Controls the players actual movement")]
     [SerializeField]
     private CharacterController characterController;
+    [Tooltip("The characters Teddy bear hanging in their hands")]
+    [SerializeField]
+    private GameObject TeddyObject;
     #endregion
+
+    private void Awake()
+    {
+        if (canRun)
+        {
+            TeddyObject.SetActive(true);
+        }
+        else
+        {
+            TeddyObject.SetActive(false);
+        }
+    }
 
     private void Update()
     {
