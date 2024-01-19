@@ -1191,7 +1191,6 @@ MonoBehaviour:
   canRun: 0
   mouseSensitivity: 2
   upDownRange: 60
-  radius: 5
   interactableDistance: 5
   horizontalMoveInput: Horizontal
   verticalMoveInput: Vertical
@@ -1201,6 +1200,10 @@ MonoBehaviour:
   playerAnimator: {fileID: 641613026772570569}
   characterController: {fileID: 1209879090922295609}
   TeddyObject: {fileID: 2020765270886030702}
+  CrosshairColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.27792454, g: 1, b: 0, a: 1}
 --- !u!1 &1636093002547786830
 GameObject:
   m_ObjectHideFlags: 0
