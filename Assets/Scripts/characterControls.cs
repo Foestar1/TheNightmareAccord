@@ -13,6 +13,7 @@ public class characterControls : MonoBehaviour
     [Tooltip("Whether the player can run or not(hub related)")]
     [SerializeField]
     private bool canRun;
+    private bool canMove;
 
     [Header("Camera Controls")]
     [Tooltip("Mouse sensitivity for the camera")]
@@ -62,6 +63,7 @@ public class characterControls : MonoBehaviour
 
     private void Awake()
     {
+        canMove = true;
         if (canRun)
         {
             TeddyObject.SetActive(true);
@@ -69,6 +71,12 @@ public class characterControls : MonoBehaviour
         else
         {
             TeddyObject.SetActive(false);
+        }
+
+        if (canMove)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 

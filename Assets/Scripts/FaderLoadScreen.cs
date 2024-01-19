@@ -26,9 +26,6 @@ public class FaderLoadScreen : MonoBehaviour
         {
             thing.gameObject.SetActive(false);
         }
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void loadHub()
