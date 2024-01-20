@@ -7,10 +7,10 @@ TerrainLayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Pathing
-  m_DiffuseTexture: {fileID: 2800000, guid: 937d42efde3a6b64c8ca5c63a0d6df98, type: 3}
-  m_NormalMapTexture: {fileID: 2800000, guid: 32645c84b25091040bfa43b6f1de4480, type: 3}
+  m_DiffuseTexture: {fileID: 2800000, guid: a159bc8e26a449948b79210418374a04, type: 3}
+  m_NormalMapTexture: {fileID: 2800000, guid: 360f19512c5f3a946ab663a853f81b76, type: 3}
   m_MaskMapTexture: {fileID: 0}
-  m_TileSize: {x: 10, y: 10}
+  m_TileSize: {x: 15, y: 15}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0
