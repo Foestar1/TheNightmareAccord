@@ -30,7 +30,7 @@ Material:
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _FLIPBOOKBLENDING_OFF
-  m_LightmapFlags: 0
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -166,7 +166,7 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 1
-    - _SoftParticlesFarFadeDistance: 48.88
+    - _SoftParticlesFarFadeDistance: 60.7
     - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 5
@@ -180,15 +180,15 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0.6392157}
-    - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseColorAddSubDiff: {r: -1, g: 1, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0.6392157}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _DeepColor: {r: 0, g: 0.3333333, b: 0.8509804, a: 1}
-    - _EmissionColor: {r: 0.35270226, g: 0.8679245, b: 0.27429688, a: 1}
+    - _EmissionColor: {r: 0.07580001, g: 2.9208732, b: 0, a: 1}
     - _FoamColor: {r: 0.8705882, g: 0.8705882, b: 0.8705882, a: 1}
     - _FresnelColor: {r: 0.8313726, g: 0.8313726, b: 0.8313726, a: 1}
     - _ShallowColor: {r: 0, g: 0.6117647, b: 1, a: 1}
-    - _SoftParticleFadeParams: {r: 0, g: 0.020458264, b: 0, a: 0}
+    - _SoftParticleFadeParams: {r: 0, g: 0.016474465, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

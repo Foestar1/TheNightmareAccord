@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   shadows:
     m_OverrideState: 1
     m_Value: {x: 1, y: 0.9815295, z: 0.9029882, w: -0.2780536}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9427608, z: 0.79416203, w: 0.19860971}
+    m_Value: {x: 1, y: 0.9427608, z: 0.79416203, w: 0.0017592983}
   highlights:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -50,158 +50,6 @@ MonoBehaviour:
   mode:
     m_OverrideState: 1
     m_Value: 2
---- !u!114 &-4740667660348376858
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 840cc048a5aa61d4cbc01d6073ffb0a0, type: 3}
-  m_Name: BetterFogVolume
-  m_EditorClassIdentifier: 
-  active: 1
-  _FogIntensity:
-    m_OverrideState: 0
-    m_Value: 1
-  _EnergyLoss:
-    m_OverrideState: 0
-    m_Value: 0
-  _UseGradient:
-    m_OverrideState: 0
-    m_Value: 0
-  _FogColor:
-    m_OverrideState: 0
-    m_Value: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  _GradientStart:
-    m_OverrideState: 0
-    m_Value: 0
-  _GradientEnd:
-    m_OverrideState: 0
-    m_Value: 100
-  _GradientTexture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-    dimension: 1
-    LerpValue: 0
-    FromTexture: {fileID: 0}
-  _UseSunLight:
-    m_OverrideState: 0
-    m_Value: 0
-  _SunColor:
-    m_OverrideState: 0
-    m_Value: {r: 0.9, g: 0.85, b: 0.8, a: 1}
-  _SunIntensity:
-    m_OverrideState: 0
-    m_Value: 0
-  _SunPower:
-    m_OverrideState: 0
-    m_Value: 2
-  _UseDistanceFog:
-    m_OverrideState: 0
-    m_Value: 1
-  _UseRadialDistance:
-    m_OverrideState: 0
-    m_Value: 0
-  _FogType:
-    m_OverrideState: 0
-    m_Value: 3
-  _DistanceFogOffset:
-    m_OverrideState: 0
-    m_Value: -20
-  _SceneStart:
-    m_OverrideState: 0
-    m_Value: 10
-  _SceneEnd:
-    m_OverrideState: 0
-    m_Value: 100
-  _FogDensity:
-    m_OverrideState: 0
-    m_Value: 0
-  _UseSkyboxHeightFog:
-    m_OverrideState: 0
-    m_Value: 0
-  _SkyboxFogOffset:
-    m_OverrideState: 0
-    m_Value: 0
-  _SkyboxFogHardness:
-    m_OverrideState: 0
-    m_Value: 0.75
-  _SkyboxFogIntensity:
-    m_OverrideState: 0
-    m_Value: 1
-  _SkyboxFill:
-    m_OverrideState: 0
-    m_Value: 0
-  _UseHeightFog:
-    m_OverrideState: 0
-    m_Value: 0
-  _Height:
-    m_OverrideState: 0
-    m_Value: 4
-  _HeightDensity:
-    m_OverrideState: 0
-    m_Value: 0
-  _HeightFogType:
-    m_OverrideState: 0
-    m_Value: 2
-  _UseNoise:
-    m_OverrideState: 0
-    m_Value: 0
-  _NoiseAffect:
-    m_OverrideState: 0
-    m_Value: 2
-  _NoiseIntensity:
-    m_OverrideState: 0
-    m_Value: 0
-  _NoiseDistanceEnd:
-    m_OverrideState: 0
-    m_Value: 80
-  _NoiseEndHardness:
-    m_OverrideState: 0
-    m_Value: 0.35
-  _Scale1:
-    m_OverrideState: 0
-    m_Value: 40
-  _Lerp1:
-    m_OverrideState: 0
-    m_Value: 0.5
-  _NoiseSpeed1:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: 0, z: 0}
-  _NoiseTimeScale1:
-    m_OverrideState: 0
-    m_Value: 0.1
-  _UseSSMS:
-    m_OverrideState: 0
-    m_Value: 0
-  _Threshold:
-    m_OverrideState: 0
-    m_Value: 0
-  _SoftKnee:
-    m_OverrideState: 0
-    m_Value: 0.5
-  _Radius:
-    m_OverrideState: 0
-    m_Value: 7
-  _BlurWeight:
-    m_OverrideState: 0
-    m_Value: 1
-  _Intensity:
-    m_OverrideState: 0
-    m_Value: 1
-  _HighQuality:
-    m_OverrideState: 0
-    m_Value: 0
-  _AntiFlicker:
-    m_OverrideState: 0
-    m_Value: 0
-  _FadeRamp:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-    dimension: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +66,6 @@ MonoBehaviour:
   - {fileID: -5219985181512625654}
   - {fileID: 2175282222088166400}
   - {fileID: 5724971707860426117}
-  - {fileID: -4740667660348376858}
   - {fileID: -9038346307059550536}
   - {fileID: 6967899756231927563}
 --- !u!114 &2175282222088166400
@@ -320,9 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb4b772797da9440885e8bd939e9560, type: 3}
   m_Name: ColorCurves
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   master:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       <length>k__BackingField: 2
       m_Loop: 0
@@ -448,7 +295,7 @@ MonoBehaviour:
   hueVsHue:
     m_OverrideState: 1
     m_Value:
-      <length>k__BackingField: 3
+      <length>k__BackingField: 6
       m_Loop: 1
       m_ZeroValue: 0.5
       m_Range: 1
@@ -456,26 +303,53 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.0027027028
+          time: 0.0026954177
           value: 0.5
-          inSlope: -1.1554816
-          outSlope: -1.1554816
+          inSlope: 0
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.048648648
-          value: 0.92571425
-          inSlope: -0.0376702
-          outSlope: -0.0376702
+          time: 0.03773585
+          value: 0.5657143
+          inSlope: 0
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.11621621
-          value: 0.49714285
+          time: 0.07816712
+          value: 0.5
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.2884097
+          value: 0.5
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.34501347
+          value: 0.6628572
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.38814017
+          value: 0.5
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -488,7 +362,7 @@ MonoBehaviour:
   hueVsSat:
     m_OverrideState: 1
     m_Value:
-      <length>k__BackingField: 3
+      <length>k__BackingField: 6
       m_Loop: 1
       m_ZeroValue: 0.5
       m_Range: 1
@@ -496,17 +370,8 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 0.5942857
-          inSlope: 1.2167116
-          outSlope: 1.2167116
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 0.054054055
-          value: 0.7257143
+          time: 0.0053908355
+          value: 0.5
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -514,8 +379,44 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.13513513
-          value: 0.32
+          time: 0.04043127
+          value: 0.5942857
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.07008086
+          value: 0.5
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.27762803
+          value: 0.5
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.32345015
+          value: 0.5942857
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.3800539
+          value: 0.5
           inSlope: 0
           outSlope: 0
           tangentMode: 0
