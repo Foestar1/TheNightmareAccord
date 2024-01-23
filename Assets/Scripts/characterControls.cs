@@ -13,7 +13,7 @@ public class characterControls : MonoBehaviour
     [Tooltip("Whether the player can run or not(hub related)")]
     [SerializeField]
     private bool canRun;
-    private bool canMove;
+    public bool canMove;
 
     [Header("Camera Controls")]
     [Tooltip("Mouse sensitivity for the camera")]
@@ -47,6 +47,9 @@ public class characterControls : MonoBehaviour
     [Tooltip("Our players view camera")]
     [SerializeField]
     private Camera playerCamera;
+    [Tooltip("What we are targeting interactable wise")]
+    [SerializeField]
+    private GameObject targetedObject;
     [Tooltip("Controls the players animations")]
     [SerializeField]
     private Animator playerAnimator;
@@ -61,6 +64,7 @@ public class characterControls : MonoBehaviour
     private Color[] CrosshairColors;
     #endregion
 
+    #region Unity Built in Functions
     private void Awake()
     {
         canMove = true;
@@ -82,14 +86,19 @@ public class characterControls : MonoBehaviour
 
     private void Update()
     {
-        HandleUI();
-        HandleMovement();
-        HandleRotation();
-        HandleAnimation();
-        HandleRaySphereCast();
+        if (canMove)
+        {
+            HandleUI();
+            HandleMovement();
+            HandleRotation();
+            HandleAnimation();
+            HandleRaySphereCast();
+            HandleInteraction();
+        }
     }
+    #endregion
 
-    #region custom functions
+    #region Custom Functions
     private void HandleUI()
     {
         if (playerCrosshair == null)
@@ -158,11 +167,13 @@ public class characterControls : MonoBehaviour
                 float distance = Vector3.Distance(playerCamera.transform.position, HitInfo.transform.position);
                 if (distance < interactableDistance)
                 {
+                    targetedObject = HitInfo.transform.gameObject;
                     interactionButton.SetActive(true);
                     playerCrosshair.GetComponent<Image>().color = CrosshairColors[2];
                 }
                 else
                 {
+                    targetedObject = null;
                     playerCrosshair.GetComponent<Image>().color = CrosshairColors[0];
                     interactionButton.SetActive(false);
                 }
@@ -170,6 +181,7 @@ public class characterControls : MonoBehaviour
             else
             {
                 interactionButton.SetActive(false);
+                targetedObject = null;
 
                 if (HitInfo.transform.tag == "Enemy")
                 {
@@ -189,9 +201,42 @@ public class characterControls : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            targetedObject = null;
+            playerCrosshair.GetComponent<Image>().color = CrosshairColors[0];
+            interactionButton.SetActive(false);
+        }
 
         Vector3 direction = HitInfo.point - playerCamera.transform.position;
         Debug.DrawRay(playerCamera.transform.position, direction, Color.yellow);
+    }
+
+    private void HandleInteraction()
+    {
+        if (targetedObject != null)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                #region DreamHub section
+                //the section for the hub
+                if (!canRun)
+                {
+                    if (targetedObject.name == "PetalsLament")
+                    {
+                        interactionButton.SetActive(false);
+                        canMove = false;
+                        GameObject.Find("HubController").GetComponent<HubController>().levelChoice = 0;
+                        GameObject.Find("HubController").GetComponent<HubController>().openLevelInfo();
+                    }
+                }
+                #endregion
+
+                #region Level section
+                //the section for the levels
+                #endregion
+            }
+        }
     }
     #endregion
 }
