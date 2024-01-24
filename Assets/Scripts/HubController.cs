@@ -50,6 +50,14 @@ public class HubController : MonoBehaviourPunCallbacks
     [Tooltip("The players list")]
     [SerializeField]
     private Transform playerListContent;
+    private int playersTotalReady;
+    private int readyUP;
+    [Tooltip("The ready sprite for our players name prefab in lobby")]
+    [SerializeField]
+    private Sprite readyImage;
+    [Tooltip("The not ready sprite for our players name prefab in lobby")]
+    [SerializeField]
+    private Sprite notReadyImage;
 
     [Header("Player Stuff")]
     [Tooltip("The player gameobject")]
@@ -108,6 +116,7 @@ public class HubController : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.InRoom)
         {
+            readyUP = 0;
             PhotonNetwork.LeaveRoom();
         }
     }
@@ -141,6 +150,20 @@ public class HubController : MonoBehaviourPunCallbacks
 
         PhotonNetwork.JoinRandomRoom(null, 0, MatchmakingMode.FillRoom, typedLobby, null);
     }
+
+    public void sendReady()
+    {
+        readyUP = 1 - readyUP;
+
+        if (readyUP == 0)
+        {
+            this.photonView.RPC("playerNotReady", RpcTarget.All, PhotonNetwork.LocalPlayer.UserId.ToString());
+        }
+        else
+        {
+            this.photonView.RPC("playerReady", RpcTarget.All, PhotonNetwork.LocalPlayer.UserId.ToString());
+        }
+    }
     #endregion
 
     #region callbacks
@@ -169,6 +192,8 @@ public class HubController : MonoBehaviourPunCallbacks
         }
 
         //set the UI
+        playersTotalReady = 0;
+        readyUP = 0;
         connectionUI.SetActive(false);
         connectionText.text = null;
         connectionUI.transform.GetChild(1).gameObject.SetActive(false);
@@ -226,6 +251,22 @@ public class HubController : MonoBehaviourPunCallbacks
     {
         connectionText.text = returnCode + ":" + message;
         StartCoroutine(resetText());
+    }
+    #endregion
+
+    #region RPC's
+    [PunRPC]
+    void playerReady(string playerNameObject)
+    {
+        playersTotalReady++;
+        GameObject.Find(playerNameObject).transform.GetChild(1).GetComponent<Image>().sprite = readyImage;
+    }
+
+    [PunRPC]
+    void playerNotReady(string playerNameObject)
+    {
+        playersTotalReady--;
+        GameObject.Find(playerNameObject).transform.GetChild(1).GetComponent<Image>().sprite = notReadyImage;
     }
     #endregion
 
