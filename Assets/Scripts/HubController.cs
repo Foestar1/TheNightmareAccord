@@ -68,6 +68,29 @@ public class HubController : MonoBehaviourPunCallbacks
     private GameObject playerNamePrefab;
     #endregion
 
+    #region built in functions
+    private void Update()
+    {
+        if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
+        {
+            if (playersTotalReady == PhotonNetwork.CurrentRoom.PlayerCount)
+            {
+                if (gameRoomUI.transform.GetChild(1).gameObject.activeSelf == false)
+                {
+                    gameRoomUI.transform.GetChild(1).gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                if (gameRoomUI.transform.GetChild(1).gameObject.activeSelf == true)
+                {
+                    gameRoomUI.transform.GetChild(1).gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+    #endregion
+
     #region custom functions
     public void openLevelInfo()
     {
@@ -198,18 +221,10 @@ public class HubController : MonoBehaviourPunCallbacks
         connectionText.text = null;
         connectionUI.transform.GetChild(1).gameObject.SetActive(false);
         gameRoomUI.SetActive(true);
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            gameRoomUI.transform.GetChild(1).gameObject.SetActive(true);
-        }
-        else
-        {
-            gameRoomUI.transform.GetChild(1).gameObject.SetActive(false);
-        }
+        gameRoomUI.transform.GetChild(1).gameObject.SetActive(false);
 
         //create new list
-        foreach(Player player in PhotonNetwork.PlayerList)
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
             //create the players name object
             var newPlayerListing = Instantiate(playerNamePrefab, playerListContent);
@@ -223,6 +238,11 @@ public class HubController : MonoBehaviourPunCallbacks
     {
         foreach (Transform child in playerListContent)
         {
+            if (child.transform.GetChild(1).GetComponent<Image>().sprite == readyImage)
+            {
+                playersTotalReady--;
+            }
+
             if (child.name == otherPlayer.UserId)
             {
                 GameObject.Destroy(child.gameObject);
@@ -237,6 +257,11 @@ public class HubController : MonoBehaviourPunCallbacks
         //and set the players name and gameobject name
         newPlayerListing.name = newPlayer.UserId;
         newPlayerListing.gameObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = newPlayer.NickName;
+
+        if (readyUP != 0)
+        {
+            this.photonView.RPC("playerReady", newPlayer, PhotonNetwork.LocalPlayer.UserId.ToString());
+        }
     }
     #endregion
 
@@ -260,6 +285,12 @@ public class HubController : MonoBehaviourPunCallbacks
     {
         playersTotalReady++;
         GameObject.Find(playerNameObject).transform.GetChild(1).GetComponent<Image>().sprite = readyImage;
+    }
+
+    [PunRPC]
+    void playerReadyUpdate(string playerNameObject)
+    {
+        GameObject.Find(playerNameObject).transform.GetChild(1).GetComponent<Image>().sprite = notReadyImage;
     }
 
     [PunRPC]
