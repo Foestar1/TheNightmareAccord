@@ -1,5 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8011899142767462007
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
+  m_Name: FilmGrain
+  m_EditorClassIdentifier: 
+  active: 1
+  type:
+    m_OverrideState: 1
+    m_Value: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
+  response:
+    m_OverrideState: 1
+    m_Value: 0.8
+  texture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
 --- !u!114 &-7356115733484104359
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -28,158 +53,6 @@ MonoBehaviour:
   saturation:
     m_OverrideState: 0
     m_Value: 0
---- !u!114 &-5623795384365956707
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 840cc048a5aa61d4cbc01d6073ffb0a0, type: 3}
-  m_Name: BetterFogVolume
-  m_EditorClassIdentifier: 
-  active: 1
-  _FogIntensity:
-    m_OverrideState: 0
-    m_Value: 1
-  _EnergyLoss:
-    m_OverrideState: 0
-    m_Value: 0
-  _UseGradient:
-    m_OverrideState: 0
-    m_Value: 0
-  _FogColor:
-    m_OverrideState: 0
-    m_Value: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  _GradientStart:
-    m_OverrideState: 0
-    m_Value: 0
-  _GradientEnd:
-    m_OverrideState: 0
-    m_Value: 100
-  _GradientTexture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-    dimension: 1
-    LerpValue: 0
-    FromTexture: {fileID: 0}
-  _UseSunLight:
-    m_OverrideState: 0
-    m_Value: 0
-  _SunColor:
-    m_OverrideState: 0
-    m_Value: {r: 0.9, g: 0.85, b: 0.8, a: 1}
-  _SunIntensity:
-    m_OverrideState: 0
-    m_Value: 0
-  _SunPower:
-    m_OverrideState: 0
-    m_Value: 2
-  _UseDistanceFog:
-    m_OverrideState: 0
-    m_Value: 1
-  _UseRadialDistance:
-    m_OverrideState: 0
-    m_Value: 0
-  _FogType:
-    m_OverrideState: 0
-    m_Value: 3
-  _DistanceFogOffset:
-    m_OverrideState: 0
-    m_Value: -20
-  _SceneStart:
-    m_OverrideState: 0
-    m_Value: 10
-  _SceneEnd:
-    m_OverrideState: 0
-    m_Value: 100
-  _FogDensity:
-    m_OverrideState: 0
-    m_Value: 0
-  _UseSkyboxHeightFog:
-    m_OverrideState: 0
-    m_Value: 0
-  _SkyboxFogOffset:
-    m_OverrideState: 0
-    m_Value: 0
-  _SkyboxFogHardness:
-    m_OverrideState: 0
-    m_Value: 0.75
-  _SkyboxFogIntensity:
-    m_OverrideState: 0
-    m_Value: 1
-  _SkyboxFill:
-    m_OverrideState: 0
-    m_Value: 0
-  _UseHeightFog:
-    m_OverrideState: 0
-    m_Value: 0
-  _Height:
-    m_OverrideState: 0
-    m_Value: 4
-  _HeightDensity:
-    m_OverrideState: 0
-    m_Value: 0
-  _HeightFogType:
-    m_OverrideState: 0
-    m_Value: 2
-  _UseNoise:
-    m_OverrideState: 0
-    m_Value: 0
-  _NoiseAffect:
-    m_OverrideState: 0
-    m_Value: 2
-  _NoiseIntensity:
-    m_OverrideState: 0
-    m_Value: 0
-  _NoiseDistanceEnd:
-    m_OverrideState: 0
-    m_Value: 80
-  _NoiseEndHardness:
-    m_OverrideState: 0
-    m_Value: 0.35
-  _Scale1:
-    m_OverrideState: 0
-    m_Value: 40
-  _Lerp1:
-    m_OverrideState: 0
-    m_Value: 0.5
-  _NoiseSpeed1:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: 0, z: 0}
-  _NoiseTimeScale1:
-    m_OverrideState: 0
-    m_Value: 0.1
-  _UseSSMS:
-    m_OverrideState: 0
-    m_Value: 0
-  _Threshold:
-    m_OverrideState: 0
-    m_Value: 0
-  _SoftKnee:
-    m_OverrideState: 0
-    m_Value: 0.5
-  _Radius:
-    m_OverrideState: 0
-    m_Value: 7
-  _BlurWeight:
-    m_OverrideState: 0
-    m_Value: 1
-  _Intensity:
-    m_OverrideState: 0
-    m_Value: 1
-  _HighQuality:
-    m_OverrideState: 0
-    m_Value: 0
-  _AntiFlicker:
-    m_OverrideState: 0
-    m_Value: 0
-  _FadeRamp:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-    dimension: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,8 +69,8 @@ MonoBehaviour:
   - {fileID: 4511359142267278816}
   - {fileID: 5704315168087207507}
   - {fileID: 3638625646076557704}
-  - {fileID: -5623795384365956707}
   - {fileID: -7356115733484104359}
+  - {fileID: -8011899142767462007}
 --- !u!114 &3638625646076557704
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -216,7 +89,7 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.8
   scatter:
     m_OverrideState: 0
     m_Value: 0.262
@@ -234,11 +107,11 @@ MonoBehaviour:
     m_Value: 1
   dirtTexture:
     m_OverrideState: 1
-    m_Value: {fileID: 0}
+    m_Value: {fileID: 2800000, guid: bdca5e9a5f4be924782b84af1614d624, type: 3}
     dimension: 1
   dirtIntensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
 --- !u!114 &4511359142267278816
 MonoBehaviour:
   m_ObjectHideFlags: 3
