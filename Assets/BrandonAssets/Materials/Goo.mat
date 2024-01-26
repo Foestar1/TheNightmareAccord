@@ -39,17 +39,17 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 0
-    - _Normalscale: 5.44
-    - _Normalstrength: 0.09
+    - _Normalscale: 9.96
+    - _Normalstrength: 0.44
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _Trans: -7.99
-    - _Voronoiagressive: 2.08
-    - _Voronoipower: 4
-    - _Voronoiscale: 5.47
+    - _Voronoiagressive: 3.38
+    - _Voronoipower: 5.49
+    - _Voronoiscale: 2.18
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
@@ -57,9 +57,9 @@ Material:
     m_Colors:
     - _Basecolor: {r: 0, g: 1, b: 0.07058835, a: 1}
     - _VoronoiColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
-    - _VoronoiSpeed: {r: -0.05, g: -0.09, b: 0, a: 0}
-    - _VoronoiTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _normalspeed: {r: -0.5, g: -0.8, b: 0, a: 0}
+    - _VoronoiSpeed: {r: -0.25, g: -0.25, b: 0, a: 0}
+    - _VoronoiTiling: {r: 10, g: 10, b: 0, a: 0}
+    - _normalspeed: {r: -0.1, g: -0.3, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5214984801718034627
 MonoBehaviour:
