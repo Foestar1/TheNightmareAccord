@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.Rendering;
+using Smooth;
 
 public class characterControls : MonoBehaviourPunCallbacks
 {
@@ -74,6 +75,14 @@ public class characterControls : MonoBehaviourPunCallbacks
     #endregion
 
     #region Unity Built in Functions
+    private void Awake()
+    {
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            this.GetComponent<SmoothSyncPUN2>().enabled = true;
+        }
+    }
+
     private void Start()
     {
         if (canRun)
