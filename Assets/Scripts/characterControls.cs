@@ -65,9 +65,12 @@ public class characterControls : MonoBehaviourPunCallbacks
     [Tooltip("The colors for the crosshair depending on what we hover over")]
     [SerializeField]
     private Color[] CrosshairColors;
+    [Tooltip("The players head, enabled on other players but not the one we control")]
     [SerializeField]
     private SkinnedMeshRenderer[] characterHeadStuff;
     [Tooltip("The players head, enabled on other players but not the one we control")]
+    [SerializeField]
+    private MeshRenderer[] characterHairStuff;
     #endregion
 
     #region Unity Built in Functions
@@ -92,6 +95,12 @@ public class characterControls : MonoBehaviourPunCallbacks
                 {
                     piece.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
                 }
+
+                foreach (MeshRenderer piece in characterHairStuff)
+                {
+                    piece.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                }
+
                 canMove = true;
 
                 if (canMove)
@@ -106,6 +115,12 @@ public class characterControls : MonoBehaviourPunCallbacks
                 {
                     piece.shadowCastingMode = ShadowCastingMode.On;
                 }
+
+                foreach (MeshRenderer piece in characterHairStuff)
+                {
+                    piece.shadowCastingMode = ShadowCastingMode.On;
+                }
+
                 playerCamera.gameObject.SetActive(false);
             }
         }
