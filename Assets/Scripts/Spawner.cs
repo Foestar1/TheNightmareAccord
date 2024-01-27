@@ -103,13 +103,12 @@ public class Spawner : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient && playersReady == PhotonNetwork.CurrentRoom.PlayerCount && !spawnedPlayers)
         {
             spawnedPlayers = true;
-            List<Transform> tempPlayerSpawnPoints = playerSpawnPoints;
             foreach (Player player in PhotonNetwork.PlayerList)
             {
                 //var point = Random.Range(0, playerSpawnPoints.Count);
-                var point = Random.Range(0, tempPlayerSpawnPoints.Count);
+                var point = Random.Range(0, playerSpawnPoints.Count);
                 this.photonView.RPC("activateUIAndPlayer", player, point);
-                tempPlayerSpawnPoints.Remove(tempPlayerSpawnPoints[point]);
+                //playerSpawnPoints.Remove(playerSpawnPoints[point]);
             }
         }
     }
