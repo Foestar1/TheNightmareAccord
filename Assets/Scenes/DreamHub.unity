@@ -13544,6 +13544,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -1693420420305901715, guid: 40d382e54107abb4e83e9a964d945dee, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1209879090922295591, guid: 40d382e54107abb4e83e9a964d945dee, type: 3}
       propertyPath: canRun
       value: 0
