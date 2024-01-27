@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.Rendering;
 
-public class characterControls : MonoBehaviour
+public class characterControls : MonoBehaviourPunCallbacks
 {
     #region Variables Section
     [Header("Movement Variables")]
@@ -62,12 +65,17 @@ public class characterControls : MonoBehaviour
     [Tooltip("The colors for the crosshair depending on what we hover over")]
     [SerializeField]
     private Color[] CrosshairColors;
+    [Tooltip("The players head, enabled on other players but not the one we control")]
+    [SerializeField]
+    private SkinnedMeshRenderer[] characterHeadStuff;
+    [Tooltip("The players head, enabled on other players but not the one we control")]
+    [SerializeField]
+    private MeshRenderer[] characterHairStuff;
     #endregion
 
     #region Unity Built in Functions
-    private void Awake()
+    private void Start()
     {
-        canMove = true;
         if (canRun)
         {
             TeddyObject.SetActive(true);
@@ -77,8 +85,53 @@ public class characterControls : MonoBehaviour
             TeddyObject.SetActive(false);
         }
 
-        if (canMove)
+        if (PhotonNetwork.IsConnectedAndReady)
         {
+            if (this.photonView.IsMine)
+            {
+                GameObject.Find("Main Camera").SetActive(false);
+
+                foreach(SkinnedMeshRenderer piece in characterHeadStuff)
+                {
+                    piece.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                }
+
+                foreach (MeshRenderer piece in characterHairStuff)
+                {
+                    piece.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                }
+
+                canMove = true;
+
+                if (canMove)
+                {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+            }
+            else
+            {
+                foreach (SkinnedMeshRenderer piece in characterHeadStuff)
+                {
+                    piece.shadowCastingMode = ShadowCastingMode.On;
+                }
+
+                foreach (MeshRenderer piece in characterHairStuff)
+                {
+                    piece.shadowCastingMode = ShadowCastingMode.On;
+                }
+
+                playerCamera.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (canRun)
+            {
+                GameObject.Find("Main Camera").SetActive(false);
+            }
+            canMove = true;
+
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
@@ -86,14 +139,32 @@ public class characterControls : MonoBehaviour
 
     private void Update()
     {
-        if (canMove)
+        if (PhotonNetwork.IsConnectedAndReady)
         {
-            HandleUI();
-            HandleMovement();
-            HandleRotation();
-            HandleAnimation();
-            HandleRaySphereCast();
-            HandleInteraction();
+            if (this.photonView.IsMine)
+            {
+                if (canMove)
+                {
+                    HandleUI();
+                    HandleMovement();
+                    HandleRotation();
+                    HandleAnimation();
+                    HandleRaySphereCast();
+                    HandleInteraction();
+                }
+            }
+        }
+        else
+        {
+            if (canMove)
+            {
+                HandleUI();
+                HandleMovement();
+                HandleRotation();
+                HandleAnimation();
+                HandleRaySphereCast();
+                HandleInteraction();
+            }
         }
     }
     #endregion
