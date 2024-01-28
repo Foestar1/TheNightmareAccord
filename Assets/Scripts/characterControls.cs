@@ -314,9 +314,28 @@ public class characterControls : MonoBehaviourPunCallbacks
 
                 #region Level section
                 //the section for the levels
+                if (canRun)
+                {
+                    if (targetedObject.name == "PetalsLament")
+                    {
+                        //make a temp var
+                        int photonViewNumber = targetedObject.GetPhotonView().ViewID;
+                        //send RPC to remove a flower
+                        this.photonView.RPC("minusGoal", RpcTarget.All, photonViewNumber);
+                    }
+                }
                 #endregion
             }
         }
+    }
+    #endregion
+
+    #region RPC's
+    [PunRPC]
+    void minusGoal(int photonViewNumberTemp)
+    {
+        PhotonView.Find(photonViewNumberTemp).gameObject.SetActive(false);
+        GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound--;
     }
     #endregion
 }

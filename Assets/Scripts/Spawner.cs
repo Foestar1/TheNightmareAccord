@@ -13,10 +13,18 @@ public class Spawner : MonoBehaviourPunCallbacks
     [Tooltip("The interaction button icon")]
     [SerializeField]
     private GameObject interactionButton;
+    [Tooltip("The goal UI tracker")]
+    [SerializeField]
+    private GameObject goalTrackerUI;
+    [Tooltip("Teddy's coldown UI")]
+    [SerializeField]
+    private GameObject teddyUI;
     [Tooltip("The object goals to activate")]
     [SerializeField]
     private List<GameObject> goals;
     private int goalsPicked;
+    public int goalsNotFoundVar;
+    public int goalsNotFound { get; set; }
 
     [Header("Player Stuff")]
     private int playersReady;
@@ -29,9 +37,11 @@ public class Spawner : MonoBehaviourPunCallbacks
     private List<Transform> playerSpawnPoints;
     #endregion
 
+    #region unity functions
     private void Awake()
     {
         playersReady = 0;
+        goalsNotFound = goalsNotFoundVar;
 
         if (PhotonNetwork.IsConnectedAndReady)
         {
@@ -48,6 +58,8 @@ public class Spawner : MonoBehaviourPunCallbacks
         {
             Crosshair.SetActive(true);
             interactionButton.SetActive(true);
+            goalTrackerUI.SetActive(true);
+            teddyUI.SetActive(true);
             var point = Random.Range(0, playerSpawnPoints.Count);
             var newPlayerListing = Instantiate(playerPrefab, playerSpawnPoints[point].position, playerSpawnPoints[point].rotation);
         }
@@ -58,7 +70,9 @@ public class Spawner : MonoBehaviourPunCallbacks
         pickGoals();
         spawnPlayers();
     }
+    #endregion
 
+    #region custom functions
     private void pickGoals()
     {
         if (PhotonNetwork.IsConnectedAndReady)
@@ -112,7 +126,9 @@ public class Spawner : MonoBehaviourPunCallbacks
             }
         }
     }
+    #endregion
 
+    #region RPC's
     [PunRPC]
     void activateGoal(int thisGoal)
     {
@@ -124,6 +140,8 @@ public class Spawner : MonoBehaviourPunCallbacks
     {
         Crosshair.SetActive(true);
         interactionButton.SetActive(true);
+        goalTrackerUI.SetActive(true);
+        teddyUI.SetActive(true);
         var myPlayerObject = PhotonNetwork.Instantiate(this.playerPrefab.name, playerSpawnPoints[point].position, playerSpawnPoints[point].rotation, 0);
         //myPlayerObject.name = myPlayerObject.GetPhotonView().Owner.UserId;
     }
@@ -133,4 +151,5 @@ public class Spawner : MonoBehaviourPunCallbacks
     {
         playersReady++;
     }
+    #endregion
 }
