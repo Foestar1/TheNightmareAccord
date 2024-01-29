@@ -29,6 +29,8 @@ public class WraithAI : MonoBehaviourPunCallbacks
     [Tooltip("The AI's chase distance")]
     [SerializeField]
     private float chaseDistance;
+    private bool isChasing;
+    public bool isDead { get; set; }
     #endregion
 
     #region built in functions
@@ -60,60 +62,75 @@ public class WraithAI : MonoBehaviourPunCallbacks
     #region custom functions
     private void actualAI()
     {
-        if (isDormant)
+        if (!isDead)
         {
-            if (currentTarget != null)
+            if (isDormant)
             {
-                StopCoroutine(resetPath());
-                agentAI.SetDestination(currentTarget.position);
-            }
-            else
-            {
-                if (agentAI.hasPath)
+                if (GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound < 3)
                 {
-                    StartCoroutine(resetPath());
-
+                    isDormant = false;
                 }
-            }
 
-            if (GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound < 3 && isDormant)
-            {
-                isDormant = false;
-            }
-        }
-        else
-        {
-            if (currentTarget != null)
-            {
-                StopCoroutine(resetPath());
-                agentAI.SetDestination(currentTarget.position);
-            }
-            else
-            {
-                if (agentAI.remainingDistance <= agentAI.stoppingDistance) //done with path
+                if (currentTarget != null)
                 {
-                    Vector3 point;
-                    if (RandomPoint(this.transform.position, chaseDistance, out point)) //pass in our centre point and radius of area
+                    rotateTowardsTarget();
+                    StopCoroutine(resetPath());
+                    agentAI.SetDestination(currentTarget.position);
+                }
+                else
+                {
+                    if (agentAI.hasPath)
                     {
-                        Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
-                        agentAI.SetDestination(point);
+                        StartCoroutine(resetPath());
                     }
                 }
             }
-        }
+            else
+            {
+                if (currentTarget != null)
+                {
+                    rotateTowardsTarget();
+                    StopCoroutine(resetPath());
+                    agentAI.SetDestination(currentTarget.position);
+                }
+                else
+                {
+                    if (agentAI.remainingDistance <= agentAI.stoppingDistance) //done with path
+                    {
+                        Vector3 point;
+                        if (RandomPoint(this.transform.position, chaseDistance, out point)) //pass in our centre point and radius of area
+                        {
+                            Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
+                            agentAI.SetDestination(point);
+                        }
+                    }
+                }
+            }
 
-        if (agentAI.remainingDistance <= agentAI.stoppingDistance)
-        {
-            agentAnimator.SetBool("moving", false);
-        }
-        else
-        {
-            agentAnimator.SetBool("moving", true);
-        }
+            if (agentAI.remainingDistance <= agentAI.stoppingDistance)
+            {
+                agentAnimator.SetBool("moving", false);
+            }
+            else
+            {
+                agentAnimator.SetBool("moving", true);
+            }
 
-        if (!isDormant && agentAnimator.GetBool("dormant") == true)
+            if (!isDormant && agentAnimator.GetBool("dormant") == true)
+            {
+                agentAnimator.SetBool("dormant", false);
+            }
+        }
+    }
+
+    public void rotateTowardsTarget()
+    {
+        float distance = Vector3.Distance(currentTarget.position, this.transform.position);
+        if (distance <= agentAI.stoppingDistance + 3)
         {
-            agentAnimator.SetBool("dormant", false);
+            Vector3 direction = (currentTarget.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
         }
     }
 
