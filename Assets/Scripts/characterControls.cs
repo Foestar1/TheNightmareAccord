@@ -266,7 +266,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                 if (HitInfo.transform.tag == "Enemy")
                 {
                     float distance = Vector3.Distance(playerCamera.transform.position, HitInfo.transform.position);
-                    if (distance < interactableDistance * 4)
+                    if (distance < interactableDistance * 8)
                     {
                         playerCrosshair.GetComponent<Image>().color = CrosshairColors[1];
                     }
@@ -318,10 +318,18 @@ public class characterControls : MonoBehaviourPunCallbacks
                 {
                     if (targetedObject.name == "PetalsLament")
                     {
-                        //make a temp var
-                        int photonViewNumber = targetedObject.GetPhotonView().ViewID;
-                        //send RPC to remove a flower
-                        this.photonView.RPC("minusGoal", RpcTarget.All, photonViewNumber);
+                        if (PhotonNetwork.IsConnectedAndReady)
+                        {
+                            //make a temp var
+                            int photonViewNumber = targetedObject.GetPhotonView().ViewID;
+                            //send RPC to remove a flower
+                            this.photonView.RPC("minusGoal", RpcTarget.All, photonViewNumber);
+                        }
+                        else
+                        {
+                            targetedObject.SetActive(false);
+                            GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound--;
+                        }
                     }
                 }
                 #endregion

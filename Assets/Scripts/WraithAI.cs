@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class WraithAI : MonoBehaviour
 {
@@ -39,25 +40,40 @@ public class WraithAI : MonoBehaviour
         {
             if (currentTarget != null)
             {
-                Debug.Log("Chasing");
-                //agentAI.SetDestination(currentTarget.position);
+                StopCoroutine(resetPath());
+                agentAI.SetDestination(currentTarget.position);
             }
             else
             {
-                Debug.Log("Stopped and dormant");
-                //agentAI.ResetPath();
-                //agentAI.isStopped = true;
+                if (agentAI.hasPath)
+                {
+                    StartCoroutine(resetPath());
+                    
+                }
+            }
+
+            if (GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound < 3 && isDormant)
+            {
+                isDormant = false;
             }
         }
         else
         {
-            if (agentAI.remainingDistance <= agentAI.stoppingDistance) //done with path
+            if (currentTarget != null)
             {
-                Vector3 point;
-                if (RandomPoint(this.transform.position, chaseDistance, out point)) //pass in our centre point and radius of area
+                StopCoroutine(resetPath());
+                agentAI.SetDestination(currentTarget.position);
+            }
+            else
+            {
+                if (agentAI.remainingDistance <= agentAI.stoppingDistance) //done with path
                 {
-                    Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
-                    agentAI.SetDestination(point);
+                    Vector3 point;
+                    if (RandomPoint(this.transform.position, chaseDistance, out point)) //pass in our centre point and radius of area
+                    {
+                        Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
+                        agentAI.SetDestination(point);
+                    }
                 }
             }
         }
@@ -103,6 +119,14 @@ public class WraithAI : MonoBehaviour
         {
             currentTarget = null;
         }
+    }
+    #endregion
+
+    #region coroutines
+    public IEnumerator resetPath()
+    {
+        yield return new WaitForSeconds(3);
+        agentAI.ResetPath();
     }
     #endregion
 }

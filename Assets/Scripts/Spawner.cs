@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
+using TMPro;
 
 public class Spawner : MonoBehaviourPunCallbacks
 {
@@ -26,15 +27,24 @@ public class Spawner : MonoBehaviourPunCallbacks
     public int goalsNotFoundVar;
     public int goalsNotFound { get; set; }
 
-    [Header("Player Stuff")]
-    private int playersReady;
-    private bool spawnedPlayers;
+    [Header("Enemy Stuff")]
+    [Tooltip("The lesser enemies in the map")]
+    [SerializeField]
+    private GameObject[] smallEnemy;
+    [Tooltip("The main enemy in the map")]
+    [SerializeField]
+    private GameObject bigEnemy;
+    private bool enemiesSpawned;
+
+    [Header("Players Stuff")]
     [Tooltip("The player prefab model")]
     [SerializeField]
     private GameObject playerPrefab;
     [Tooltip("All the spawn points the player can spawn at")]
     [SerializeField]
     private List<Transform> playerSpawnPoints;
+    private int playersReady;
+    private bool spawnedPlayers;
     #endregion
 
     #region unity functions
@@ -69,6 +79,8 @@ public class Spawner : MonoBehaviourPunCallbacks
     {
         pickGoals();
         spawnPlayers();
+        updateGoals();
+        spawnEnemies();
     }
     #endregion
 
@@ -126,6 +138,36 @@ public class Spawner : MonoBehaviourPunCallbacks
             }
         }
     }
+
+    private void spawnEnemies()
+    {
+        if (!enemiesSpawned)
+        {
+            if (PhotonNetwork.IsConnectedAndReady)
+            {
+                if (PhotonNetwork.IsMasterClient && playersReady == PhotonNetwork.CurrentRoom.PlayerCount && spawnedPlayers)
+                {
+                    this.photonView.RPC("activateEnemies", RpcTarget.All);
+                }
+            }
+            else
+            {
+                foreach (GameObject enemy in smallEnemy)
+                {
+                    enemiesSpawned = true;
+                    enemy.SetActive(true);
+                }
+            }
+        }
+    }
+
+    private void updateGoals()
+    {
+        if (goalTrackerUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text != goalsNotFound.ToString())
+        {
+            goalTrackerUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = goalsNotFound.ToString();
+        }
+    }
     #endregion
 
     #region RPC's
@@ -133,6 +175,16 @@ public class Spawner : MonoBehaviourPunCallbacks
     void activateGoal(int thisGoal)
     {
         goals[thisGoal].SetActive(true);
+    }
+
+    [PunRPC]
+    void activateEnemies(int thisGoal)
+    {
+        enemiesSpawned = true;
+        foreach (GameObject enemy in smallEnemy)
+        {
+            enemy.SetActive(true);
+        }
     }
 
     [PunRPC]
