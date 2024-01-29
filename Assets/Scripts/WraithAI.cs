@@ -2,13 +2,19 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class WraithAI : MonoBehaviour
+public class WraithAI : MonoBehaviourPunCallbacks
 {
+    #region variables
     [Header("AI Object References")]
     [Tooltip("The AI's navmesh agent")]
     [SerializeField]
     private NavMeshAgent agentAI;
+    [Tooltip("The AI's animator")]
+    [SerializeField]
+    private Animator agentAnimator;
     [Tooltip("The AI's targets list")]
     [SerializeField]
     private List<GameObject> playerTargets;
@@ -23,6 +29,7 @@ public class WraithAI : MonoBehaviour
     [Tooltip("The AI's chase distance")]
     [SerializeField]
     private float chaseDistance;
+    #endregion
 
     #region built in functions
     private void Awake()
@@ -34,8 +41,25 @@ public class WraithAI : MonoBehaviour
 
     private void Update()
     {
-        checkDistances4Target();
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                checkDistances4Target();
+                actualAI();
+            }
+        }
+        else
+        {
+            checkDistances4Target();
+            actualAI();
+        }
+    }
+    #endregion
 
+    #region custom functions
+    private void actualAI()
+    {
         if (isDormant)
         {
             if (currentTarget != null)
@@ -48,7 +72,7 @@ public class WraithAI : MonoBehaviour
                 if (agentAI.hasPath)
                 {
                     StartCoroutine(resetPath());
-                    
+
                 }
             }
 
@@ -77,10 +101,22 @@ public class WraithAI : MonoBehaviour
                 }
             }
         }
-    }
-    #endregion
 
-    #region custom functions
+        if (agentAI.remainingDistance <= agentAI.stoppingDistance)
+        {
+            agentAnimator.SetBool("moving", false);
+        }
+        else
+        {
+            agentAnimator.SetBool("moving", true);
+        }
+
+        if (!isDormant && agentAnimator.GetBool("dormant") == true)
+        {
+            agentAnimator.SetBool("dormant", false);
+        }
+    }
+
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
 
