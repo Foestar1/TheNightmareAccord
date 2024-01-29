@@ -178,7 +178,7 @@ public class Spawner : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void activateEnemies(int thisGoal)
+    void activateEnemies()
     {
         enemiesSpawned = true;
         foreach (GameObject enemy in smallEnemy)
