@@ -64,10 +64,13 @@ public class WraithAI : MonoBehaviourPunCallbacks
     {
         if (!isDead)
         {
-            if (playerTargets.Count != PhotonNetwork.CurrentRoom.PlayerCount)
+            if (PhotonNetwork.IsConnectedAndReady)
             {
-                playerTargets.Clear();
-                playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+                if (playerTargets.Count != PhotonNetwork.CurrentRoom.PlayerCount)
+                {
+                    playerTargets.Clear();
+                    playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+                }
             }
 
             //chase, wander and dormant part
@@ -76,6 +79,7 @@ public class WraithAI : MonoBehaviourPunCallbacks
                 if (GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound < 3)
                 {
                     isDormant = false;
+                    agentAI.speed = 10;
                 }
 
                 if (currentTarget != null)
