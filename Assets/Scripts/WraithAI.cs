@@ -57,6 +57,19 @@ public class WraithAI : MonoBehaviourPunCallbacks
             actualAI();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Explosion")
+        {
+            if (!isDead)
+            {
+                isDead = true;
+                agentAnimator.SetBool("dead", true);
+                agentAI.isStopped = true;
+            }
+        }
+    }
     #endregion
 
     #region custom functions
@@ -184,6 +197,13 @@ public class WraithAI : MonoBehaviourPunCallbacks
         {
             currentTarget = null;
         }
+    }
+    #endregion
+
+    #region callbacks
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
     }
     #endregion
 
