@@ -5,6 +5,8 @@ public class GrowAndFade : MonoBehaviour
 {
     public float growTime = 2.0f; // Time in seconds to grow
     public float fadeTime = 2.0f; // Time in seconds to fade
+    public float colorIntensity = 7.0f; // Intensity of the color
+    public float emissionMultiplier = 10.0f; // Intensity of the color
     public float maxSize = 5.0f;  // Maximum size of the object during the grow phase
     public float fadeScaleMultiplier = 1.2f; // Multiplier for additional scaling during the fade phase
     public Color emissionColor = Color.white; // Emission color
@@ -42,7 +44,7 @@ public class GrowAndFade : MonoBehaviour
 
         // Ensure object is fully grown and visible at the end of the grow phase
         transform.localScale = Vector3.one * maxSize;
-        SetMaterialProperties(1, 1);
+        SetMaterialProperties(colorIntensity, 1);
 
         // Fade phase with continuous growth
         timer = 0;
@@ -65,7 +67,7 @@ public class GrowAndFade : MonoBehaviour
     void SetMaterialProperties(float emissionIntensity, float alpha)
     {
         // Adjust emission color
-        material.SetColor("_EmissionColor", emissionColor * emissionIntensity);
+        material.SetColor("_EmissionColor", emissionColor * Mathf.Pow(emissionMultiplier, emissionIntensity));
 
         // Adjust base color and alpha
         Color baseColor = originalBaseColor;
