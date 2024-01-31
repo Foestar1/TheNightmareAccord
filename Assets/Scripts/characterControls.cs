@@ -353,25 +353,28 @@ public class characterControls : MonoBehaviourPunCallbacks
 
     private void HandleTeddy()
     {
-        if (Input.GetButtonDown("Fire1") && !teddyOnCooldown)
+        if (canRun)
         {
-            teddyOnCooldown = true;
-            if (teddyUI == null)
+            if (Input.GetButtonDown("Fire1") && !teddyOnCooldown)
             {
-                teddyUI = GameObject.Find("TeddyBorder");
-            }
+                teddyOnCooldown = true;
+                if (teddyUI == null)
+                {
+                    teddyUI = GameObject.Find("TeddyBorder");
+                }
 
-            if (PhotonNetwork.IsConnectedAndReady)
-            {
-                PhotonNetwork.Instantiate(this.lightExplosion.name, playerCamera.transform.position, playerCamera.transform.rotation, 0);
-            }
-            else
-            {
-                Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
-            }
+                if (PhotonNetwork.IsConnectedAndReady)
+                {
+                    PhotonNetwork.Instantiate(this.lightExplosion.name, playerCamera.transform.position, playerCamera.transform.rotation, 0);
+                }
+                else
+                {
+                    Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
+                }
 
-            currentCooldownTime = teddyCooldownTime;
-            StartCoroutine(UpdateCooldown());
+                currentCooldownTime = teddyCooldownTime;
+                StartCoroutine(UpdateCooldown());
+            }
         }
     }
     #endregion
