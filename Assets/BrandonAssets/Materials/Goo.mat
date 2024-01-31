@@ -38,6 +38,7 @@ Material:
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
+    - _Displacement: 1
     - _DstBlend: 0
     - _Normalscale: 9.96
     - _Normalstrength: 0.44
@@ -56,6 +57,7 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _Basecolor: {r: 0, g: 1, b: 0.07058835, a: 1}
+    - _Emissioncolor: {r: 0, g: 0, b: 0, a: 0}
     - _VoronoiColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
     - _VoronoiSpeed: {r: -0.25, g: -0.25, b: 0, a: 0}
     - _VoronoiTiling: {r: 10, g: 10, b: 0, a: 0}
