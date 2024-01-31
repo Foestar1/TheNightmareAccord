@@ -1250,7 +1250,6 @@ MonoBehaviour:
   targetedObject: {fileID: 0}
   playerAnimator: {fileID: 641613026772570569}
   characterController: {fileID: 1209879090922295609}
-  TeddyObject: {fileID: 2020765270886030702}
   CrosshairColors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -1265,6 +1264,9 @@ MonoBehaviour:
   - {fileID: 7660647468500239169}
   characterHairStuff:
   - {fileID: 1209879089571262184}
+  TeddyObject: {fileID: 2020765270886030702}
+  lightExplosion: {fileID: 7195407350128338894, guid: 2263f56a14ea8e042b854347b7c60d57, type: 3}
+  teddyCooldownTime: 1
 --- !u!114 &-1693420420305901715
 MonoBehaviour:
   m_ObjectHideFlags: 0

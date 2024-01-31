@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.Rendering;
 using Smooth;
+using System.Collections;
 
 public class characterControls : MonoBehaviourPunCallbacks
 {
@@ -60,9 +61,6 @@ public class characterControls : MonoBehaviourPunCallbacks
     [Tooltip("Controls the players actual movement")]
     [SerializeField]
     private CharacterController characterController;
-    [Tooltip("The characters Teddy bear hanging in their hands")]
-    [SerializeField]
-    private GameObject TeddyObject;
     [Tooltip("The colors for the crosshair depending on what we hover over")]
     [SerializeField]
     private Color[] CrosshairColors;
@@ -72,6 +70,20 @@ public class characterControls : MonoBehaviourPunCallbacks
     [Tooltip("The players head, enabled on other players but not the one we control")]
     [SerializeField]
     private MeshRenderer[] characterHairStuff;
+
+    [Header("Teddy References")]
+    [Tooltip("The characters Teddy bear hanging in their hands")]
+    [SerializeField]
+    private GameObject TeddyObject;
+    [Tooltip("The light explosion prefab for the teddy bear")]
+    [SerializeField]
+    private GameObject lightExplosion;
+    [Tooltip("Teddy's cooldown time")]
+    [SerializeField]
+    private float teddyCooldownTime;
+    private float currentCooldownTime;
+    private bool teddyOnCooldown;
+    private GameObject teddyUI;
     #endregion
 
     #region Unity Built in Functions
@@ -160,6 +172,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     HandleAnimation();
                     HandleRaySphereCast();
                     HandleInteraction();
+                    HandleTeddy();
                 }
             }
         }
@@ -173,6 +186,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                 HandleAnimation();
                 HandleRaySphereCast();
                 HandleInteraction();
+                HandleTeddy();
             }
         }
     }
@@ -335,6 +349,50 @@ public class characterControls : MonoBehaviourPunCallbacks
                 #endregion
             }
         }
+    }
+
+    private void HandleTeddy()
+    {
+        if (Input.GetButtonDown("Fire1") && !teddyOnCooldown)
+        {
+            teddyOnCooldown = true;
+            if (teddyUI == null)
+            {
+                teddyUI = GameObject.Find("TeddyBorder");
+            }
+
+            if (PhotonNetwork.IsConnectedAndReady)
+            {
+                PhotonNetwork.Instantiate(this.lightExplosion.name, playerCamera.transform.position, playerCamera.transform.rotation, 0);
+            }
+            else
+            {
+                Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
+            }
+
+            currentCooldownTime = teddyCooldownTime;
+            StartCoroutine(UpdateCooldown());
+        }
+    }
+    #endregion
+
+    #region coroutines
+    private IEnumerator UpdateCooldown()
+    {
+        Image fillImage = teddyUI.transform.GetChild(1).transform.GetComponent<Image>();
+        float endTime = Time.time + teddyCooldownTime; // Time when the cooldown will end
+
+        while (Time.time < endTime)
+        {
+            currentCooldownTime = endTime - Time.time; // Remaining time
+            float tempCD = currentCooldownTime / teddyCooldownTime;
+            fillImage.fillAmount = tempCD;
+            yield return null;
+        }
+
+        currentCooldownTime = 0;
+        fillImage.fillAmount = 0; // Ensure the fill amount is set to 0 at the end
+        teddyOnCooldown = false;
     }
     #endregion
 
