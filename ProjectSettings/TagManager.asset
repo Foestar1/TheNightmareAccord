@@ -6,11 +6,13 @@ TagManager:
   tags:
   - Interactable
   - Enemy
+  - Explosion
+  - EnemySpirit
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - hitNothing
   - Water
   - UI
   - Player
