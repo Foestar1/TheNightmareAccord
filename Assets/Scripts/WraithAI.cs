@@ -47,12 +47,14 @@ public class WraithAI : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.IsMasterClient)
             {
+                updateOnPlayers();
                 checkDistances4Target();
                 actualAI();
             }
         }
         else
         {
+            updateOnPlayers();
             checkDistances4Target();
             actualAI();
         }
@@ -196,6 +198,18 @@ public class WraithAI : MonoBehaviourPunCallbacks
         if (closestDist == Mathf.Infinity)
         {
             currentTarget = null;
+        }
+    }
+
+    private void updateOnPlayers()
+    {
+        foreach(GameObject player in playerTargets)
+        {
+            if (player.activeSelf == false || player == null)
+            {
+                playerTargets.Clear();
+                playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+            }
         }
     }
     #endregion
