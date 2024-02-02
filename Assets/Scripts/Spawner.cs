@@ -85,6 +85,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         spawnPlayers();
         updateGoals();
         spawnEnemies();
+        arePlayersAlive();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -183,6 +184,20 @@ public class Spawner : MonoBehaviourPunCallbacks
             Debug.Log("YAY! WE WON!!");
         }
     }
+
+    private void arePlayersAlive()
+    {
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            if (PhotonNetwork.IsMasterClient && playersReady == PhotonNetwork.CurrentRoom.PlayerCount && spawnedPlayers)
+            {
+                if (playersAlive <= 0 && !gameLost)
+                {
+                    this.photonView.RPC("gameWasLost", RpcTarget.All, playersAlive);
+                }
+            }
+        }
+    }
     #endregion
 
     #region RPC's
@@ -217,6 +232,13 @@ public class Spawner : MonoBehaviourPunCallbacks
     void playerReady()
     {
         playersReady++;
+    }
+
+    [PunRPC]
+    void gameWasLost(int playersAlive)
+    {
+        Debug.Log("Oh shit son, we done lost! " + playersAlive + " players are alive!");
+        gameLost = true;
     }
     #endregion
 }
