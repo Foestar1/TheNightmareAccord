@@ -36,8 +36,20 @@ public class WraithAI : MonoBehaviourPunCallbacks
     #region built in functions
     private void Awake()
     {
-        //get all the player objects at the start
-        playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //get all the player objects at the start
+                playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+            }
+        }
+        else
+        {
+            //get all the player objects at the start
+            playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        }
+
         isDormant = true;
     }
 
@@ -223,6 +235,7 @@ public class WraithAI : MonoBehaviourPunCallbacks
     #region callbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+        playerTargets.Clear();
         playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
     }
     #endregion
