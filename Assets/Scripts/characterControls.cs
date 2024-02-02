@@ -182,7 +182,6 @@ public class characterControls : MonoBehaviourPunCallbacks
                     HandleRaySphereCast();
                     HandleInteraction();
                     HandleTeddy();
-                    HandleDeaths();
                 }
             }
         }
@@ -197,7 +196,6 @@ public class characterControls : MonoBehaviourPunCallbacks
                 HandleRaySphereCast();
                 HandleInteraction();
                 HandleTeddy();
-                HandleDeaths();
             }
         }
     }
@@ -212,9 +210,9 @@ public class characterControls : MonoBehaviourPunCallbacks
                 {
                     isDead = true;
                     var myPlayerObject = PhotonNetwork.Instantiate(this.playerDeathSpirit.name, this.transform.position, this.transform.rotation, 0);
+                    int playerPWID = this.photonView.ViewID;
+                    this.photonView.RPC("playerDied", RpcTarget.All, playerPWID);
                     myPlayerObject.transform.GetChild(0).gameObject.SetActive(true);
-                    this.gameObject.SetActive(false);
-                    this.photonView.RPC("playerDied", RpcTarget.All);
                 }
             }
         }
@@ -236,11 +234,8 @@ public class characterControls : MonoBehaviourPunCallbacks
                     isDead = true;
                     var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
                     ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(true);
-                    Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
-                    currentCooldownTime = 0;
-                    StopCoroutine(UpdateCooldown());
-                    playerLives--;
-                    StartCoroutine(UpdateDead());
+                    this.gameObject.SetActive(false);
+                    Debug.Log("GAME OVER!");
                 }
             }
         }
@@ -432,21 +427,6 @@ public class characterControls : MonoBehaviourPunCallbacks
             }
         }
     }
-
-    private void HandleDeaths()
-    {
-        if (PhotonNetwork.IsConnectedAndReady)
-        {
-            //nothing for now
-        }
-        else
-        {
-            if (playerLives <= 0)
-            {
-                Debug.Log("GAME OVER!");
-            }
-        }
-    }
     #endregion
 
     #region coroutines
@@ -484,9 +464,10 @@ public class characterControls : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void playerDied()
+    void playerDied(int playerPWID)
     {
         GameObject.Find("SpawnControls").GetComponent<Spawner>().playersAlive--;
+        PhotonView.Find(playerPWID).gameObject.SetActive(false);
     }
     #endregion
 }
