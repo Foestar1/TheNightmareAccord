@@ -212,6 +212,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                 {
                     isDead = true;
                     var myPlayerObject = PhotonNetwork.Instantiate(this.playerDeathSpirit.name, this.transform.position, this.transform.rotation, 0);
+                    myPlayerObject.transform.GetChild(0).gameObject.SetActive(true);
                     this.gameObject.SetActive(false);
                     this.photonView.RPC("playerDied", RpcTarget.All);
                 }
@@ -221,11 +222,20 @@ public class characterControls : MonoBehaviourPunCallbacks
         {
             if (other.name == "HitArea" && !isDead)
             {
-                if (playerLives > 0)
+                if (playerLives > 1)
                 {
                     isDead = true;
                     var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
                     ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(false);
+                    Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
+                    currentCooldownTime = 0;
+                    StopCoroutine(UpdateCooldown());
+                    playerLives--;
+                    StartCoroutine(UpdateDead());
+                }else if (playerLives == 1) {
+                    isDead = true;
+                    var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
+                    ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(true);
                     Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
                     currentCooldownTime = 0;
                     StopCoroutine(UpdateCooldown());
