@@ -26,6 +26,10 @@ public class Spawner : MonoBehaviourPunCallbacks
     private int goalsPicked;
     public int goalsNotFoundVar;
     public int goalsNotFound { get; set; }
+    public int playersAlive { get; set; }
+    private bool gameFinished;
+    private bool gameWon;
+    private bool gameLost;
 
     [Header("Enemy Stuff")]
     [Tooltip("The lesser enemies in the map")]
@@ -82,6 +86,11 @@ public class Spawner : MonoBehaviourPunCallbacks
         updateGoals();
         spawnEnemies();
     }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        playersAlive--;
+    }
     #endregion
 
     #region custom functions
@@ -131,10 +140,9 @@ public class Spawner : MonoBehaviourPunCallbacks
             spawnedPlayers = true;
             foreach (Player player in PhotonNetwork.PlayerList)
             {
-                //var point = Random.Range(0, playerSpawnPoints.Count);
+                playersAlive++;
                 var point = Random.Range(0, playerSpawnPoints.Count);
                 this.photonView.RPC("activateUIAndPlayer", player, point);
-                //playerSpawnPoints.Remove(playerSpawnPoints[point]);
             }
         }
     }
@@ -166,6 +174,13 @@ public class Spawner : MonoBehaviourPunCallbacks
         if (goalTrackerUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text != goalsNotFound.ToString())
         {
             goalTrackerUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = goalsNotFound.ToString();
+        }
+
+        if (goalsNotFound == 0 && !gameFinished)
+        {
+            gameFinished = true;
+            gameWon = true;
+            Debug.Log("YAY! WE WON!!");
         }
     }
     #endregion

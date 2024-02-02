@@ -19,6 +19,8 @@ public class characterControls : MonoBehaviourPunCallbacks
     [SerializeField]
     private bool canRun;
     public bool canMove;
+    private int playerLives;
+    public bool isDead { get; set; }
 
     [Header("Camera Controls")]
     [Tooltip("Mouse sensitivity for the camera")]
@@ -70,6 +72,9 @@ public class characterControls : MonoBehaviourPunCallbacks
     [Tooltip("The players head, enabled on other players but not the one we control")]
     [SerializeField]
     private MeshRenderer[] characterHairStuff;
+    [Tooltip("The players head, enabled on other players but not the one we control")]
+    [SerializeField]
+    private GameObject playerDeathSpirit;
 
     [Header("Teddy References")]
     [Tooltip("The characters Teddy bear hanging in their hands")]
@@ -92,6 +97,10 @@ public class characterControls : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsConnectedAndReady)
         {
             this.GetComponent<SmoothSyncPUN2>().enabled = true;
+        }
+        else
+        {
+            playerLives = 3;
         }
     }
 
@@ -173,6 +182,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     HandleRaySphereCast();
                     HandleInteraction();
                     HandleTeddy();
+                    HandleDeaths();
                 }
             }
         }
@@ -187,6 +197,41 @@ public class characterControls : MonoBehaviourPunCallbacks
                 HandleRaySphereCast();
                 HandleInteraction();
                 HandleTeddy();
+                HandleDeaths();
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            if (this.photonView.IsMine)
+            {
+                if (other.name == "HitArea" && !isDead)
+                {
+                    isDead = true;
+                    var myPlayerObject = PhotonNetwork.Instantiate(this.playerDeathSpirit.name, this.transform.position, this.transform.rotation, 0);
+                    this.gameObject.SetActive(false);
+                    this.photonView.RPC("playerDied", RpcTarget.All);
+                }
+            }
+        }
+        else
+        {
+            if (other.name == "HitArea" && !isDead)
+            {
+                if (playerLives > 0)
+                {
+                    isDead = true;
+                    var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
+                    ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(false);
+                    Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
+                    currentCooldownTime = 0;
+                    StopCoroutine(UpdateCooldown());
+                    playerLives--;
+                    StartCoroutine(UpdateDead());
+                }
             }
         }
     }
@@ -377,6 +422,21 @@ public class characterControls : MonoBehaviourPunCallbacks
             }
         }
     }
+
+    private void HandleDeaths()
+    {
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            //nothing for now
+        }
+        else
+        {
+            if (playerLives <= 0)
+            {
+                Debug.Log("GAME OVER!");
+            }
+        }
+    }
     #endregion
 
     #region coroutines
@@ -397,6 +457,12 @@ public class characterControls : MonoBehaviourPunCallbacks
         fillImage.fillAmount = 0; // Ensure the fill amount is set to 0 at the end
         teddyOnCooldown = false;
     }
+
+    private IEnumerator UpdateDead()
+    {
+        yield return new WaitForSeconds(3);
+        isDead = false;
+    }
     #endregion
 
     #region RPC's
@@ -405,6 +471,12 @@ public class characterControls : MonoBehaviourPunCallbacks
     {
         PhotonView.Find(photonViewNumberTemp).gameObject.SetActive(false);
         GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound--;
+    }
+
+    [PunRPC]
+    void playerDied()
+    {
+        GameObject.Find("SpawnControls").GetComponent<Spawner>().playersAlive--;
     }
     #endregion
 }
