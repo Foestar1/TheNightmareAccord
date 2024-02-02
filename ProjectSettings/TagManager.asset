@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Explosion
   - EnemySpirit
+  - PlayerSpirit
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
