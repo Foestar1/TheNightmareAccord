@@ -203,13 +203,19 @@ public class WraithAI : MonoBehaviourPunCallbacks
 
     private void updateOnPlayers()
     {
+        var aPlayerLeft = 0;
         foreach(GameObject player in playerTargets)
         {
             if (player.activeSelf == false || player == null)
             {
-                playerTargets.Clear();
-                playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+                aPlayerLeft++;
             }
+        }
+
+        if (aPlayerLeft > 0)
+        {
+            playerTargets.Clear();
+            playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         }
     }
     #endregion
