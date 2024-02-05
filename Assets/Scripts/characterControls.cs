@@ -75,6 +75,9 @@ public class characterControls : MonoBehaviourPunCallbacks
     [Tooltip("The players head, enabled on other players but not the one we control")]
     [SerializeField]
     private GameObject playerDeathSpirit;
+    [Tooltip("The players losing animation")]
+    [SerializeField]
+    private GameObject playerLostAnimations;
 
     [Header("Teddy References")]
     [Tooltip("The characters Teddy bear hanging in their hands")]
@@ -226,8 +229,11 @@ public class characterControls : MonoBehaviourPunCallbacks
                     var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
                     ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(false);
                     Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
+
                     currentCooldownTime = 0;
-                    StopCoroutine(UpdateCooldown());
+                    Image fillImage = teddyUI.transform.GetChild(1).transform.GetComponent<Image>();
+                    fillImage.fillAmount = 0; // Ensure the fill amount is set to 0 at the end
+                    teddyOnCooldown = false;
                     playerLives--;
                     StartCoroutine(UpdateDead());
                 }else if (playerLives == 1) {
@@ -235,7 +241,35 @@ public class characterControls : MonoBehaviourPunCallbacks
                     var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
                     ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(true);
                     this.gameObject.SetActive(false);
-                    Debug.Log("GAME OVER!");
+
+                    List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+                    foreach (GameObject enemyObject in enemyObjects)
+                    {
+                        Destroy(enemyObject.gameObject);
+                    }
+
+                    List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+
+                    foreach (GameObject playersGhost in playerObjects)
+                    {
+                        Destroy(playersGhost.gameObject);
+                    }
+
+                    int randomAni = Random.Range(0, 2);
+                    var newPlayerListing = Instantiate(playerLostAnimations, this.transform.position, this.transform.rotation);
+                    if (randomAni == 0)
+                    {
+                        newPlayerListing.GetComponent<Animator>().Play("Lose1");
+                    }
+                    else
+                    {
+                        newPlayerListing.GetComponent<Animator>().Play("Lose2");
+                    }
+                    playerCrosshair.SetActive(false);
+                    teddyUI.SetActive(false);
+                    GameObject.Find("GoalBorder").SetActive(false);
+                    interactionButton.SetActive(false);
+                    Destroy(this.gameObject);
                 }
             }
         }
@@ -435,7 +469,7 @@ public class characterControls : MonoBehaviourPunCallbacks
         Image fillImage = teddyUI.transform.GetChild(1).transform.GetComponent<Image>();
         float endTime = Time.time + teddyCooldownTime; // Time when the cooldown will end
 
-        while (Time.time < endTime)
+        while (Time.time < endTime && teddyOnCooldown)
         {
             currentCooldownTime = endTime - Time.time; // Remaining time
             float tempCD = currentCooldownTime / teddyCooldownTime;

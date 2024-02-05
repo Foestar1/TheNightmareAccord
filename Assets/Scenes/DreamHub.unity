@@ -13781,6 +13781,7 @@ GameObject:
   - component: {fileID: 1860168571671233245}
   - component: {fileID: 1871962907053921785}
   - component: {fileID: 1871962907053921786}
+  - component: {fileID: 1871962907053921787}
   m_Layer: 0
   m_Name: PetalsLament
   m_TagString: Interactable
@@ -13852,6 +13853,21 @@ CapsuleCollider:
   m_Height: 1.0411651
   m_Direction: 1
   m_Center: {x: -0.000000035348275, y: 0.52715135, z: -0.00000007693336}
+--- !u!114 &1871962907053921787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850398476989057257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff3958cc3aae7f4da4c370787d28961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notWon: {fileID: 2100000, guid: 3394f2af15d02354d8e825cd11930ed6, type: 2}
+  haveWon: {fileID: 2100000, guid: ccb63da6afd98194b87717cb83ff2145, type: 2}
+  levelNumber: 1
 --- !u!33 &1988722705264709825
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -13914,6 +13930,7 @@ GameObject:
   - component: {fileID: 1988722705264709825}
   - component: {fileID: 1996068728531961829}
   - component: {fileID: 2012665188134117326}
+  - component: {fileID: 2012665188134117327}
   m_Layer: 0
   m_Name: PetalsLament
   m_TagString: Interactable
@@ -13950,6 +13967,21 @@ CapsuleCollider:
   m_Height: 1.0411651
   m_Direction: 1
   m_Center: {x: -0.00000009426207, y: 0.5271508, z: -0.000000061223034}
+--- !u!114 &2012665188134117327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009755704249457397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff3958cc3aae7f4da4c370787d28961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notWon: {fileID: 2100000, guid: 3394f2af15d02354d8e825cd11930ed6, type: 2}
+  haveWon: {fileID: 2100000, guid: ccb63da6afd98194b87717cb83ff2145, type: 2}
+  levelNumber: 1
 --- !u!4 &7003353534253060247
 Transform:
   m_ObjectHideFlags: 0
@@ -13977,6 +14009,7 @@ GameObject:
   - component: {fileID: 7009809387936587675}
   - component: {fileID: 7020532732863170751}
   - component: {fileID: 7020532732863170752}
+  - component: {fileID: 7020532732863170753}
   m_Layer: 0
   m_Name: PetalsLament
   m_TagString: Interactable
@@ -14048,3 +14081,18 @@ CapsuleCollider:
   m_Height: 1.0411649
   m_Direction: 1
   m_Center: {x: 0.00000035762787, y: 0.5271522, z: -0.000000029802322}
+--- !u!114 &7020532732863170753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7006073343778264495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff3958cc3aae7f4da4c370787d28961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notWon: {fileID: 2100000, guid: 3394f2af15d02354d8e825cd11930ed6, type: 2}
+  haveWon: {fileID: 2100000, guid: ccb63da6afd98194b87717cb83ff2145, type: 2}
+  levelNumber: 1
