@@ -341,8 +341,8 @@ public class Spawner : MonoBehaviourPunCallbacks
         }
 
         //clear out the ghost spirits of lost players
-        List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
-        foreach (GameObject playersGhost in playerObjects)
+        List<GameObject> playerSpiritObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+        foreach (GameObject playersGhost in playerSpiritObjects)
         {
             if (playersGhost.GetPhotonView().IsMine)
             {
@@ -357,6 +357,26 @@ public class Spawner : MonoBehaviourPunCallbacks
                     newPlayerListing.GetComponent<Animator>().Play("Win2");
                 }
                 Destroy(playersGhost.gameObject);
+            }
+        }
+
+        //clear out the players who are alive
+        List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        foreach (GameObject playersAlive in playerObjects)
+        {
+            if (playersAlive.GetPhotonView().IsMine)
+            {
+                int randomAni = Random.Range(0, 2);
+                var newPlayerListing = Instantiate(playerWinAnimations, playersAlive.transform.position, playersAlive.transform.rotation);
+                if (randomAni == 0)
+                {
+                    newPlayerListing.GetComponent<Animator>().Play("Win1");
+                }
+                else
+                {
+                    newPlayerListing.GetComponent<Animator>().Play("Win2");
+                }
+                Destroy(playersAlive.gameObject);
             }
         }
 

@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class SoundEffectController : MonoBehaviour
+public class SoundEffectController : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private bool isCrickets;
@@ -31,20 +33,41 @@ public class SoundEffectController : MonoBehaviour
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-            // Loop through each player object
             foreach (var player in players)
             {
-                float distance = Vector3.Distance(this.transform.position, player.transform.position);
-
-                if (distance <= silencePoint)
+                if (PhotonNetwork.IsConnectedAndReady)
                 {
-                    effectAudioSource.Stop();
+                    if (player.GetPhotonView().IsMine)
+                    {
+                        float distance = Vector3.Distance(this.transform.position, player.transform.position);
+
+                        if (distance <= silencePoint)
+                        {
+                            effectAudioSource.Stop();
+                        }
+                        else
+                        {
+                            if (!effectAudioSource.isPlaying)
+                            {
+                                effectAudioSource.Play();
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    if (!effectAudioSource.isPlaying)
+                    float distance = Vector3.Distance(this.transform.position, player.transform.position);
+
+                    if (distance <= silencePoint)
                     {
-                        effectAudioSource.Play();
+                        effectAudioSource.Stop();
+                    }
+                    else
+                    {
+                        if (!effectAudioSource.isPlaying)
+                        {
+                            effectAudioSource.Play();
+                        }
                     }
                 }
             }
