@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviourPunCallbacks
 {
@@ -44,6 +45,12 @@ public class Spawner : MonoBehaviourPunCallbacks
     [Tooltip("The player prefab model")]
     [SerializeField]
     private GameObject playerPrefab;
+    [Tooltip("The player losing animations")]
+    [SerializeField]
+    private GameObject playerLostAnimations;
+    [Tooltip("The player winning animation")]
+    [SerializeField]
+    private GameObject playerWinAnimations;
     [Tooltip("All the spawn points the player can spawn at")]
     [SerializeField]
     private List<Transform> playerSpawnPoints;
@@ -181,7 +188,55 @@ public class Spawner : MonoBehaviourPunCallbacks
         {
             gameFinished = true;
             gameWon = true;
-            Debug.Log("YAY! WE WON!!");
+            
+            //check if it's multiplayer
+            if (PhotonNetwork.IsConnectedAndReady)
+            {
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    this.photonView.RPC("gameWasWon", RpcTarget.All);
+                }
+            }
+            else
+            {
+                //which scene are we in
+                if (SceneManager.GetActiveScene().name == "Petal's Lament")
+                {
+                    GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().level1Complete = 1;
+                    GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().saveInfo();
+                }
+
+                //clear out the enemies
+                List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+                foreach (GameObject enemyObject in enemyObjects)
+                {
+                    Destroy(enemyObject.gameObject);
+                }
+
+                //clear out the ghost spirits of lost players
+                List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+                foreach (GameObject playersGhost in playerObjects)
+                {
+                    Destroy(playersGhost.gameObject);
+                }
+
+                int randomAni = Random.Range(0, 2);
+                var playersObject = GameObject.FindGameObjectWithTag("Player");
+                var newPlayerListing = Instantiate(playerWinAnimations, playersObject.transform.position, playersObject.transform.rotation);
+                if (randomAni == 0)
+                {
+                    newPlayerListing.GetComponent<Animator>().Play("Win1");
+                }
+                else
+                {
+                    newPlayerListing.GetComponent<Animator>().Play("Win2");
+                }
+                Destroy(playersObject.gameObject);
+                GameObject.Find("Crosshair").SetActive(false);
+                GameObject.Find("InteractionButton").SetActive(false);
+                GameObject.Find("GoalBorder").SetActive(false);
+                GameObject.Find("TeddyBorder").SetActive(false);
+            }
         }
     }
 
@@ -237,8 +292,79 @@ public class Spawner : MonoBehaviourPunCallbacks
     [PunRPC]
     void gameWasLost(int playersAlive)
     {
-        Debug.Log("Oh shit son, we done lost! " + playersAlive + " players are alive!");
         gameLost = true;
+        List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        foreach(GameObject enemyObject in enemyObjects)
+        {
+            Destroy(enemyObject.gameObject);
+        }
+
+        List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+        foreach(GameObject playersGhost in playerObjects)
+        {
+            if (playersGhost.GetPhotonView().IsMine)
+            {
+                int randomAni = Random.Range(0, 2);
+                var newPlayerListing = Instantiate(playerLostAnimations, playersGhost.transform.position, playersGhost.transform.rotation);
+                if (randomAni == 0)
+                {
+                    newPlayerListing.GetComponent<Animator>().Play("Lose1");
+                }
+                else
+                {
+                    newPlayerListing.GetComponent<Animator>().Play("Lose2");
+                }
+                Destroy(playersGhost.gameObject);
+            }
+        }
+
+        GameObject.Find("Crosshair").SetActive(false);
+        GameObject.Find("InteractionButton").SetActive(false);
+        GameObject.Find("GoalBorder").SetActive(false);
+        GameObject.Find("TeddyBorder").SetActive(false);
+    }
+
+    [PunRPC]
+    void gameWasWon()
+    {
+        //which scene are we in
+        if (SceneManager.GetActiveScene().name == "Petal's Lament")
+        {
+            GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().level1Complete = 1;
+            GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().saveInfo();
+        }
+
+        //clear out the enemies
+        List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        foreach (GameObject enemyObject in enemyObjects)
+        {
+            Destroy(enemyObject.gameObject);
+        }
+
+        //clear out the ghost spirits of lost players
+        List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+        foreach (GameObject playersGhost in playerObjects)
+        {
+            if (playersGhost.GetPhotonView().IsMine)
+            {
+                int randomAni = Random.Range(0, 2);
+                var newPlayerListing = Instantiate(playerWinAnimations, playersGhost.transform.position, playersGhost.transform.rotation);
+                if (randomAni == 0)
+                {
+                    newPlayerListing.GetComponent<Animator>().Play("Win1");
+                }
+                else
+                {
+                    newPlayerListing.GetComponent<Animator>().Play("Win2");
+                }
+                Destroy(playersGhost.gameObject);
+            }
+        }
+
+        GameObject.Find("Crosshair").SetActive(false);
+        GameObject.Find("InteractionButton").SetActive(false);
+        GameObject.Find("GoalBorder").SetActive(false);
+        GameObject.Find("TeddyBorder").SetActive(false);
     }
     #endregion
 }
