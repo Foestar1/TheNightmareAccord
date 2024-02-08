@@ -381,7 +381,6 @@ public class Spawner : MonoBehaviourPunCallbacks
         }
 
         GameObject.Find("Crosshair").SetActive(false);
-        GameObject.Find("InteractionButton").SetActive(false);
         GameObject.Find("GoalBorder").SetActive(false);
         GameObject.Find("TeddyBorder").SetActive(false);
     }
