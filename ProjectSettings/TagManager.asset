@@ -10,6 +10,8 @@ TagManager:
   - EnemySpirit
   - PlayerSpirit
   - FxTemporaire
+  - SlowZone
+  - DeathZone
   layers:
   - Default
   - TransparentFX

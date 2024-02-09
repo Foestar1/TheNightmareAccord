@@ -14,7 +14,8 @@ public class characterControls : MonoBehaviourPunCallbacks
     [Tooltip("The players run speed")]
     [SerializeField]
     private float runSpeed = 8.0f;
-    private float movementSpeed;
+    public float movementSpeed { get; set; }
+    public bool playerSlowed { get; set; }
     [Tooltip("Whether the player can run or not(hub related)")]
     [SerializeField]
     private bool canRun;
@@ -209,6 +210,7 @@ public class characterControls : MonoBehaviourPunCallbacks
         {
             if (this.photonView.IsMine)
             {
+                //ENEMY HIT AREA
                 if (other.name == "HitArea" && !isDead)
                 {
                     isDead = true;
@@ -217,10 +219,23 @@ public class characterControls : MonoBehaviourPunCallbacks
                     this.photonView.RPC("playerDied", RpcTarget.All, playerPWID);
                     myPlayerObject.transform.GetChild(0).gameObject.SetActive(true);
                 }
+
+                //SLOW ZONE AREA
+                if (other.tag == "SlowZone")
+                {
+                    playerSlowed = true;
+                }
+
+                //DEATH ZONE AREA
+                if (other.tag == "DeathZone")
+                {
+                    Debug.Log("Shit, we dead");
+                }
             }
         }
         else
         {
+            //ENEMY HIT AREA
             if (other.name == "HitArea" && !isDead)
             {
                 if (playerLives > 1)
@@ -272,6 +287,41 @@ public class characterControls : MonoBehaviourPunCallbacks
                     Destroy(this.gameObject);
                 }
             }
+
+            //SLOW ZONE AREA
+            if (other.tag == "SlowZone")
+            {
+                playerSlowed = true;
+            }
+
+            //DEATH ZONE AREA
+            if (other.tag == "DeathZone")
+            {
+                Debug.Log("Shit, we dead");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            if (this.photonView.IsMine)
+            {
+                //SLOW ZONE AREA
+                if (other.tag == "SlowZone")
+                {
+                    playerSlowed = false;
+                }
+            }
+        }
+        else
+        {
+            //SLOW ZONE AREA
+            if (other.tag == "SlowZone")
+            {
+                playerSlowed = false;
+            }
         }
     }
     #endregion
@@ -295,11 +345,25 @@ public class characterControls : MonoBehaviourPunCallbacks
     {
         if (canRun && Input.GetButton("Sprint"))
         {
-            movementSpeed = runSpeed;
+            if (!playerSlowed)
+            {
+                movementSpeed = runSpeed;
+            }
+            else
+            {
+                movementSpeed = runSpeed/2;
+            }
         }
         else
         {
-            movementSpeed = 5;
+            if (!playerSlowed)
+            {
+                movementSpeed = 5;
+            }
+            else
+            {
+                movementSpeed = 5/2;
+            }
         }
         
         float verticalSpeed = Input.GetAxis(verticalMoveInput) * movementSpeed;
