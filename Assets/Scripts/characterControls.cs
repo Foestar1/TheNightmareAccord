@@ -229,7 +229,11 @@ public class characterControls : MonoBehaviourPunCallbacks
                 //DEATH ZONE AREA
                 if (other.tag == "DeathZone")
                 {
-                    Debug.Log("Shit, we dead");
+                    isDead = true;
+                    var myPlayerObject = PhotonNetwork.Instantiate(this.playerDeathSpirit.name, this.transform.position, this.transform.rotation, 0);
+                    int playerPWID = this.photonView.ViewID;
+                    this.photonView.RPC("playerDied", RpcTarget.All, playerPWID);
+                    myPlayerObject.transform.GetChild(0).gameObject.SetActive(true);
                 }
             }
         }
@@ -253,8 +257,6 @@ public class characterControls : MonoBehaviourPunCallbacks
                     StartCoroutine(UpdateDead());
                 }else if (playerLives == 1) {
                     isDead = true;
-                    var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
-                    ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(true);
                     this.gameObject.SetActive(false);
 
                     List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
@@ -295,9 +297,50 @@ public class characterControls : MonoBehaviourPunCallbacks
             }
 
             //DEATH ZONE AREA
-            if (other.tag == "DeathZone")
+            if (other.tag == "DeathZone" && !isDead)
             {
-                Debug.Log("Shit, we dead");
+                if (playerLives > 1)
+                {
+                    isDead = true;
+                    var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
+                    ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(false);
+                    playerLives--;
+                    StartCoroutine(UpdateDead());
+                }
+                else if (playerLives == 1)
+                {
+                    isDead = true;
+                    this.gameObject.SetActive(false);
+
+                    List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+                    foreach (GameObject enemyObject in enemyObjects)
+                    {
+                        Destroy(enemyObject.gameObject);
+                    }
+
+                    List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+
+                    foreach (GameObject playersGhost in playerObjects)
+                    {
+                        Destroy(playersGhost.gameObject);
+                    }
+
+                    int randomAni = Random.Range(0, 2);
+                    var newPlayerListing = Instantiate(playerLostAnimations, this.transform.position, this.transform.rotation);
+                    if (randomAni == 0)
+                    {
+                        newPlayerListing.GetComponent<Animator>().Play("Lose1");
+                    }
+                    else
+                    {
+                        newPlayerListing.GetComponent<Animator>().Play("Lose2");
+                    }
+                    playerCrosshair.SetActive(false);
+                    teddyUI.SetActive(false);
+                    GameObject.Find("GoalBorder").SetActive(false);
+                    interactionButton.SetActive(false);
+                    Destroy(this.gameObject);
+                }
             }
         }
     }
