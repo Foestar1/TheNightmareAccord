@@ -1870,7 +1870,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &326879658
 GameObject:
@@ -5395,7 +5395,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9eb111d64de2d0e4d93eee326e51a90e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9eb111d64de2d0e4d93eee326e51a90e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13698,7 +13698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1209879090922295608, guid: 40d382e54107abb4e83e9a964d945dee, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1209879090922295608, guid: 40d382e54107abb4e83e9a964d945dee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13982,6 +13982,37 @@ MonoBehaviour:
   notWon: {fileID: 2100000, guid: 3394f2af15d02354d8e825cd11930ed6, type: 2}
   haveWon: {fileID: 2100000, guid: ccb63da6afd98194b87717cb83ff2145, type: 2}
   levelNumber: 1
+--- !u!1 &2636196039377890690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3449325173207562040}
+  m_Layer: 0
+  m_Name: Dreamcatcher Variant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3449325173207562040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2636196039377890690}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.7641983, y: 28.07, z: 1.5481696}
+  m_LocalScale: {x: 3.2893, y: 3.2893, z: 3.2893}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &7003353534253060247
 Transform:
   m_ObjectHideFlags: 0
@@ -14109,7 +14140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2270432170293617979, guid: 6dbdab4f4f9dc8d48ab6c27eca82adc1, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 2270432170293617979, guid: 6dbdab4f4f9dc8d48ab6c27eca82adc1, type: 3}
       propertyPath: m_LocalPosition.x
