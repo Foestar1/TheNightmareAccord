@@ -31,6 +31,7 @@ public class Spawner : MonoBehaviourPunCallbacks
     private bool gameFinished;
     private bool gameWon;
     private bool gameLost;
+    private bool randomizeLevel;
 
     [Header("Enemy Stuff")]
     [Tooltip("The lesser enemies in the map")]
@@ -108,34 +109,56 @@ public class Spawner : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.IsMasterClient && playersReady == PhotonNetwork.CurrentRoom.PlayerCount)
             {
-                if (goalsPicked < 3)
+                if (goalsPicked < goalsNotFound)
                 {
-                    var point = Random.Range(0, goals.Count);
-                    if (goals[point].activeSelf == false)
+                    if (goals.Count != 0)
                     {
-                        goalsPicked++;
-                        this.photonView.RPC("activateGoal", RpcTarget.All, point);
+                        var point = Random.Range(0, goals.Count);
+                        if (goals[point].activeSelf == false)
+                        {
+                            goalsPicked++;
+                            this.photonView.RPC("activateGoal", RpcTarget.All, point);
+                        }
+                        else
+                        {
+                            pickGoals();
+                        }
                     }
                     else
                     {
-                        pickGoals();
+                        if (!randomizeLevel)
+                        {
+                            randomizeLevel = true;
+                            Debug.Log("We need to randomize the level then choose goals/" + randomizeLevel);
+                        }
                     }
                 }
             }
         }
         else
         {
-            if (goalsPicked < 3)
+            if (goalsPicked < goalsNotFound)
             {
-                var point = Random.Range(0, goals.Count);
-                if (goals[point].activeSelf == false)
+                if (goals.Count != 0)
                 {
-                    goalsPicked++;
-                    goals[point].SetActive(true);
+                    var point = Random.Range(0, goals.Count);
+                    if (goals[point].activeSelf == false)
+                    {
+                        goalsPicked++;
+                        goals[point].SetActive(true);
+                    }
+                    else
+                    {
+                        pickGoals();
+                    }
                 }
                 else
                 {
-                    pickGoals();
+                    if (!randomizeLevel)
+                    {
+                        randomizeLevel = true;
+                        Debug.Log("We need to randomize the level then choose goals/" + randomizeLevel);
+                    }
                 }
             }
         }
@@ -252,6 +275,11 @@ public class Spawner : MonoBehaviourPunCallbacks
                 }
             }
         }
+    }
+
+    private void RANDOMIZER()
+    {
+
     }
     #endregion
 
