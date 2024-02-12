@@ -33,6 +33,11 @@ public class Spawner : MonoBehaviourPunCallbacks
     private bool gameLost;
     private bool randomizeLevel;
 
+    [Header("Randomizer Stuff")]
+    [Tooltip("The sections to be randomized via rotation")]
+    [SerializeField]
+    private List<GameObject> areasToRotate;
+
     [Header("Enemy Stuff")]
     [Tooltip("The lesser enemies in the map")]
     [SerializeField]
@@ -129,7 +134,7 @@ public class Spawner : MonoBehaviourPunCallbacks
                         if (!randomizeLevel)
                         {
                             randomizeLevel = true;
-                            Debug.Log("We need to randomize the level then choose goals/" + randomizeLevel);
+                            RANDOMIZER();
                         }
                     }
                 }
@@ -157,7 +162,7 @@ public class Spawner : MonoBehaviourPunCallbacks
                     if (!randomizeLevel)
                     {
                         randomizeLevel = true;
-                        Debug.Log("We need to randomize the level then choose goals/" + randomizeLevel);
+                        RANDOMIZER();
                     }
                 }
             }
@@ -279,7 +284,19 @@ public class Spawner : MonoBehaviourPunCallbacks
 
     private void RANDOMIZER()
     {
-
+        Debug.Log("We need to randomize the level then choose goals/" + randomizeLevel);
+        GameObject zeroedObject = areasToRotate[Random.Range(0, areasToRotate.Count)];
+        zeroedObject.transform.Rotate(0, 0, 0);
+        areasToRotate.Remove(zeroedObject);
+        GameObject ninetyObject = areasToRotate[Random.Range(0, areasToRotate.Count)];
+        ninetyObject.transform.Rotate(0, 90, 0);
+        areasToRotate.Remove(ninetyObject);
+        GameObject oneeightyObject = areasToRotate[Random.Range(0, areasToRotate.Count)];
+        oneeightyObject.transform.Rotate(0, 180, 0);
+        areasToRotate.Remove(oneeightyObject);
+        GameObject twoseventyObject = areasToRotate[Random.Range(0, areasToRotate.Count)];
+        twoseventyObject.transform.Rotate(0, 270, 0);
+        areasToRotate.Remove(twoseventyObject);
     }
     #endregion
 
