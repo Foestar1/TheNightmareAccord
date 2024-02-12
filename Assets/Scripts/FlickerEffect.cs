@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FlickerEffect : MonoBehaviour
 {
-    public float intensity = 0.2f;
+    public float intensity = 0.1f;
     public float perSecond = 0.3f;
     public float randomness = 1.0f;
 
