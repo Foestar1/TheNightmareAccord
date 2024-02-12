@@ -284,7 +284,6 @@ public class Spawner : MonoBehaviourPunCallbacks
 
     private void RANDOMIZER()
     {
-        Debug.Log("We need to randomize the level then choose goals/" + randomizeLevel);
         GameObject zeroedObject = areasToRotate[Random.Range(0, areasToRotate.Count)];
         zeroedObject.transform.Rotate(0, 0, 0);
         areasToRotate.Remove(zeroedObject);
