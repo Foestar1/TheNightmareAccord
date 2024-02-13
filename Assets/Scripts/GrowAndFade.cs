@@ -1,7 +1,9 @@
-using System.Collections;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using System.Collections;
 
-public class GrowAndFade : MonoBehaviour
+public class GrowAndFade : MonoBehaviourPunCallbacks
 {
     public float growTime = 2.0f; // Time in seconds to grow
     public float fadeTime = 2.0f; // Time in seconds to fade

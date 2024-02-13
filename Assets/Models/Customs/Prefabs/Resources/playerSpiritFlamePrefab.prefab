@@ -4953,7 +4953,8 @@ GameObject:
   - component: {fileID: 8029407636288708921}
   - component: {fileID: 6369185234922755549}
   - component: {fileID: 7101729290437058818}
-  m_Layer: 3
+  - component: {fileID: -2274521215548099864}
+  m_Layer: 0
   m_Name: playerSpiritFlamePrefab
   m_TagString: PlayerSpirit
   m_Icon: {fileID: 0}
@@ -5030,6 +5031,19 @@ CapsuleCollider:
   m_Height: 6.89
   m_Direction: 1
   m_Center: {x: 0, y: 3.5, z: 0}
+--- !u!114 &-2274521215548099864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773574973811153699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d479a3f9083ebbb419836324cd9ad1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkedPlayer: {fileID: 0}
 --- !u!1 &2934454498638421422
 GameObject:
   m_ObjectHideFlags: 0
