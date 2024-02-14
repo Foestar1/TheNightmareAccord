@@ -84,7 +84,6 @@ public class GraveWardenAI : MonoBehaviourPunCallbacks
         {
             currentZone = "Tunnel";
         }
-        Debug.Log("Warden has reached the " + currentZone + ".");
     }
     #endregion
 
@@ -104,11 +103,8 @@ public class GraveWardenAI : MonoBehaviourPunCallbacks
                 if (!revivingWraiths && !wardenAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle2"))
                 {
                     revivingWraiths = true;
-                    StartCoroutine(spawnFlaems());
+                    StartCoroutine(spawnFlames());
                     wardenAnimator.SetBool("reviving", true);
-                }
-                else
-                {
                     int index = System.Array.IndexOf(wardenSpots, currentWardenSpot);
                     index = (index + 1) % wardenSpots.Length;
                     currentWardenSpot = wardenSpots[index];
@@ -154,7 +150,7 @@ public class GraveWardenAI : MonoBehaviourPunCallbacks
         wardenAgent.SetDestination(currentWardenSpot.position);
     }
 
-    private IEnumerator spawnFlaems()
+    private IEnumerator spawnFlames()
     {
         yield return new WaitForSeconds(2);
         if (PhotonNetwork.IsConnectedAndReady)

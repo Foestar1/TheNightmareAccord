@@ -201,7 +201,10 @@ public class Spawner : MonoBehaviourPunCallbacks
                     enemiesSpawned = true;
                     enemy.SetActive(true);
                 }
-                bigEnemy.SetActive(true);
+                if (bigEnemy != null)
+                {
+                    bigEnemy.SetActive(true);
+                }
             }
         }
     }
@@ -315,7 +318,10 @@ public class Spawner : MonoBehaviourPunCallbacks
         {
             enemy.SetActive(true);
         }
-        bigEnemy.SetActive(true);
+        if (bigEnemy != null)
+        {
+            bigEnemy.SetActive(true);
+        }
     }
 
     [PunRPC]
