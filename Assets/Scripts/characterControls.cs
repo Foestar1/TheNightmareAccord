@@ -216,7 +216,8 @@ public class characterControls : MonoBehaviourPunCallbacks
                     isDead = true;
                     var myPlayerObject = PhotonNetwork.Instantiate(this.playerDeathSpirit.name, this.transform.position, this.transform.rotation, 0);
                     int playerPWID = this.photonView.ViewID;
-                    this.photonView.RPC("playerDied", RpcTarget.All, playerPWID);
+                    int playerGhostPWID = myPlayerObject.GetPhotonView().ViewID;
+                    this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
                     myPlayerObject.transform.GetChild(0).gameObject.SetActive(true);
                 }
 
@@ -227,12 +228,13 @@ public class characterControls : MonoBehaviourPunCallbacks
                 }
 
                 //DEATH ZONE AREA
-                if (other.tag == "DeathZone")
+                if (other.tag == "DeathZone" && !isDead)
                 {
                     isDead = true;
                     var myPlayerObject = PhotonNetwork.Instantiate(this.playerDeathSpirit.name, this.transform.position, this.transform.rotation, 0);
                     int playerPWID = this.photonView.ViewID;
-                    this.photonView.RPC("playerDied", RpcTarget.All, playerPWID);
+                    int playerGhostPWID = myPlayerObject.GetPhotonView().ViewID;
+                    this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
                     myPlayerObject.transform.GetChild(0).gameObject.SetActive(true);
                 }
             }
@@ -568,6 +570,12 @@ public class characterControls : MonoBehaviourPunCallbacks
             }
         }
     }
+
+    public void resetDead()
+    {
+        StartCoroutine(UpdateDead());
+        StartCoroutine(UpdateCooldown());
+    }
     #endregion
 
     #region coroutines
@@ -605,9 +613,10 @@ public class characterControls : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void playerDied(int playerPWID)
+    void playerDied(int playerPWID, int playerGhostPWID)
     {
         GameObject.Find("SpawnControls").GetComponent<Spawner>().playersAlive--;
+        PhotonView.Find(playerGhostPWID).GetComponent<LinkedPlayer>().linkedPlayer = PhotonView.Find(playerPWID).gameObject;
         PhotonView.Find(playerPWID).gameObject.SetActive(false);
     }
     #endregion

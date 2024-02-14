@@ -31,6 +31,7 @@ public class WraithAI : MonoBehaviourPunCallbacks
     private float chaseDistance;
     private bool isChasing;
     public bool isDead { get; set; }
+    public string currentZone { get; set; }
     #endregion
 
     #region built in functions
@@ -82,6 +83,31 @@ public class WraithAI : MonoBehaviourPunCallbacks
                 agentAnimator.SetBool("dead", true);
                 agentAI.isStopped = true;
             }
+        }
+
+        if (other.name == "GraveyardTrigger")
+        {
+            currentZone = "Graveyard";
+        }
+
+        if (other.name == "ForestTrigger")
+        {
+            currentZone = "Forest";
+        }
+
+        if (other.name == "MeadowTrigger")
+        {
+            currentZone = "Meadow";
+        }
+
+        if (other.name == "RockyTrigger")
+        {
+            currentZone = "Rocky";
+        }
+
+        if (other.name == "TunnelTrigger")
+        {
+            currentZone = "Tunnel";
         }
     }
     #endregion
