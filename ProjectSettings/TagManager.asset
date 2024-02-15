@@ -12,6 +12,7 @@ TagManager:
   - FxTemporaire
   - SlowZone
   - DeathZone
+  - EnemyRevive
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Enemy
   - Teddy
   - PlayerGhost
-  - 
+  - Spirit
   - 
   - 
   - 

@@ -489,7 +489,6 @@ GameObject:
   - component: {fileID: 4132558835280027455}
   - component: {fileID: 8651914443847152854}
   - component: {fileID: 6611929924499171236}
-  - component: {fileID: 4731023714587617134}
   m_Layer: 0
   m_Name: WraithIdle
   m_TagString: Untagged
@@ -557,7 +556,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: dormant
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: dead
   m_SynchronizeLayers:
   - SynchronizeType: 2
@@ -585,20 +584,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4731023714587617134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2928894199623524455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b60e672b9f93474a9a58a6dfe5c5300, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floatingFlame: {fileID: 1773574973811153699, guid: b286a334246055d42870810d707f287e, type: 3}
-  parentObject: {fileID: 8703425977989922007}
 --- !u!1 &2932783107543445519
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,6 +739,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   isDormant: 1
   chaseDistance: 20
+  floatingFlame: {fileID: 1773574973811153699, guid: b286a334246055d42870810d707f287e, type: 3}
 --- !u!114 &1184709289
 MonoBehaviour:
   m_ObjectHideFlags: 0
