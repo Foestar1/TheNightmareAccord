@@ -11,7 +11,7 @@ public class TunnelAudioControl : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            if (other.gameObject.GetPhotonView().IsMine && other.tag == "Player")
+            if (other.gameObject.GetPhotonView().IsMine && other.tag == "Player")//wierd issues
             {
                 foreach (AudioSource tunnelAudio in tunnelAudios)
                 {

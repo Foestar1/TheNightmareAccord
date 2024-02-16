@@ -1242,6 +1242,7 @@ MonoBehaviour:
   mouseSensitivity: 2
   upDownRange: 60
   interactableDistance: 5
+  observerObject: {fileID: 1773574973811153699, guid: 3f18bc40ee900b14d80ded82a2e96819, type: 3}
   horizontalMoveInput: Horizontal
   verticalMoveInput: Vertical
   mouseXInput: Mouse X

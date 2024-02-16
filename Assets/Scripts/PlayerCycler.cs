@@ -6,22 +6,11 @@ public class PlayerCycler : MonoBehaviour
     private List<GameObject> playerObjects;
     private int currentIndex = 0;
     private Transform cameraTransform;
-    public float orbitSpeed = 50f;
+    public float orbitSensitivity = 100f; // Adjust this value to control the orbit sensitivity
 
     void Start()
     {
-        // Initialize the list
-        playerObjects = new List<GameObject>();
-
-        // Find all game objects tagged as "Player" and "PlayerSpirit" and add them to the list
-        playerObjects.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        playerObjects.AddRange(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
-
-        // Move this game object to the position of the first player object, if available
-        if (playerObjects.Count > 0)
-        {
-            transform.position = playerObjects[currentIndex].transform.position;
-        }
+        FindAndSetPlayerObjects();
 
         // Find and set the camera child
         if (transform.childCount > 0)
@@ -32,27 +21,46 @@ public class PlayerCycler : MonoBehaviour
 
     void Update()
     {
+        // Check if the current target exists and is active
+        if (playerObjects.Count == 0 || !playerObjects[currentIndex] || !playerObjects[currentIndex].activeInHierarchy)
+        {
+            FindAndSetPlayerObjects(); // Refresh the list if the current target is missing or inactive
+        }
+
+        // Continuously follow the current target object
+        transform.position = playerObjects[currentIndex].transform.position;
+
         // Check for the "Fire1" button input to cycle through player objects
         if (Input.GetButtonDown("Fire1"))
         {
             CycleToNextPlayerObject();
         }
 
-        // Orbit the camera around this game object on the Y plane
+        // Orbit the camera around this game object on the Y plane based on mouse movement
         if (cameraTransform != null)
         {
-            cameraTransform.RotateAround(transform.position, Vector3.up, orbitSpeed * Time.deltaTime);
+            float mouseX = Input.GetAxis("Mouse X");
+            cameraTransform.RotateAround(transform.position, Vector3.up, mouseX * orbitSensitivity * Time.deltaTime);
         }
     }
 
     void CycleToNextPlayerObject()
     {
+        currentIndex = (currentIndex + 1) % playerObjects.Count;
+        if (playerObjects.Count == 0 || !playerObjects[currentIndex] || !playerObjects[currentIndex].activeInHierarchy)
+        {
+            FindAndSetPlayerObjects(); // Ensure the new target is valid
+        }
+    }
+
+    void FindAndSetPlayerObjects()
+    {
+        playerObjects = new List<GameObject>();
+        playerObjects.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        playerObjects.AddRange(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
         if (playerObjects.Count > 0)
         {
-            // Increment the current index, and wrap around if it goes beyond the list's count
-            currentIndex = (currentIndex + 1) % playerObjects.Count;
-
-            // Move this game object to the position of the next player object
+            currentIndex = 0; // Reset to the first object in the list
             transform.position = playerObjects[currentIndex].transform.position;
         }
     }
