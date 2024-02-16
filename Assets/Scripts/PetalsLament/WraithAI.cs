@@ -243,20 +243,27 @@ public class WraithAI : MonoBehaviourPunCallbacks
 
     private void updateOnPlayers()
     {
-        var aPlayerLeft = 0;
-        foreach(GameObject player in playerTargets)
+        // Flag to indicate if the list needs updating
+        bool needsUpdate = false;
+
+        // Iterate through the list to check for inactive or null entries
+        foreach (GameObject player in playerTargets)
         {
-            if (player.activeSelf == false || player == null)
+            // Check if the player is null or inactive
+            if (player == null || !player.activeSelf)
             {
-                aPlayerLeft++;
+                needsUpdate = true;
+                break; // No need to continue checking once we know an update is needed
             }
         }
 
-        if (aPlayerLeft > 0)
+        // Update the list if needed
+        if (needsUpdate)
         {
             playerTargets.Clear();
             playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         }
+
     }
 
     public void destroyME()

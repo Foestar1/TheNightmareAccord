@@ -35,6 +35,8 @@ public class characterControls : MonoBehaviourPunCallbacks
     private float interactableDistance;
     private GameObject playerCrosshair;
     private GameObject interactionButton;
+    [SerializeField]
+    private GameObject observerObject;
 
     [Header("Inputs Customization")]
     [Tooltip("The input button for horizontal character movement")]
@@ -218,7 +220,8 @@ public class characterControls : MonoBehaviourPunCallbacks
                     int playerPWID = this.photonView.ViewID;
                     int playerGhostPWID = myPlayerObject.GetPhotonView().ViewID;
                     this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
-                    myPlayerObject.transform.GetChild(0).gameObject.SetActive(true);
+                    var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
+                    observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
                 }
 
                 //SLOW ZONE AREA
@@ -235,7 +238,9 @@ public class characterControls : MonoBehaviourPunCallbacks
                     int playerPWID = this.photonView.ViewID;
                     int playerGhostPWID = myPlayerObject.GetPhotonView().ViewID;
                     this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
-                    myPlayerObject.transform.GetChild(0).gameObject.SetActive(true);
+                    //testing stuff
+                    var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
+                    observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
                 }
             }
         }
