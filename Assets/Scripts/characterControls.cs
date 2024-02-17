@@ -222,6 +222,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
                     var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
                     observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
+                    myPlayerObject.GetComponent<LinkedPlayer>().linkedObserver = observerObjectCamera;
                 }
 
                 //SLOW ZONE AREA
@@ -238,9 +239,9 @@ public class characterControls : MonoBehaviourPunCallbacks
                     int playerPWID = this.photonView.ViewID;
                     int playerGhostPWID = myPlayerObject.GetPhotonView().ViewID;
                     this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
-                    //testing stuff
                     var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
                     observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
+                    myPlayerObject.GetComponent<LinkedPlayer>().linkedObserver = observerObjectCamera;
                 }
             }
         }

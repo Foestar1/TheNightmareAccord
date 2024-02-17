@@ -5,6 +5,7 @@ using Photon.Realtime;
 public class LinkedPlayer : MonoBehaviourPunCallbacks
 {
     public GameObject linkedPlayer;
+    public GameObject linkedObserver;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -12,6 +13,10 @@ public class LinkedPlayer : MonoBehaviourPunCallbacks
         {
             int playerPWID = linkedPlayer.GetPhotonView().ViewID;
             this.photonView.RPC("reactivatePlayer", RpcTarget.All, playerPWID);
+            if (this.photonView.IsMine)
+            {
+                Destroy(linkedObserver);
+            }
             Destroy(this.gameObject);
         }
     }

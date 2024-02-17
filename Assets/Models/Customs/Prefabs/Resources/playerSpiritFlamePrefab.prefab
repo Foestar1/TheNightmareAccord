@@ -5043,6 +5043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedPlayer: {fileID: 0}
+  linkedObserver: {fileID: 0}
 --- !u!1 &4256279647472166440
 GameObject:
   m_ObjectHideFlags: 0

@@ -171,14 +171,19 @@ public class Spawner : MonoBehaviourPunCallbacks
 
     private void spawnPlayers()
     {
-        if (PhotonNetwork.IsMasterClient && playersReady == PhotonNetwork.CurrentRoom.PlayerCount && !spawnedPlayers)
+        if (PhotonNetwork.IsConnectedAndReady)
         {
-            spawnedPlayers = true;
-            foreach (Player player in PhotonNetwork.PlayerList)
+            if (PhotonNetwork.IsMasterClient && playersReady == PhotonNetwork.CurrentRoom.PlayerCount && !spawnedPlayers)
             {
-                playersAlive++;
-                var point = Random.Range(0, playerSpawnPoints.Count);
-                this.photonView.RPC("activateUIAndPlayer", player, point);
+                spawnedPlayers = true;
+                foreach (Player player in PhotonNetwork.PlayerList)
+                {
+                    playersAlive++;
+                    var point = Random.Range(0, playerSpawnPoints.Count);
+                    int pointID = playerSpawnPoints[point].gameObject.GetPhotonView().ViewID;
+                    playerSpawnPoints.RemoveAt(point);
+                    this.photonView.RPC("activateUIAndPlayer", player, pointID);
+                }
             }
         }
     }
@@ -325,13 +330,14 @@ public class Spawner : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void activateUIAndPlayer(int point)
+    void activateUIAndPlayer(int pointID)
     {
+        PhotonView tempView = PhotonView.Find(pointID);
         Crosshair.SetActive(true);
         interactionButton.SetActive(true);
         goalTrackerUI.SetActive(true);
         teddyUI.SetActive(true);
-        var myPlayerObject = PhotonNetwork.Instantiate(this.playerPrefab.name, playerSpawnPoints[point].position, playerSpawnPoints[point].rotation, 0);
+        var myPlayerObject = PhotonNetwork.Instantiate(this.playerPrefab.name, tempView.gameObject.transform.position, tempView.gameObject.transform.rotation, 0);
         //myPlayerObject.name = myPlayerObject.GetPhotonView().Owner.UserId;
     }
 

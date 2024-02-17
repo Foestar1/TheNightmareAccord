@@ -5,15 +5,15 @@ using Photon.Realtime;
 public class TunnelAudioControl : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private AudioSource[] tunnelAudios;
+    private AudioSource tunnelAudio;
 
     private void OnTriggerEnter(Collider other)
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            if (other.gameObject.GetPhotonView().IsMine && other.tag == "Player")//wierd issues
+            if (other.tag == "Player")
             {
-                foreach (AudioSource tunnelAudio in tunnelAudios)
+                if (other.gameObject.GetPhotonView().IsMine)
                 {
                     tunnelAudio.GetComponent<AudioLowPassFilter>().enabled = true;
                 }
@@ -23,10 +23,7 @@ public class TunnelAudioControl : MonoBehaviourPunCallbacks
         {
             if (other.tag == "Player")
             {
-                foreach (AudioSource tunnelAudio in tunnelAudios)
-                {
-                    tunnelAudio.GetComponent<AudioLowPassFilter>().enabled = true;
-                }
+                tunnelAudio.GetComponent<AudioLowPassFilter>().enabled = true;
             }
         }
     }
@@ -35,9 +32,9 @@ public class TunnelAudioControl : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            if (other.gameObject.GetPhotonView().IsMine && other.tag == "Player")
+            if (other.tag == "Player")
             {
-                foreach (AudioSource tunnelAudio in tunnelAudios)
+                if (other.gameObject.GetPhotonView().IsMine)
                 {
                     tunnelAudio.GetComponent<AudioLowPassFilter>().enabled = false;
                 }
@@ -47,10 +44,7 @@ public class TunnelAudioControl : MonoBehaviourPunCallbacks
         {
             if (other.tag == "Player")
             {
-                foreach (AudioSource tunnelAudio in tunnelAudios)
-                {
-                    tunnelAudio.GetComponent<AudioLowPassFilter>().enabled = false;
-                }
+                tunnelAudio.GetComponent<AudioLowPassFilter>().enabled = false;
             }
         }
     }
