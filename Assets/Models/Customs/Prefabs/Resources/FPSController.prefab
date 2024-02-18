@@ -1269,7 +1269,7 @@ MonoBehaviour:
   playerLostAnimations: {fileID: 2476902621862603299, guid: 7464c1799f31ea042b62628c4cd6d00e, type: 3}
   TeddyObject: {fileID: 2020765270886030702}
   lightExplosion: {fileID: 7195407350128338894, guid: 2263f56a14ea8e042b854347b7c60d57, type: 3}
-  teddyCooldownTime: 60
+  teddyCooldownTime: 30
 --- !u!114 &-1693420420305901715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1855,8 +1855,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 15
+  m_Intensity: 4
+  m_Range: 25
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
