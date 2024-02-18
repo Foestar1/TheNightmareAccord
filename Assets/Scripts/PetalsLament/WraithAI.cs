@@ -72,6 +72,7 @@ public class WraithAI : MonoBehaviourPunCallbacks
             checkDistances4Target();
             actualAI();
         }
+        audioQueue();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -292,6 +293,12 @@ public class WraithAI : MonoBehaviourPunCallbacks
         isDead = false;
         agentAnimator.SetBool("dead", false);
         agentAI.isStopped = false;
+    }
+
+    public void audioQueue()
+    {
+        //use get current animation and activate the looping grudge audio
+        //if (agentAnimator.)
     }
     #endregion
 
