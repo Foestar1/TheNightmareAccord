@@ -11,11 +11,14 @@ public class LinkedPlayer : MonoBehaviourPunCallbacks
     {
         if (other.tag == "Explosion")
         {
-            int playerPWID = linkedPlayer.GetPhotonView().ViewID;
-            this.photonView.RPC("reactivatePlayer", RpcTarget.All, playerPWID);
-            if (this.photonView.IsMine)
+            if (PhotonNetwork.IsConnectedAndReady)
             {
-                Destroy(linkedObserver);
+                int playerPWID = linkedPlayer.GetPhotonView().ViewID;
+                this.photonView.RPC("reactivatePlayer", RpcTarget.All, playerPWID);
+                if (this.photonView.IsMine)
+                {
+                    Destroy(linkedObserver);
+                }
             }
             Destroy(this.gameObject);
         }

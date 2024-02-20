@@ -663,6 +663,7 @@ GameObject:
   - component: {fileID: 1184709289}
   - component: {fileID: 3383717476849977762}
   - component: {fileID: 2750786652040788390}
+  - component: {fileID: -4496477398230396794}
   m_Layer: 8
   m_Name: WraithAgent
   m_TagString: Enemy
@@ -738,6 +739,7 @@ MonoBehaviour:
   agentAnimator: {fileID: 4132558835280027455}
   playerTargets: []
   currentTarget: {fileID: 0}
+  wraithAudio: {fileID: 2750786652040788390}
   isDormant: 1
   chaseDistance: 30
   floatingFlame: {fileID: 1773574973811153699, guid: b286a334246055d42870810d707f287e, type: 3}
@@ -790,11 +792,11 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: be46cb1bab90a6d4186e7462584ab396, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -876,6 +878,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-4496477398230396794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3130587851621237768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a01a1cc2d7c8944b5587dc59c35fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VolumeType:
+    soundVolume: 1
+    musicVolume: 0
 --- !u!1 &3221488989454563678
 GameObject:
   m_ObjectHideFlags: 0

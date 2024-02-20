@@ -21,6 +21,9 @@ public class WraithAI : MonoBehaviourPunCallbacks
     [Tooltip("The AI's current target")]
     [SerializeField]
     private Transform currentTarget;
+    [Tooltip("The AI's 3D audio source")]
+    [SerializeField]
+    private AudioSource wraithAudio;
 
     [Header("AI behavior references")]
     [Tooltip("The AI's dormant status")]
@@ -72,6 +75,7 @@ public class WraithAI : MonoBehaviourPunCallbacks
             checkDistances4Target();
             actualAI();
         }
+        audioQueue();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -292,6 +296,27 @@ public class WraithAI : MonoBehaviourPunCallbacks
         isDead = false;
         agentAnimator.SetBool("dead", false);
         agentAI.isStopped = false;
+    }
+
+    public void audioQueue()
+    {
+        //use get current animation and activate the looping grudge audio
+        if (agentAnimator.GetCurrentAnimatorStateInfo(0).IsName("Chase") || agentAnimator.GetCurrentAnimatorStateInfo(0).IsName("Chase 1"))
+        {
+            wraithAudio.enabled = true;
+            if (!wraithAudio.isPlaying)
+            {
+                wraithAudio.Play();
+            }
+        }
+        else
+        {
+            wraithAudio.enabled = false;
+            if (wraithAudio.isPlaying)
+            {
+                wraithAudio.Stop();
+            }
+        }
     }
     #endregion
 
