@@ -189,6 +189,11 @@ public class characterControls : MonoBehaviourPunCallbacks
                     HandleInteraction();
                     HandleTeddy();
                 }
+                else
+                {
+                    characterController.SimpleMove(Vector3.zero);
+                    HandleAnimation();
+                }
             }
         }
         else
@@ -202,6 +207,11 @@ public class characterControls : MonoBehaviourPunCallbacks
                 HandleRaySphereCast();
                 HandleInteraction();
                 HandleTeddy();
+            }
+            else
+            {
+                characterController.SimpleMove(Vector3.zero);
+                HandleAnimation();
             }
         }
     }

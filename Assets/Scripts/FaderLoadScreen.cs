@@ -11,6 +11,9 @@ public class FaderLoadScreen : MonoBehaviour
     private Animator sleepyBoi;
 
     [SerializeField]
+    private GameObject inGameMenuControls;
+
+    [SerializeField]
     private GameObject[] thingsToEnable;
     [SerializeField]
     private GameObject[] thingsToDisable;
@@ -26,6 +29,8 @@ public class FaderLoadScreen : MonoBehaviour
         {
             thing.gameObject.SetActive(false);
         }
+
+        inGameMenuControls.GetComponent<InGameMenu>().canOpen = true;
     }
 
     private void loadHub()
