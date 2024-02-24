@@ -233,6 +233,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
                     observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
                     myPlayerObject.GetComponent<LinkedPlayer>().linkedObserver = observerObjectCamera;
+                    playerCrosshair.SetActive(false);
                 }
 
                 //SLOW ZONE AREA
@@ -252,6 +253,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
                     observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
                     myPlayerObject.GetComponent<LinkedPlayer>().linkedObserver = observerObjectCamera;
+                    playerCrosshair.SetActive(false);
                 }
             }
         }
@@ -589,6 +591,7 @@ public class characterControls : MonoBehaviourPunCallbacks
 
     public void resetDead()
     {
+        playerCrosshair.SetActive(true);
         StartCoroutine(UpdateDead());
         StartCoroutine(UpdateCooldown());
     }
