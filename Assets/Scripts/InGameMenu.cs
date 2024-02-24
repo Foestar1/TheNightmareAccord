@@ -24,6 +24,7 @@ public class InGameMenu : MonoBehaviourPunCallbacks
     {
         playerTargets.Clear();
         playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        playerTargets.AddRange(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
     }
 
     public void openMenu()
@@ -38,6 +39,10 @@ public class InGameMenu : MonoBehaviourPunCallbacks
                 {
                     if (player.GetPhotonView().IsMine)
                     {
+                        if (player.tag == "Player")
+                        {
+
+                        }
                         canOpen = player.GetComponent<characterControls>().canMove;
                     }
                 }
