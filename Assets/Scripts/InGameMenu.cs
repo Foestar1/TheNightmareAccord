@@ -41,9 +41,11 @@ public class InGameMenu : MonoBehaviourPunCallbacks
                     {
                         if (player.tag == "Player")
                         {
-
+                            canOpen = player.GetComponent<characterControls>().canMove;
+                        }else if (player.tag == "PlayerSpirit")
+                        {
+                            canOpen = true;
                         }
-                        canOpen = player.GetComponent<characterControls>().canMove;
                     }
                 }
             }
@@ -63,7 +65,10 @@ public class InGameMenu : MonoBehaviourPunCallbacks
                     {
                         if (player.GetPhotonView().IsMine)
                         {
-                            player.GetComponent<characterControls>().canMove = false;
+                            if (player.tag == "Player")
+                            {
+                                player.GetComponent<characterControls>().canMove = false;
+                            }
                         }
                     }
                 }
@@ -71,7 +76,10 @@ public class InGameMenu : MonoBehaviourPunCallbacks
                 {
                     foreach (GameObject player in playerTargets)
                     {
-                        player.GetComponent<characterControls>().canMove = false;
+                        if (player.tag == "Player")
+                        {
+                            player.GetComponent<characterControls>().canMove = false;
+                        }
                     }
                 }
 
@@ -93,7 +101,10 @@ public class InGameMenu : MonoBehaviourPunCallbacks
             {
                 if (player.GetPhotonView().IsMine)
                 {
-                    player.GetComponent<characterControls>().canMove = true;
+                    if (player.tag == "Player")
+                    {
+                        player.GetComponent<characterControls>().canMove = true;
+                    }
                 }
             }
         }
@@ -101,7 +112,10 @@ public class InGameMenu : MonoBehaviourPunCallbacks
         {
             foreach (GameObject player in playerTargets)
             {
-                player.GetComponent<characterControls>().canMove = true;
+                if (player.tag == "Player")
+                {
+                    player.GetComponent<characterControls>().canMove = true;
+                }
             }
         }
 
