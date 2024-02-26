@@ -7,6 +7,9 @@ public class PlayerCycler : MonoBehaviour
     private int currentIndex = 0;
     private Transform cameraTransform;
     public float orbitSensitivity = 100f; // Adjust this value to control the orbit sensitivity
+    public float minDistance = 2f; // Minimum distance from the object
+    public float maxDistance = 10f; // Maximum distance the camera can be from the object
+    public LayerMask ignoreLayers; // Layers to ignore by the raycast
 
     void Start()
     {
@@ -17,30 +20,30 @@ public class PlayerCycler : MonoBehaviour
         {
             cameraTransform = transform.GetChild(0);
         }
+
+        // Set up the layer mask to ignore specific layers (6, 8, 10)
+        ignoreLayers = ~((1 << 6) | (1 << 8) | (1 << 10));
     }
 
     void Update()
     {
-        // Check if the current target exists and is active
         if (playerObjects.Count == 0 || !playerObjects[currentIndex] || !playerObjects[currentIndex].activeInHierarchy)
         {
-            FindAndSetPlayerObjects(); // Refresh the list if the current target is missing or inactive
+            FindAndSetPlayerObjects();
         }
 
-        // Continuously follow the current target object
         transform.position = playerObjects[currentIndex].transform.position;
 
-        // Check for the "Fire1" button input to cycle through player objects
         if (Input.GetButtonDown("Fire1"))
         {
             CycleToNextPlayerObject();
         }
 
-        // Orbit the camera around this game object on the Y plane based on mouse movement
         if (cameraTransform != null)
         {
             float mouseX = Input.GetAxis("Mouse X");
             cameraTransform.RotateAround(transform.position, Vector3.up, mouseX * orbitSensitivity * Time.deltaTime);
+            AdjustCameraDistance();
         }
     }
 
@@ -49,7 +52,7 @@ public class PlayerCycler : MonoBehaviour
         currentIndex = (currentIndex + 1) % playerObjects.Count;
         if (playerObjects.Count == 0 || !playerObjects[currentIndex] || !playerObjects[currentIndex].activeInHierarchy)
         {
-            FindAndSetPlayerObjects(); // Ensure the new target is valid
+            FindAndSetPlayerObjects();
         }
     }
 
@@ -60,8 +63,22 @@ public class PlayerCycler : MonoBehaviour
         playerObjects.AddRange(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
         if (playerObjects.Count > 0)
         {
-            currentIndex = 0; // Reset to the first object in the list
+            currentIndex = 0;
             transform.position = playerObjects[currentIndex].transform.position;
         }
+    }
+
+    void AdjustCameraDistance()
+    {
+        RaycastHit hit;
+        Vector3 direction = cameraTransform.position - transform.position;
+        float desiredDistance = maxDistance;
+
+        if (Physics.Raycast(transform.position, direction, out hit, maxDistance, ignoreLayers))
+        {
+            desiredDistance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
+        }
+
+        cameraTransform.position = transform.position + direction.normalized * desiredDistance;
     }
 }

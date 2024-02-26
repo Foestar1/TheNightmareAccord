@@ -46,6 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitSensitivity: 100
+  minDistance: 2
+  maxDistance: 15
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 1344
 --- !u!1 &2934454498638421422
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,7 +78,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2934454498638421422}
   m_LocalRotation: {x: 0.11294618, y: 0.6980281, z: -0.11294618, w: 0.6980281}
-  m_LocalPosition: {x: -8.25, y: 6.96, z: 0}
+  m_LocalPosition: {x: -8.25, y: 7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
