@@ -591,9 +591,24 @@ public class characterControls : MonoBehaviourPunCallbacks
 
     public void resetDead()
     {
-        playerCrosshair.SetActive(true);
-        StartCoroutine(UpdateDead());
-        StartCoroutine(UpdateCooldown());
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            if (this.photonView.IsMine)
+            {
+                playerCrosshair.SetActive(true);
+                StartCoroutine(UpdateDead());
+                if (teddyOnCooldown)
+                {
+                    StartCoroutine(UpdateCooldown());
+                }
+            }
+        }
+        else
+        {
+            playerCrosshair.SetActive(true);
+            StartCoroutine(UpdateDead());
+            StartCoroutine(UpdateCooldown());
+        }
     }
     #endregion
 
