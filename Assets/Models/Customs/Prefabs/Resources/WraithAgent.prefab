@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 7234778050791361301}
   - component: {fileID: 4088032250822078455}
   - component: {fileID: 2835185215276935040}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HitArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1752,7 +1752,7 @@ GameObject:
   - component: {fileID: 7392538568450362791}
   - component: {fileID: 3356062101512266144}
   - component: {fileID: 8317243271409341356}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HitArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

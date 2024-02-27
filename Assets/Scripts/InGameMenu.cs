@@ -17,6 +17,24 @@ public class InGameMenu : MonoBehaviourPunCallbacks
 
     public void Update()
     {
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            if (PhotonNetwork.InRoom)
+            {
+                if (playerTargets.Count < PhotonNetwork.CurrentRoom.PlayerCount)
+                {
+                    getPlayers();
+                }
+            }
+        }
+        else
+        {
+            if (playerTargets.Count < 1)
+            {
+                getPlayers();
+            }
+        }
+
         openMenu();
     }
 
@@ -24,28 +42,19 @@ public class InGameMenu : MonoBehaviourPunCallbacks
     {
         playerTargets.Clear();
         playerTargets.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        playerTargets.AddRange(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
     }
 
     public void openMenu()
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            getPlayers();
-
             if (PhotonNetwork.IsConnectedAndReady)
             {
                 foreach (GameObject player in playerTargets)
                 {
                     if (player.GetPhotonView().IsMine)
                     {
-                        if (player.tag == "Player")
-                        {
-                            canOpen = player.GetComponent<characterControls>().canMove;
-                        }else if (player.tag == "PlayerSpirit")
-                        {
-                            canOpen = true;
-                        }
+                        canOpen = player.GetComponent<characterControls>().canMove;
                     }
                 }
             }
@@ -65,10 +74,7 @@ public class InGameMenu : MonoBehaviourPunCallbacks
                     {
                         if (player.GetPhotonView().IsMine)
                         {
-                            if (player.tag == "Player")
-                            {
-                                player.GetComponent<characterControls>().canMove = false;
-                            }
+                            player.GetComponent<characterControls>().canMove = false;
                         }
                     }
                 }
@@ -76,10 +82,7 @@ public class InGameMenu : MonoBehaviourPunCallbacks
                 {
                     foreach (GameObject player in playerTargets)
                     {
-                        if (player.tag == "Player")
-                        {
-                            player.GetComponent<characterControls>().canMove = false;
-                        }
+                        player.GetComponent<characterControls>().canMove = false;
                     }
                 }
 
@@ -93,18 +96,13 @@ public class InGameMenu : MonoBehaviourPunCallbacks
 
     public void resumeGame()
     {
-        getPlayers();
-
         if (PhotonNetwork.IsConnectedAndReady)
         {
             foreach (GameObject player in playerTargets)
             {
                 if (player.GetPhotonView().IsMine)
                 {
-                    if (player.tag == "Player")
-                    {
-                        player.GetComponent<characterControls>().canMove = true;
-                    }
+                    player.GetComponent<characterControls>().canMove = true;
                 }
             }
         }
@@ -112,10 +110,7 @@ public class InGameMenu : MonoBehaviourPunCallbacks
         {
             foreach (GameObject player in playerTargets)
             {
-                if (player.tag == "Player")
-                {
-                    player.GetComponent<characterControls>().canMove = true;
-                }
+                player.GetComponent<characterControls>().canMove = true;
             }
         }
 
