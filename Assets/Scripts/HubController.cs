@@ -58,6 +58,9 @@ public class HubController : MonoBehaviourPunCallbacks
     [Tooltip("The not ready sprite for our players name prefab in lobby")]
     [SerializeField]
     private Sprite notReadyImage;
+    [Tooltip("The desired game private room to join")]
+    [SerializeField]
+    private TMP_InputField gameNumberField;
 
     [Header("Player Stuff")]
     [Tooltip("The player gameobject")]
@@ -115,6 +118,16 @@ public class HubController : MonoBehaviourPunCallbacks
 
     public void loadTheLevel()
     {
+        //ensure if connected to online we close the room access
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                PhotonNetwork.CurrentRoom.IsVisible = false;
+            }
+        }
+
         if (levelChoice == 0)
         {
             SceneManager.LoadScene("Petal's Lament");
@@ -152,44 +165,45 @@ public class HubController : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 4;
         roomOptions.PublishUserId = true;
 
-        TypedLobby typedLobby = new TypedLobby("", LobbyType.Default);
-
-        if (levelChoice == 0)
-        {
-            typedLobby = new TypedLobby("PetalsLemantOpen", LobbyType.Default);
-        }
-
-        PhotonNetwork.CreateRoom(null, roomOptions, typedLobby, null);
+        PhotonNetwork.CreateRoom(null, roomOptions);
     }
 
     public void createPrivateGame()
     {
+        // Initialize the random number generator
+        System.Random random = new System.Random();
+        // Initialize your string with the starting value
+        string randomGameNumber = "";
+        // Loop to add 8 random integers to the string
+        for (int i = 0; i < 8; i++)
+        {
+            // Generate a random integer between 0 and 9
+            int randomNumber = random.Next(0, 10);
+
+            // Append the random integer to your string
+            randomGameNumber += randomNumber.ToString();
+        }
+
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsOpen = true;
         roomOptions.IsVisible = false;
         roomOptions.MaxPlayers = 4;
         roomOptions.PublishUserId = true;
 
-        TypedLobby typedLobby = new TypedLobby("", LobbyType.Default);
-
-        if (levelChoice == 0)
-        {
-            typedLobby = new TypedLobby("PetalsLemantClosed", LobbyType.Default);
-        }
-
-        PhotonNetwork.CreateRoom(null, roomOptions, typedLobby, null);
+        PhotonNetwork.CreateRoom(randomGameNumber.ToString(), roomOptions);
     }
 
     public void joinOpenGame()
     {
-        TypedLobby typedLobby = new TypedLobby("", LobbyType.Default);
+        PhotonNetwork.JoinRandomRoom();
+    }
 
-        if (levelChoice == 0)
+    public void joinPrivateGame()
+    {
+        if (gameNumberField.text != null || gameNumberField.text != "")
         {
-            typedLobby = new TypedLobby("PetalsLemantOpen", LobbyType.Default);
+            PhotonNetwork.JoinRoom(gameNumberField.text);
         }
-
-        PhotonNetwork.JoinRandomRoom(null, 0, MatchmakingMode.FillRoom, typedLobby, null);
     }
 
     public void sendReady()
@@ -210,18 +224,33 @@ public class HubController : MonoBehaviourPunCallbacks
     #region callbacks
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.GameVersion = "0.1";
+        PhotonNetwork.GameVersion = "0.2";
         connectionText.text = "Connected to master, attempting to connecting to master lobby...";
-        PhotonNetwork.JoinLobby();
+
+        //we need to check which lobby to join
+        TypedLobby typedLobby = new TypedLobby("", LobbyType.Default);
+        if (levelChoice == 0)
+        {
+            typedLobby = new TypedLobby("PetalsLemantOpen", LobbyType.Default);
+        }
+
+        PhotonNetwork.JoinLobby(typedLobby);
     }
 
     public override void OnJoinedLobby()
     {
         //the line below is temporary
-        PhotonNetwork.NickName = "Player" + Random.Range(0, 100);
-        connectionText.text = "Connected...";
+        if (PhotonNetwork.NickName == null || PhotonNetwork.NickName == "")
+        {
+            PhotonNetwork.NickName = "Player" + Random.Range(0, 100);
+        }
+        connectionText.text = "";
+        if (gameNumberField.transform.parent.gameObject.activeSelf == false)
+        {
+            multiplayerOptions.SetActive(true);
+        }
+        connectionUI.SetActive(false);
         connectionUI.transform.GetChild(0).gameObject.SetActive(false);
-        StartCoroutine(resetText());
     }
 
     public override void OnJoinedRoom()
@@ -253,7 +282,11 @@ public class HubController : MonoBehaviourPunCallbacks
 
         if (!PhotonNetwork.CurrentRoom.IsVisible)
         {
-            Debug.Log("We are in a closed room");
+            gameRoomUI.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "GAME ROOM: " + PhotonNetwork.CurrentRoom.Name;
+        }
+        else
+        {
+            gameRoomUI.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "GAME ROOM";
         }
     }
 
@@ -291,14 +324,10 @@ public class HubController : MonoBehaviourPunCallbacks
     #region failed callbacks
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        connectionText.text = returnCode + ":" + message;
-        StartCoroutine(resetText());
-    }
-
-    public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        connectionText.text = returnCode + ":" + message;
-        StartCoroutine(resetText());
+        if (returnCode == 32766)
+        {
+            createPrivateGame();
+        }
     }
     #endregion
 
@@ -321,16 +350,6 @@ public class HubController : MonoBehaviourPunCallbacks
     {
         playersTotalReady--;
         GameObject.Find(playerNameObject).transform.GetChild(1).GetComponent<Image>().sprite = notReadyImage;
-    }
-    #endregion
-
-    #region Coroutines
-    public IEnumerator resetText()
-    {
-        yield return new WaitForSeconds(3);
-        connectionText.text = "";
-        multiplayerOptions.SetActive(true);
-        connectionUI.SetActive(false);
     }
     #endregion
 }
