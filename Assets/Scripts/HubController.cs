@@ -162,6 +162,24 @@ public class HubController : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(null, roomOptions, typedLobby, null);
     }
 
+    public void createPrivateGame()
+    {
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.IsOpen = true;
+        roomOptions.IsVisible = false;
+        roomOptions.MaxPlayers = 4;
+        roomOptions.PublishUserId = true;
+
+        TypedLobby typedLobby = new TypedLobby("", LobbyType.Default);
+
+        if (levelChoice == 0)
+        {
+            typedLobby = new TypedLobby("PetalsLemantClosed", LobbyType.Default);
+        }
+
+        PhotonNetwork.CreateRoom(null, roomOptions, typedLobby, null);
+    }
+
     public void joinOpenGame()
     {
         TypedLobby typedLobby = new TypedLobby("", LobbyType.Default);
@@ -231,6 +249,11 @@ public class HubController : MonoBehaviourPunCallbacks
             //and set the players name and gameobject name
             newPlayerListing.name = player.UserId;
             newPlayerListing.gameObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = player.NickName;
+        }
+
+        if (!PhotonNetwork.CurrentRoom.IsVisible)
+        {
+            Debug.Log("We are in a closed room");
         }
     }
 

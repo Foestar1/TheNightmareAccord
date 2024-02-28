@@ -62,7 +62,10 @@ public class InGameMenu : MonoBehaviourPunCallbacks
             {
                 foreach (GameObject player in playerTargets)
                 {
-                    canOpen = player.GetComponent<characterControls>().canMove;
+                    if (player != null)
+                    {
+                        canOpen = player.GetComponent<characterControls>().canMove;
+                    }
                 }
             }
 
