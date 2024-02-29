@@ -1,35 +1,48 @@
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class ThresholdMusic : MonoBehaviour
+public class ThresholdMusic : MonoBehaviourPunCallbacks
 {
-    public AudioSource audioSource;
+    private AudioSource objectAudioSource;
 
-    private bool isPlayerInside = false;
+    private void Awake()
+    {
+        objectAudioSource = this.GetComponent<AudioSource>();
+    }
 
     void OnTriggerStay(Collider other)
     {
-        // Check if the collider inside the trigger zone is the player
         if (other.CompareTag("Player"))
         {
-            // If the player is inside the trigger zone and the audio source is not playing, play it
-            if (!isPlayerInside && !audioSource.isPlaying)
+            if (PhotonNetwork.IsConnectedAndReady)
             {
-                audioSource.Play();
-                isPlayerInside = true;
+                if (other.gameObject.GetPhotonView().IsMine)
+                {
+                    objectAudioSource.Play();
+                }
+            }
+            else
+            {
+                objectAudioSource.Play();
             }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        // Check if the collider exiting the trigger zone is the player
         if (other.CompareTag("Player"))
         {
-            // If the player exits the trigger zone and the audio source is playing, stop it
-            if (isPlayerInside && audioSource.isPlaying)
+            if (PhotonNetwork.IsConnectedAndReady)
             {
-                audioSource.Stop();
-                isPlayerInside = false;
+                if (other.gameObject.GetPhotonView().IsMine)
+                {
+                    objectAudioSource.Stop();
+                }
+            }
+            else
+            {
+                objectAudioSource.Stop();
             }
         }
     }
