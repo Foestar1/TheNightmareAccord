@@ -11,7 +11,7 @@ public class ThresholdMusic : MonoBehaviourPunCallbacks
         objectAudioSource = this.GetComponent<AudioSource>();
     }
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
