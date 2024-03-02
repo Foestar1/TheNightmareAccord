@@ -17,6 +17,7 @@ public class LinkedPlayer : MonoBehaviourPunCallbacks
                 this.photonView.RPC("reactivatePlayer", RpcTarget.All, playerPWID);
                 if (this.photonView.IsMine)
                 {
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloRevives++;
                     Destroy(linkedObserver);
                 }
             }
@@ -29,6 +30,7 @@ public class LinkedPlayer : MonoBehaviourPunCallbacks
     void reactivatePlayer(int playerPWID)
     {
         GameObject.Find("SpawnControls").GetComponent<Spawner>().playersAlive++;
+        GameObject.Find("SpawnControls").GetComponent<Spawner>().totalRevives++;
         PhotonView tempView = PhotonView.Find(playerPWID);
         tempView.gameObject.SetActive(true);
         if (tempView.IsMine)

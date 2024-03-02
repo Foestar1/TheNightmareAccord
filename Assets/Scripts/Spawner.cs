@@ -31,6 +31,26 @@ public class Spawner : MonoBehaviourPunCallbacks
     private bool gameFinished;
     private bool gameWon;
     private bool gameLost;
+    private Camera mainStartingCamera;
+
+    [Header("Scoreboard Stuff")]
+    [Tooltip("The scoreboard itself")]
+    [SerializeField]
+    private GameObject endScoreboard;
+    [Tooltip("The scoreboard string elements")]
+    [SerializeField]
+    private string[] scoreboardStat;
+    [Tooltip("The scoreboard physical elements")]
+    [SerializeField]
+    private TextMeshProUGUI[] scoreboardPhysicalStat;
+    public int soloObjectives { get; set; }
+    public int totalObjectives { get; set; }
+    public int soloKills { get; set; }
+    public int totalKills { get; set; }
+    public int soloRevives { get; set; }
+    public int totalRevives { get; set; }
+    public int soloDeaths { get; set; }
+    public int totalDeaths { get; set; }
 
     [Header("Randomizer Stuff")]
     [Tooltip("The sections to be randomized via rotation")]
@@ -68,6 +88,12 @@ public class Spawner : MonoBehaviourPunCallbacks
     {
         playersReady = 0;
         goalsNotFound = goalsNotFoundVar;
+        mainStartingCamera = GameObject.Find("Main Camera").gameObject.GetComponent<Camera>();
+
+        for (int i = 0; i < scoreboardPhysicalStat.Length; i++)
+        {
+            scoreboardPhysicalStat[i].text = scoreboardStat[i];
+        }
 
         if (PhotonNetwork.IsConnectedAndReady)
         {
@@ -207,8 +233,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         if (goalsNotFound == 0 && !gameFinished)
         {
             gameFinished = true;
-            gameWon = true;
-            
+
             //check if it's multiplayer
             if (PhotonNetwork.IsConnectedAndReady)
             {
@@ -219,6 +244,9 @@ public class Spawner : MonoBehaviourPunCallbacks
             }
             else
             {
+                gameWon = true;
+                GameObject.Find("Main Camera").SetActive(true);
+
                 //which scene are we in
                 if (SceneManager.GetActiveScene().name == "Petal's Lament")
                 {
@@ -234,28 +262,24 @@ public class Spawner : MonoBehaviourPunCallbacks
                 }
 
                 //clear out the ghost spirits of lost players
-                List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
-                foreach (GameObject playersGhost in playerObjects)
+                List<GameObject> playerSpiritsObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+                foreach (GameObject playersGhost in playerSpiritsObjects)
                 {
                     Destroy(playersGhost.gameObject);
                 }
 
-                int randomAni = Random.Range(0, 2);
-                var playersObject = GameObject.FindGameObjectWithTag("Player");
-                var newPlayerListing = Instantiate(playerWinAnimations, playersObject.transform.position, playersObject.transform.rotation);
-                if (randomAni == 0)
+                //clear out the players who are alive
+                List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+                foreach (GameObject playersAlive in playerObjects)
                 {
-                    newPlayerListing.GetComponent<Animator>().Play("Win1");
+                    Destroy(playersAlive.gameObject);
                 }
-                else
-                {
-                    newPlayerListing.GetComponent<Animator>().Play("Win2");
-                }
-                Destroy(playersObject.gameObject);
-                GameObject.Find("Crosshair").SetActive(false);
-                GameObject.Find("InteractionButton").SetActive(false);
-                GameObject.Find("GoalBorder").SetActive(false);
-                GameObject.Find("TeddyBorder").SetActive(false);
+
+                Crosshair.SetActive(false);
+                interactionButton.SetActive(false);
+                goalTrackerUI.SetActive(false);
+                teddyUI.SetActive(false);
+                endScoreboard.SetActive(true);
             }
         }
     }
@@ -268,10 +292,45 @@ public class Spawner : MonoBehaviourPunCallbacks
             {
                 if (playersAlive <= 0 && !gameLost)
                 {
-                    this.photonView.RPC("gameWasLost", RpcTarget.All, playersAlive);
+                    this.photonView.RPC("gameWasLost", RpcTarget.All);
                 }
             }
         }
+    }
+
+    public void openScoreboardLost()
+    {
+        gameLost = true;
+        mainStartingCamera.gameObject.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        //clear out the enemies
+        List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        foreach (GameObject enemyObject in enemyObjects)
+        {
+            Destroy(enemyObject.gameObject);
+        }
+
+        //clear out the ghost spirits of lost players
+        List<GameObject> playerSpiritObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+        foreach (GameObject playersGhost in playerSpiritObjects)
+        {
+            Destroy(playersGhost.gameObject);
+        }
+
+        //clear out the players who are alive
+        List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        foreach (GameObject playerAlive in playerObjects)
+        {
+            Destroy(playerAlive.gameObject);
+        }
+
+        Crosshair.SetActive(false);
+        interactionButton.SetActive(false);
+        goalTrackerUI.SetActive(false);
+        teddyUI.SetActive(false);
+        endScoreboard.SetActive(true);
     }
 
     #endregion
@@ -316,41 +375,13 @@ public class Spawner : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void gameWasLost(int playersAlive)
+    void gameWasLost()
     {
         gameLost = true;
-        List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-        foreach(GameObject enemyObject in enemyObjects)
-        {
-            Destroy(enemyObject.gameObject);
-        }
+        mainStartingCamera.gameObject.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
-        List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
-        foreach(GameObject playersGhost in playerObjects)
-        {
-            if (playersGhost.GetPhotonView().IsMine)
-            {
-                int randomAni = Random.Range(0, 2);
-                var newPlayerListing = Instantiate(playerLostAnimations, playersGhost.transform.position, playersGhost.transform.rotation);
-                if (randomAni == 0)
-                {
-                    newPlayerListing.GetComponent<Animator>().Play("Lose1");
-                }
-                else
-                {
-                    newPlayerListing.GetComponent<Animator>().Play("Lose2");
-                }
-                Destroy(playersGhost.gameObject);
-            }
-        }
-
-        GameObject.Find("GoalBorder").SetActive(false);
-        GameObject.Find("TeddyBorder").SetActive(false);
-    }
-
-    [PunRPC]
-    void gameWasWon()
-    {
         //which scene are we in
         if (SceneManager.GetActiveScene().name == "Petal's Lament")
         {
@@ -365,49 +396,82 @@ public class Spawner : MonoBehaviourPunCallbacks
             Destroy(enemyObject.gameObject);
         }
 
+        //clear out the player cycler objects
+        List<GameObject> playerCyclerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerCycler"));
+        foreach (GameObject cycleObject in playerCyclerObjects)
+        {
+            Destroy(cycleObject.gameObject);
+        }
+
         //clear out the ghost spirits of lost players
         List<GameObject> playerSpiritObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
         foreach (GameObject playersGhost in playerSpiritObjects)
         {
-            if (playersGhost.GetPhotonView().IsMine)
-            {
-                int randomAni = Random.Range(0, 2);
-                var newPlayerListing = Instantiate(playerWinAnimations, playersGhost.transform.position, playersGhost.transform.rotation);
-                if (randomAni == 0)
-                {
-                    newPlayerListing.GetComponent<Animator>().Play("Win1");
-                }
-                else
-                {
-                    newPlayerListing.GetComponent<Animator>().Play("Win2");
-                }
-                Destroy(playersGhost.gameObject);
-            }
+            Destroy(playersGhost.gameObject);
         }
 
         //clear out the players who are alive
         List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
-        foreach (GameObject playersAlive in playerObjects)
+        foreach (GameObject playerAlive in playerObjects)
         {
-            if (playersAlive.GetPhotonView().IsMine)
-            {
-                int randomAni = Random.Range(0, 2);
-                var newPlayerListing = Instantiate(playerWinAnimations, playersAlive.transform.position, playersAlive.transform.rotation);
-                if (randomAni == 0)
-                {
-                    newPlayerListing.GetComponent<Animator>().Play("Win1");
-                }
-                else
-                {
-                    newPlayerListing.GetComponent<Animator>().Play("Win2");
-                }
-                Destroy(playersAlive.gameObject);
-            }
+            Destroy(playerAlive.gameObject);
         }
 
-        GameObject.Find("Crosshair").SetActive(false);
-        GameObject.Find("GoalBorder").SetActive(false);
-        GameObject.Find("TeddyBorder").SetActive(false);
+        Crosshair.SetActive(false);
+        interactionButton.SetActive(false);
+        goalTrackerUI.SetActive(false);
+        teddyUI.SetActive(false);
+        endScoreboard.SetActive(true);
+    }
+
+    [PunRPC]
+    void gameWasWon()
+    {
+        gameWon = true;
+        mainStartingCamera.gameObject.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        //which scene are we in
+        if (SceneManager.GetActiveScene().name == "Petal's Lament")
+        {
+            GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().level1Complete = 1;
+            GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().saveInfo();
+        }
+
+        //clear out the enemies
+        List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        foreach (GameObject enemyObject in enemyObjects)
+        {
+            Destroy(enemyObject.gameObject);
+        }
+
+        //clear out the player cycler objects
+        List<GameObject> playerCyclerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerCycler"));
+        foreach (GameObject cycleObject in playerCyclerObjects)
+        {
+            Destroy(cycleObject.gameObject);
+        }
+
+        //clear out the ghost spirits of lost players
+        List<GameObject> playerSpiritObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+        foreach (GameObject playersGhost in playerSpiritObjects)
+        {
+            Destroy(playersGhost.gameObject);
+        }
+
+        //clear out the players who are alive
+        List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        foreach (GameObject playerAlive in playerObjects)
+        {
+            Destroy(playerAlive.gameObject);
+        }
+
+        Crosshair.SetActive(false);
+        interactionButton.SetActive(false);
+        goalTrackerUI.SetActive(false);
+        teddyUI.SetActive(false);
+        endScoreboard.SetActive(true);
     }
     #endregion
 }

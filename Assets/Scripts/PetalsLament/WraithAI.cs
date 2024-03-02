@@ -84,6 +84,20 @@ public class WraithAI : MonoBehaviourPunCallbacks
         {
             if (!isDead)
             {
+                if (PhotonNetwork.IsConnectedAndReady)
+                {
+                    if (other.gameObject.GetPhotonView().IsMine)
+                    {
+                        GameObject.Find("SpawnControls").GetComponent<Spawner>().soloKills++;
+                        this.photonView.RPC("wraithDead", RpcTarget.All);
+                    }
+                }
+                else
+                {
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloKills++;
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().totalKills++;
+                }
+                
                 isDead = true;
                 agentAnimator.SetBool("dead", true);
                 agentAI.isStopped = true;
@@ -340,6 +354,14 @@ public class WraithAI : MonoBehaviourPunCallbacks
         destroyME();
         yield return new WaitForSeconds(1);
         this.gameObject.SetActive(false);
+    }
+    #endregion
+
+    #region RPC's
+    [PunRPC]
+    void wraithDead()
+    {
+        GameObject.Find("SpawnControls").GetComponent<Spawner>().totalKills++;
     }
     #endregion
 }

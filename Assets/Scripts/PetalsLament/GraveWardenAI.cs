@@ -12,6 +12,7 @@ public class GraveWardenAI : MonoBehaviourPunCallbacks
     [Tooltip("The pathing spots for the warden")]
     [SerializeField]
     private Transform[] wardenSpots;
+    private int currentSpotElement;
     private Transform currentWardenSpot;
     private NavMeshAgent wardenAgent;
     [Tooltip("The wardens animator controlling animations")]
@@ -95,6 +96,7 @@ public class GraveWardenAI : MonoBehaviourPunCallbacks
             if (currentWardenSpot == null)
             {
                 int randoSpot = Random.Range(0, wardenSpots.Length);
+                currentSpotElement = randoSpot;
                 currentWardenSpot = wardenSpots[randoSpot];
                 wardenAgent.SetDestination(currentWardenSpot.position);
             }
@@ -105,9 +107,15 @@ public class GraveWardenAI : MonoBehaviourPunCallbacks
                     revivingWraiths = true;
                     StartCoroutine(spawnFlames());
                     wardenAnimator.SetBool("reviving", true);
-                    int index = System.Array.IndexOf(wardenSpots, currentWardenSpot);
-                    index = (index + 1) % wardenSpots.Length;
-                    currentWardenSpot = wardenSpots[index];
+                    if (currentSpotElement < wardenSpots.Length - 1)
+                    {
+                        currentSpotElement++;
+                    }
+                    else
+                    {
+                        currentSpotElement = 0;
+                    }
+                    currentWardenSpot = wardenSpots[currentSpotElement];
                     StartCoroutine(pickNewSpot());
                 }
             }

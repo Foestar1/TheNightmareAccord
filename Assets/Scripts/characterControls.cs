@@ -230,6 +230,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     int playerPWID = this.photonView.ViewID;
                     int playerGhostPWID = myPlayerObject.GetPhotonView().ViewID;
                     this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
                     var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
                     observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
                     myPlayerObject.GetComponent<LinkedPlayer>().linkedObserver = observerObjectCamera;
@@ -250,6 +251,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     int playerPWID = this.photonView.ViewID;
                     int playerGhostPWID = myPlayerObject.GetPhotonView().ViewID;
                     this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
                     var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
                     observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
                     myPlayerObject.GetComponent<LinkedPlayer>().linkedObserver = observerObjectCamera;
@@ -269,6 +271,8 @@ public class characterControls : MonoBehaviourPunCallbacks
                     ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(false);
                     Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
 
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
                     currentCooldownTime = 0;
                     Image fillImage = teddyUI.transform.GetChild(1).transform.GetComponent<Image>();
                     fillImage.fillAmount = 0; // Ensure the fill amount is set to 0 at the end
@@ -277,35 +281,9 @@ public class characterControls : MonoBehaviourPunCallbacks
                     StartCoroutine(UpdateDead());
                 }else if (playerLives == 1) {
                     isDead = true;
-                    this.gameObject.SetActive(false);
-
-                    List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-                    foreach (GameObject enemyObject in enemyObjects)
-                    {
-                        Destroy(enemyObject.gameObject);
-                    }
-
-                    List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
-
-                    foreach (GameObject playersGhost in playerObjects)
-                    {
-                        Destroy(playersGhost.gameObject);
-                    }
-
-                    int randomAni = Random.Range(0, 2);
-                    var newPlayerListing = Instantiate(playerLostAnimations, this.transform.position, this.transform.rotation);
-                    if (randomAni == 0)
-                    {
-                        newPlayerListing.GetComponent<Animator>().Play("Lose1");
-                    }
-                    else
-                    {
-                        newPlayerListing.GetComponent<Animator>().Play("Lose2");
-                    }
-                    playerCrosshair.SetActive(false);
-                    teddyUI.SetActive(false);
-                    GameObject.Find("GoalBorder").SetActive(false);
-                    interactionButton.SetActive(false);
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().openScoreboardLost();
                     Destroy(this.gameObject);
                 }
             }
@@ -324,41 +302,17 @@ public class characterControls : MonoBehaviourPunCallbacks
                     isDead = true;
                     var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
                     ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(false);
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
                     playerLives--;
                     StartCoroutine(UpdateDead());
                 }
                 else if (playerLives == 1)
                 {
                     isDead = true;
-                    this.gameObject.SetActive(false);
-
-                    List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-                    foreach (GameObject enemyObject in enemyObjects)
-                    {
-                        Destroy(enemyObject.gameObject);
-                    }
-
-                    List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
-
-                    foreach (GameObject playersGhost in playerObjects)
-                    {
-                        Destroy(playersGhost.gameObject);
-                    }
-
-                    int randomAni = Random.Range(0, 2);
-                    var newPlayerListing = Instantiate(playerLostAnimations, this.transform.position, this.transform.rotation);
-                    if (randomAni == 0)
-                    {
-                        newPlayerListing.GetComponent<Animator>().Play("Lose1");
-                    }
-                    else
-                    {
-                        newPlayerListing.GetComponent<Animator>().Play("Lose2");
-                    }
-                    playerCrosshair.SetActive(false);
-                    teddyUI.SetActive(false);
-                    GameObject.Find("GoalBorder").SetActive(false);
-                    interactionButton.SetActive(false);
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().openScoreboardLost();
                     Destroy(this.gameObject);
                 }
             }
@@ -549,11 +503,14 @@ public class characterControls : MonoBehaviourPunCallbacks
                             int photonViewNumber = targetedObject.GetPhotonView().ViewID;
                             //send RPC to remove a flower
                             this.photonView.RPC("minusGoal", RpcTarget.All, photonViewNumber);
+                            GameObject.Find("SpawnControls").GetComponent<Spawner>().soloObjectives++;
                         }
                         else
                         {
                             targetedObject.SetActive(false);
                             GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound--;
+                            GameObject.Find("SpawnControls").GetComponent<Spawner>().soloObjectives++;
+                            GameObject.Find("SpawnControls").GetComponent<Spawner>().totalObjectives++;
                         }
                     }
                 }
@@ -644,12 +601,14 @@ public class characterControls : MonoBehaviourPunCallbacks
     {
         PhotonView.Find(photonViewNumberTemp).gameObject.SetActive(false);
         GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound--;
+        GameObject.Find("SpawnControls").GetComponent<Spawner>().totalObjectives++;
     }
 
     [PunRPC]
     void playerDied(int playerPWID, int playerGhostPWID)
     {
         GameObject.Find("SpawnControls").GetComponent<Spawner>().playersAlive--;
+        GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
         PhotonView.Find(playerGhostPWID).GetComponent<LinkedPlayer>().linkedPlayer = PhotonView.Find(playerPWID).gameObject;
         PhotonView.Find(playerPWID).gameObject.SetActive(false);
     }
