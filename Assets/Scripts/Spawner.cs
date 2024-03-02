@@ -28,9 +28,11 @@ public class Spawner : MonoBehaviourPunCallbacks
     public int goalsNotFoundVar;
     public int goalsNotFound { get; set; }
     public int playersAlive { get; set; }
-    private bool gameFinished;
-    private bool gameWon;
-    private bool gameLost;
+    public bool timerRunning { get; set; }
+    public float gameTimer { get; set; }
+    public bool gameFinished { get; set; }
+    public bool gameWon { get; set; }
+    public bool gameLost { get; set; }
     private Camera mainStartingCamera;
 
     [Header("Scoreboard Stuff")]
@@ -108,6 +110,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         }
         else
         {
+            timerRunning = true;
             Crosshair.SetActive(true);
             interactionButton.SetActive(true);
             goalTrackerUI.SetActive(true);
@@ -124,6 +127,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         updateGoals();
         spawnEnemies();
         arePlayersAlive();
+        timerControl();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -244,8 +248,10 @@ public class Spawner : MonoBehaviourPunCallbacks
             }
             else
             {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 gameWon = true;
-                GameObject.Find("Main Camera").SetActive(true);
+                mainStartingCamera.gameObject.SetActive(true);
 
                 //which scene are we in
                 if (SceneManager.GetActiveScene().name == "Petal's Lament")
@@ -333,6 +339,14 @@ public class Spawner : MonoBehaviourPunCallbacks
         endScoreboard.SetActive(true);
     }
 
+    public void timerControl()
+    {
+        if (timerRunning == true)
+        {
+            gameTimer += Time.deltaTime;
+        }
+    }
+
     #endregion
 
     #region RPC's
@@ -365,7 +379,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         goalTrackerUI.SetActive(true);
         teddyUI.SetActive(true);
         var myPlayerObject = PhotonNetwork.Instantiate(this.playerPrefab.name, tempView.gameObject.transform.position, tempView.gameObject.transform.rotation, 0);
-        //myPlayerObject.name = myPlayerObject.GetPhotonView().Owner.UserId;
+        timerRunning = true;
     }
 
     [PunRPC]
@@ -378,17 +392,11 @@ public class Spawner : MonoBehaviourPunCallbacks
     void gameWasLost()
     {
         gameLost = true;
+        timerRunning = false;
         mainStartingCamera.gameObject.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-
-        //which scene are we in
-        if (SceneManager.GetActiveScene().name == "Petal's Lament")
-        {
-            GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().level1Complete = 1;
-            GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().saveInfo();
-        }
-
+        
         //clear out the enemies
         List<GameObject> enemyObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         foreach (GameObject enemyObject in enemyObjects)
@@ -428,10 +436,11 @@ public class Spawner : MonoBehaviourPunCallbacks
     void gameWasWon()
     {
         gameWon = true;
+        timerRunning = false;
         mainStartingCamera.gameObject.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-
+        
         //which scene are we in
         if (SceneManager.GetActiveScene().name == "Petal's Lament")
         {

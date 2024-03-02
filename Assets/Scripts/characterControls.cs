@@ -284,6 +284,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
                     GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
                     GameObject.Find("SpawnControls").GetComponent<Spawner>().openScoreboardLost();
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().timerRunning = false;
                     Destroy(this.gameObject);
                 }
             }
@@ -313,6 +314,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
                     GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
                     GameObject.Find("SpawnControls").GetComponent<Spawner>().openScoreboardLost();
+                    GameObject.Find("SpawnControls").GetComponent<Spawner>().timerRunning = false;
                     Destroy(this.gameObject);
                 }
             }
