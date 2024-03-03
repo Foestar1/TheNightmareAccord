@@ -22,6 +22,8 @@ public class HubController : MonoBehaviourPunCallbacks
     [Tooltip("The description textbox for the level")]
     [SerializeField]
     private TextMeshProUGUI levelDescription;
+    [SerializeField]
+    private TextMeshProUGUI timerStat;
 
     [Tooltip("The title choices for level title")]
     [SerializeField]
@@ -103,6 +105,22 @@ public class HubController : MonoBehaviourPunCallbacks
         levelTitle.text = levelTitles[levelChoice];
         levelImage.sprite = levelChoices[levelChoice];
         levelDescription.text = levelDescriptions[levelChoice];
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        if (levelChoice == 0)
+        {
+            //timer stat
+            if (saver.level1CompleteSpeed == 0)
+            {
+                timerStat.text = "---";
+            }
+            else
+            {
+                int m = (int)saver.level1CompleteSpeed / 60;
+                int s = (int)saver.level1CompleteSpeed - m * 60;
+                timerStat.text = m.ToString() + ":" + s.ToString();
+            }
+        }
+
     }
 
     public void closeLevelInfo()
@@ -114,6 +132,7 @@ public class HubController : MonoBehaviourPunCallbacks
         levelTitle.text = null;
         levelImage.sprite = null;
         levelDescription.text = null;
+        timerStat.text = "---";
     }
 
     public void loadTheLevel()

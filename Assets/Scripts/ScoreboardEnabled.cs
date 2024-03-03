@@ -31,6 +31,8 @@ public class ScoreboardEnabled : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject inGameMenu;
 
+    private SaveAndLoadData saveAndLoadObject;
+
     private void OnEnable()
     {
         //disable the ingame menus
@@ -71,6 +73,13 @@ public class ScoreboardEnabled : MonoBehaviourPunCallbacks
             int m = (int)spawnerObject.gameTimer / 60;
             int s = (int)spawnerObject.gameTimer - m * 60;
             timerStat.text = m.ToString() + ":" + s.ToString();
+        }
+        //save timer if needed
+        saveAndLoadObject = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        if (saveAndLoadObject.level1CompleteSpeed == 0 || saveAndLoadObject.level1CompleteSpeed > spawnerObject.gameTimer)
+        {
+            saveAndLoadObject.level1CompleteSpeed = spawnerObject.gameTimer;
+            saveAndLoadObject.saveInfo();
         }
     }
 
