@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class SaveAndLoadData : MonoBehaviour
 {
-    public int haveSaveData { get; set; }
-    public int haveSavedGame { get; set; }
+    public int haveSaveData { get; set; } //0 is no saved data, 1 is have data
+    public int haveSavedGame { get; set; }//0 is no saved game, 1 is have game
+    public int selectedLanguage { get; set; } //0-English,1-Russian,2-Chinese,3-German,4-Japanese,5-Korean,6-Spanish
     public float soundVolume { get; set; }
     public float musicVolume { get; set; }
-    public int level1Complete { get; set; }
+    public int level1Complete { get; set; }//0 is not complete, 1 is complete (SAME FOR BELOW)
     public int level1CompleteSecondary { get; set; }
     public float level1CompleteSpeed { get; set; }
     public int level2Complete { get; set; }
@@ -17,6 +18,7 @@ public class SaveAndLoadData : MonoBehaviour
     {
         PlayerPrefs.SetInt("HaveSaveData", haveSaveData);
         PlayerPrefs.SetInt("HaveSavedGame", haveSavedGame);
+        PlayerPrefs.SetInt("selectedLanguage", selectedLanguage);
         PlayerPrefs.SetFloat("SoundVolume", soundVolume);
         PlayerPrefs.SetFloat("MusicVolume", musicVolume);
         PlayerPrefs.SetInt("Level1Complete", level1Complete);
@@ -32,6 +34,7 @@ public class SaveAndLoadData : MonoBehaviour
     {
         haveSaveData = PlayerPrefs.GetInt("HaveSaveData");
         haveSavedGame = PlayerPrefs.GetInt("HaveSavedGame");
+        selectedLanguage = PlayerPrefs.GetInt("selectedLanguage");
         soundVolume = PlayerPrefs.GetFloat("SoundVolume");
         musicVolume = PlayerPrefs.GetFloat("MusicVolume");
         level1Complete = PlayerPrefs.GetInt("Level1Complete");
@@ -51,6 +54,7 @@ public class SaveAndLoadData : MonoBehaviour
         {
             haveSaveData = 1;
             haveSavedGame = 0;
+            selectedLanguage = 0;
             soundVolume = 0.5f;
             musicVolume = 0.5f;
             level1Complete = 0;
