@@ -6,6 +6,7 @@ using Photon.Realtime;
 using UnityEngine.Rendering;
 using Smooth;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class characterControls : MonoBehaviourPunCallbacks
 {
@@ -103,10 +104,21 @@ public class characterControls : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsConnectedAndReady)
         {
             this.GetComponent<SmoothSyncPUN2>().enabled = true;
+            if (this.photonView.IsMine)
+            {
+                if (SceneManager.GetActiveScene().name == "Doubloon Dash")
+                {
+                    playerCamera.farClipPlane = 10000;
+                }
+            }
         }
         else
         {
             playerLives = 3;
+            if (SceneManager.GetActiveScene().name == "Doubloon Dash")
+            {
+                playerCamera.farClipPlane = 10000;
+            }
         }
     }
 
