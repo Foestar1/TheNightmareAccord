@@ -34,7 +34,7 @@ public class HubController : MonoBehaviourPunCallbacks
     [Tooltip("The description choices for level description")]
     [SerializeField]
     private string[] levelDescriptions;
-    public int levelChoice;
+    public int levelChoice;//0-Petal's Lament,
 
     [Header("UI Stuff")]
     [Tooltip("The text for the connection UI")]

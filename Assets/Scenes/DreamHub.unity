@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 58160915}
   - component: {fileID: 58160917}
   - component: {fileID: 58160916}
+  - component: {fileID: 58160918}
   m_Layer: 5
   m_Name: SoundText
   m_TagString: Untagged
@@ -656,6 +657,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58160914}
   m_CullTransparentMesh: 1
+--- !u!114 &58160918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58160914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Music
+  - "\u041C\u0443\u0437\u044B\u043A\u0430"
+  - "\u97F3\u4E50"
+  - Musik
+  - "\u97F3\u697D"
+  - "\uC74C\uC545"
+  - "M\xFAsica"
 --- !u!1 &60764509
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,6 +928,7 @@ GameObject:
   - component: {fileID: 96119454}
   - component: {fileID: 96119456}
   - component: {fileID: 96119455}
+  - component: {fileID: 96119457}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1031,6 +1053,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96119453}
   m_CullTransparentMesh: 1
+--- !u!114 &96119457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96119453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Accept
+  - "\u041F\u0440\u0438\u043D\u0438\u043C\u0430\u0442\u044C"
+  - "\u63A5\u53D7"
+  - Akzeptieren
+  - "\u53D7\u3051\u5165\u308C\u308B"
+  - "\uC218\uC6A9\uD558\uB2E4"
+  - Aceptar
 --- !u!1 &103799598
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,6 +2608,7 @@ GameObject:
   - component: {fileID: 283259537}
   - component: {fileID: 283259539}
   - component: {fileID: 283259538}
+  - component: {fileID: 283259540}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2690,6 +2733,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283259536}
   m_CullTransparentMesh: 1
+--- !u!114 &283259540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283259536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Ready
+  - "\u0413\u043E\u0442\u043E\u0432\u044B\u0439"
+  - "\u51C6\u5907\u597D"
+  - Bereit
+  - "\u6E96\u5099\u304C\u3067\u304D\u3066"
+  - "\uC900\uBE44\uAC00 \uB41C"
+  - Listo
 --- !u!1 &296313313
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,6 +3179,7 @@ GameObject:
   - component: {fileID: 350265536}
   - component: {fileID: 350265538}
   - component: {fileID: 350265537}
+  - component: {fileID: 350265539}
   m_Layer: 5
   m_Name: LevelDescription
   m_TagString: Untagged
@@ -3240,6 +3304,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350265535}
   m_CullTransparentMesh: 1
+--- !u!114 &350265539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350265535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3203b58308f6e9b4994325f4be02c58d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petalsLament:
+  - Find 3 dying flowers and avoid the Grave Warden and his wraiths
+  - "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 3 \u0443\u043C\u0438\u0440\u0430\u044E\u0449\u0438\u0445
+    \u0446\u0432\u0435\u0442\u043A\u0430 \u0438 \u0438\u0437\u0431\u0435\u0433\u0430\u0439\u0442\u0435
+    \u043C\u043E\u0433\u0438\u043B\u044C\u043D\u043E\u0433\u043E \u0441\u0442\u0440\u0430\u0436\u0430
+    \u0438 \u0435\u0433\u043E \u043F\u0440\u0438\u0437\u0440\u0430\u043A\u043E\u0432."
+  - "\u627E\u5230 3 \u6735\u5782\u6B7B\u7684\u82B1\u6735\u5E76\u907F\u5F00\u5B88\u5893\u4EBA\u548C\u4ED6\u7684\u5E7D\u7075"
+  - "Finden Sie 3 sterbende Blumen und meiden Sie den Grabw\xE4chter und seine Geister"
+  - "\u67AF\u308C\u304B\u3051\u305F\u82B1\u3092 3 \u3064\u898B\u3064\u3051\u3066\u3001\u5893\u5B88\u3068\u305D\u306E\u5E7D\u970A\u3092\u907F\u3051\u3066\u304F\u3060\u3055\u3044\u3002"
+  - "\uC8FD\uC5B4\uAC00\uB294 \uAF43 3\uAC1C\uB97C \uCC3E\uC544 \uBB34\uB364 \uAC10\uC2DC\uAD00\uACFC
+    \uADF8\uC758 \uB9DD\uB839\uC744 \uD53C\uD558\uC138\uC694"
+  - Encuentra 3 flores moribundas y evita al Grave Warden y sus espectros.
 --- !u!1 &351515183
 GameObject:
   m_ObjectHideFlags: 0
@@ -3601,6 +3689,7 @@ GameObject:
   - component: {fileID: 390967723}
   - component: {fileID: 390967725}
   - component: {fileID: 390967724}
+  - component: {fileID: 390967726}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3725,6 +3814,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390967722}
   m_CullTransparentMesh: 1
+--- !u!114 &390967726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390967722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - SETTINGS
+  - "\u041D\u0410\u0421\u0422\u0420\u041E\u0419\u041A\u0418"
+  - "\u8BBE\u7F6E"
+  - EINSTELLUNGEN
+  - "\u8A2D\u5B9A"
+  - "\uC124\uC815"
+  - AJUSTES
 --- !u!1 &404532966
 GameObject:
   m_ObjectHideFlags: 0
@@ -3858,6 +3967,7 @@ GameObject:
   - component: {fileID: 405041477}
   - component: {fileID: 405041479}
   - component: {fileID: 405041478}
+  - component: {fileID: 405041480}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3982,6 +4092,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405041476}
   m_CullTransparentMesh: 1
+--- !u!114 &405041480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405041476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Back
+  - "\u041D\u0430\u0437\u0430\u0434"
+  - "\u540E\u9000"
+  - "Zur\xFCck"
+  - "\u623B\u308B"
+  - "\uB4A4\uCABD\uC5D0"
+  - "Atr\xE1s"
 --- !u!1 &406889819
 GameObject:
   m_ObjectHideFlags: 0
@@ -4767,6 +4897,7 @@ GameObject:
   - component: {fileID: 570166063}
   - component: {fileID: 570166065}
   - component: {fileID: 570166064}
+  - component: {fileID: 570166066}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -4891,6 +5022,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570166062}
   m_CullTransparentMesh: 1
+--- !u!114 &570166066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570166062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3203b58308f6e9b4994325f4be02c58d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petalsLament:
+  - Petal's Lament
+  - "\u041F\u043B\u0430\u0447 \u041B\u0435\u043F\u0435\u0441\u0442\u043A\u0430"
+  - "\u82B1\u74E3\u7684\u54C0\u6B4C"
+  - "Bl\xFCtenblatts Klage"
+  - "\u82B1\u3073\u3089\u306E\u5606\u304D"
+  - "\uAF43\uC78E\uC758 \uC560\uB3C4"
+  - "El lamento del p\xE9talo"
 --- !u!1 &575089880
 GameObject:
   m_ObjectHideFlags: 0
@@ -4903,6 +5054,7 @@ GameObject:
   - component: {fileID: 575089884}
   - component: {fileID: 575089883}
   - component: {fileID: 575089882}
+  - component: {fileID: 575089885}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -5047,6 +5199,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575089880}
   m_CullTransparentMesh: 1
+--- !u!114 &575089885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575089880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Enter text...
+  - "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0442\u0435\u043A\u0441\u0442..."
+  - "\u8F93\u5165\u6587\u5B57..."
+  - Text eingeben...
+  - "\u30C6\u30AD\u30B9\u30C8\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044..."
+  - "\uD14D\uC2A4\uD2B8\uB97C \uC785\uB825\uD558\uC138\uC694..."
+  - Ingrese texto...
 --- !u!1 &577088205
 GameObject:
   m_ObjectHideFlags: 0
@@ -6129,6 +6301,7 @@ GameObject:
   - component: {fileID: 731355710}
   - component: {fileID: 731355712}
   - component: {fileID: 731355711}
+  - component: {fileID: 731355713}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -6253,6 +6426,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731355709}
   m_CullTransparentMesh: 1
+--- !u!114 &731355713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731355709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Create Private
+  - "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0447\u0430\u0441\u0442\u043D\u043E\u0435"
+  - "\u521B\u5EFA\u79C1\u6709"
+  - Privat erstellen
+  - "\u30D7\u30E9\u30A4\u30D9\u30FC\u30C8\u306E\u4F5C\u6210"
+  - "\uBE44\uACF5\uAC1C \uC0DD\uC131"
+  - Crear privado
 --- !u!1 &738526293
 GameObject:
   m_ObjectHideFlags: 0
@@ -7843,6 +8036,7 @@ GameObject:
   - component: {fileID: 959267633}
   - component: {fileID: 959267635}
   - component: {fileID: 959267634}
+  - component: {fileID: 959267636}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -7967,6 +8161,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959267632}
   m_CullTransparentMesh: 1
+--- !u!114 &959267636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959267632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - EXIT GAME
+  - "\u0412\u042B\u0425\u041E\u0414 \u0418\u0413\u0420\u042B"
+  - "\u9000\u51FA\u6E38\u620F"
+  - SPIEL VERLASSEN
+  - "\u30B2\u30FC\u30E0\u3092\u7D42\u4E86\u3059\u308B"
+  - "\uAC8C\uC784 \uC885\uB8CC"
+  - SALIR DEL JUEGO
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
@@ -9067,6 +9281,7 @@ GameObject:
   - component: {fileID: 1094472279}
   - component: {fileID: 1094472281}
   - component: {fileID: 1094472280}
+  - component: {fileID: 1094472282}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -9191,6 +9406,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094472278}
   m_CullTransparentMesh: 1
+--- !u!114 &1094472282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094472278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Join Private
+  - "\u041F\u0440\u0438\u0441\u043E\u0435\u0434\u0438\u043D\u044F\u0439\u0442\u0435\u0441\u044C
+    \u043A \u0447\u0430\u0441\u0442\u043D\u043E\u043C\u0443"
+  - "\u52A0\u5165\u79C1\u4EBA"
+  - Treten Sie Private bei
+  - "\u30D7\u30E9\u30A4\u30D9\u30FC\u30C8\u306B\u53C2\u52A0\u3059\u308B"
+  - "\uBE44\uACF5\uAC1C \uAC00\uC785"
+  - "\xDAnete privado"
 --- !u!1 &1095811062
 GameObject:
   m_ObjectHideFlags: 0
@@ -9448,6 +9684,7 @@ GameObject:
   - component: {fileID: 1129473648}
   - component: {fileID: 1129473650}
   - component: {fileID: 1129473649}
+  - component: {fileID: 1129473651}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -9572,6 +9809,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129473647}
   m_CullTransparentMesh: 1
+--- !u!114 &1129473651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129473647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - PRIVATE ROOM NUMBER
+  - "\u041D\u041E\u041C\u0415\u0420 \u0427\u0410\u0421\u0422\u041D\u041E\u0419 \u041A\u041E\u041C\u041D\u0410\u0422\u042B"
+  - "\u79C1\u4EBA\u623F\u95F4\u53F7\u7801"
+  - PRIVATZIMMERNUMMER
+  - "\u500B\u5BA4\u756A\u53F7"
+  - "\uAC1C\uC778\uC2E4 \uBC88\uD638"
+  - "N\xDAMERO DE HABITACI\xD3N PRIVADA"
 --- !u!1 &1133734303
 GameObject:
   m_ObjectHideFlags: 0
@@ -10510,6 +10767,7 @@ GameObject:
   - component: {fileID: 1275522305}
   - component: {fileID: 1275522307}
   - component: {fileID: 1275522306}
+  - component: {fileID: 1275522308}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -10634,6 +10892,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275522304}
   m_CullTransparentMesh: 1
+--- !u!114 &1275522308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275522304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Back
+  - "\u041D\u0430\u0437\u0430\u0434"
+  - "\u540E\u9000"
+  - "Zur\xFCck"
+  - "\u623B\u308B"
+  - "\uB4A4\uCABD\uC5D0"
+  - "Atr\xE1s"
 --- !u!1 &1287608548
 GameObject:
   m_ObjectHideFlags: 0
@@ -12957,6 +13235,7 @@ GameObject:
   - component: {fileID: 1700274124}
   - component: {fileID: 1700274126}
   - component: {fileID: 1700274125}
+  - component: {fileID: 1700274127}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13081,6 +13360,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700274123}
   m_CullTransparentMesh: 1
+--- !u!114 &1700274127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700274123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Create Open
+  - "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u041E\u0442\u043A\u0440\u044B\u0442\u044C"
+  - "\u521B\u5EFA\u5F00\u653E"
+  - Offen erstellen
+  - "\u4F5C\u6210\u3059\u308B \u958B\u304F"
+  - "\uC5F4\uAE30 \uB9CC\uB4E4\uAE30"
+  - Crear abierto
 --- !u!1 &1705192639
 GameObject:
   m_ObjectHideFlags: 0
@@ -15802,6 +16101,7 @@ GameObject:
   - component: {fileID: 1896151207}
   - component: {fileID: 1896151209}
   - component: {fileID: 1896151208}
+  - component: {fileID: 1896151210}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -15926,6 +16226,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896151206}
   m_CullTransparentMesh: 1
+--- !u!114 &1896151210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896151206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - START
+  - "\u041D\u0410\u0427\u0418\u041D\u0410\u0422\u042C"
+  - "\u5F00\u59CB"
+  - START
+  - "\u59CB\u3081\u308B"
+  - "\uC2DC\uC791"
+  - COMENZAR
 --- !u!1 &1897808361
 GameObject:
   m_ObjectHideFlags: 0
@@ -16118,6 +16438,7 @@ GameObject:
   - component: {fileID: 1899083645}
   - component: {fileID: 1899083647}
   - component: {fileID: 1899083646}
+  - component: {fileID: 1899083648}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -16242,6 +16563,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1899083644}
   m_CullTransparentMesh: 1
+--- !u!114 &1899083648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899083644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - MULTIPLAYER
+  - "\u041C\u0423\u041B\u042C\u0422\u0418\u041F\u041B\u0415\u0415\u0420"
+  - "\u591A\u4EBA\u6E38\u620F"
+  - MEHRSPIELER
+  - "\u30DE\u30EB\u30C1\u30D7\u30EC\u30A4\u30E4\u30FC"
+  - "\uBA40\uD2F0\uD50C\uB808\uC774\uC5B4"
+  - MULTIJUGADOR
 --- !u!1 &1914929265
 GameObject:
   m_ObjectHideFlags: 0
@@ -16253,6 +16594,7 @@ GameObject:
   - component: {fileID: 1914929266}
   - component: {fileID: 1914929268}
   - component: {fileID: 1914929267}
+  - component: {fileID: 1914929269}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -16377,6 +16719,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914929265}
   m_CullTransparentMesh: 1
+--- !u!114 &1914929269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914929265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Leave
+  - "\u041E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C"
+  - "\u79BB\u5F00"
+  - Verlassen
+  - "\u96E2\u308C\u308B"
+  - "\uB5A0\uB098\uB2E4"
+  - Dejar
 --- !u!1 &1916007313
 GameObject:
   m_ObjectHideFlags: 0
@@ -17329,6 +17691,7 @@ GameObject:
   - component: {fileID: 1973098796}
   - component: {fileID: 1973098798}
   - component: {fileID: 1973098797}
+  - component: {fileID: 1973098799}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -17453,6 +17816,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973098795}
   m_CullTransparentMesh: 1
+--- !u!114 &1973098799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973098795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - RESUME
+  - "\u0420\u0415\u0417\u042E\u041C\u0415"
+  - "\u6062\u590D"
+  - WIEDER AUFNEHMEN
+  - "\u518D\u958B\u3059\u308B"
+  - "\uC7AC\uAC1C\uD558\uB2E4"
+  - REANUDAR
 --- !u!1 &1976521007
 GameObject:
   m_ObjectHideFlags: 0
@@ -17464,6 +17847,7 @@ GameObject:
   - component: {fileID: 1976521008}
   - component: {fileID: 1976521010}
   - component: {fileID: 1976521009}
+  - component: {fileID: 1976521011}
   m_Layer: 5
   m_Name: SoundText
   m_TagString: Untagged
@@ -17588,6 +17972,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976521007}
   m_CullTransparentMesh: 1
+--- !u!114 &1976521011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976521007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Sound
+  - "\u0417\u0432\u0443\u043A"
+  - "\u58F0\u97F3"
+  - Klang
+  - "\u97F3"
+  - "\uC18C\uB9AC"
+  - Sonido
 --- !u!1 &1986791726
 GameObject:
   m_ObjectHideFlags: 0
@@ -17766,6 +18170,7 @@ GameObject:
   - component: {fileID: 2016006916}
   - component: {fileID: 2016006918}
   - component: {fileID: 2016006917}
+  - component: {fileID: 2016006919}
   m_Layer: 5
   m_Name: RoomNumberLimit
   m_TagString: Untagged
@@ -17890,6 +18295,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016006915}
   m_CullTransparentMesh: 1
+--- !u!114 &2016006919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016006915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - MAX 8 CHARACTERS
+  - "\u041C\u0410\u041A\u0421. 8 \u041F\u0415\u0420\u0421\u041E\u041D\u0410\u0416\u0415\u0419"
+  - "\u6700\u591A 8 \u4E2A\u5B57\u7B26"
+  - MAX 8 ZEICHEN
+  - "\u6700\u59278\u6587\u5B57"
+  - "\uCD5C\uB300 8\uC790"
+  - "M\xC1XIMO 8 CARACTERES"
 --- !u!1 &2045401419
 GameObject:
   m_ObjectHideFlags: 0
@@ -18537,6 +18962,7 @@ GameObject:
   - component: {fileID: 2138849488}
   - component: {fileID: 2138849490}
   - component: {fileID: 2138849489}
+  - component: {fileID: 2138849491}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -18661,6 +19087,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138849487}
   m_CullTransparentMesh: 1
+--- !u!114 &2138849491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138849487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Join Open
+  - "\u041F\u0440\u0438\u0441\u043E\u0435\u0434\u0438\u043D\u044F\u0439\u0442\u0435\u0441\u044C
+    \u041E\u0442\u043A\u0440\u044B\u0442\u044C"
+  - "\u52A0\u5165\u5F00\u653E"
+  - Treten Sie Open bei
+  - "\u53C2\u52A0\u30AA\u30FC\u30D7\u30F3"
+  - "\uAC00\uC785 \uC624\uD508"
+  - "\xDAnete abierto"
 --- !u!1 &2145985067
 GameObject:
   m_ObjectHideFlags: 0
