@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 113639885}
   - component: {fileID: 113639887}
   - component: {fileID: 113639886}
+  - component: {fileID: 113639888}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -297,7 +298,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading the Dream Hub...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 81ac070c92a81644baa5197805e141ef, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b874595633674543aa2b5fcb7396e42, type: 2}
   m_sharedMaterial: {fileID: -3248303734514228142, guid: 81ac070c92a81644baa5197805e141ef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -361,7 +362,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &113639887
@@ -372,6 +373,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113639884}
   m_CullTransparentMesh: 1
+--- !u!114 &113639888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113639884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f315dd5a34c1c3d4094e8d682a73a877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagedString:
+  - Loading the Dream Hub...
+  - "\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430 Dream Hub..."
+  - "\u6B63\u5728\u52A0\u8F7D\u68A6\u60F3\u4E2D\u5FC3..."
+  - Der Dream Hub wird geladen...
+  - "\u30C9\u30EA\u30FC\u30E0 \u30CF\u30D6\u3092\u8AAD\u307F\u8FBC\u307F\u4E2D..."
+  - "\uB4DC\uB9BC \uD5C8\uBE0C \uB85C\uB4DC \uC911..."
+  - Cargando el Dream Hub...
 --- !u!1 &250074202
 GameObject:
   m_ObjectHideFlags: 0
