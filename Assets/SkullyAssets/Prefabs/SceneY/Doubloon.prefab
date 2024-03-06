@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2003706472592195443}
   - component: {fileID: 4335399784712162233}
   m_Layer: 0
-  m_Name: Dubloon
+  m_Name: Doubloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
