@@ -94,4 +94,9 @@ public class MainMenu : MonoBehaviour
         #endif
             Application.Quit();
     }
+
+    public void openDiscord()
+    {
+        Application.OpenURL("https://discord.gg/sWjUvQ5uUr");
+    }
 }
