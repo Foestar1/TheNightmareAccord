@@ -15,6 +15,7 @@ TagManager:
   - EnemyRevive
   - TeddyZone
   - PlayerCycler
+  - MovingObject
   layers:
   - Default
   - TransparentFX

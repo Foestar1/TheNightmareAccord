@@ -79,9 +79,6 @@ public class characterControls : MonoBehaviourPunCallbacks
     [Tooltip("The players head, enabled on other players but not the one we control")]
     [SerializeField]
     private GameObject playerDeathSpirit;
-    [Tooltip("The players losing animation")]
-    [SerializeField]
-    private GameObject playerLostAnimations;
 
     [Header("Teddy References")]
     [Tooltip("The characters Teddy bear hanging in their hands")]
@@ -355,6 +352,14 @@ public class characterControls : MonoBehaviourPunCallbacks
             }
         }
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.transform.tag == "MovingObject")
+        {
+            this.transform.parent = hit.transform;
+        }
+    }
     #endregion
 
     #region Custom Functions
@@ -374,6 +379,12 @@ public class characterControls : MonoBehaviourPunCallbacks
 
     private void HandleMovement()
     {
+        //unparent moving objects if not grounded
+        if (!characterController.isGrounded)
+        {
+            this.transform.parent = null;
+        }
+
         if (canRun && Input.GetButton("Sprint"))
         {
             if (!playerSlowed)
@@ -382,7 +393,7 @@ public class characterControls : MonoBehaviourPunCallbacks
             }
             else
             {
-                movementSpeed = runSpeed/2;
+                movementSpeed = runSpeed / 2;
             }
         }
         else
@@ -393,19 +404,20 @@ public class characterControls : MonoBehaviourPunCallbacks
             }
             else
             {
-                movementSpeed = 5/2;
+                movementSpeed = 5 / 2;
             }
         }
-        
+
         float verticalSpeed = Input.GetAxis(verticalMoveInput) * movementSpeed;
         float horizontalSpeed = Input.GetAxis(horizontalMoveInput) * movementSpeed;
 
         Vector3 speed = new Vector3(horizontalSpeed, 0, verticalSpeed);
         speed = transform.rotation * speed;
-
+        //GRAVITY!!!
+        speed += Physics.gravity * 2;
         characterController.SimpleMove(speed);
     }
-
+    
     private void HandleRotation()
     {
         float mouseXRotation = Input.GetAxis(mouseXInput) * mouseSensitivity;
