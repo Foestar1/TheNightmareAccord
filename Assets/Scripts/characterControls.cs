@@ -417,14 +417,29 @@ public class characterControls : MonoBehaviourPunCallbacks
         speed += Physics.gravity * 2;
         characterController.SimpleMove(speed);
     }
-    
+
     private void HandleRotation()
     {
+        // Determine input source: Mouse or Controller
         float mouseXRotation = Input.GetAxis(mouseXInput) * mouseSensitivity;
-        transform.Rotate(0, mouseXRotation, 0);
+        float mouseYRotation = Input.GetAxis(mouseYInput) * mouseSensitivity;
 
-        verticalRotation -= Input.GetAxis(mouseYInput) * mouseSensitivity;
+        // Controller input (assuming you have set up "RightStickHorizontal" and "RightStickVertical" in the Input Manager)
+        float controllerXRotation = Input.GetAxis("RightStickHorizontal") * mouseSensitivity;
+        float controllerYRotation = Input.GetAxis("RightStickVertical") * mouseSensitivity;
+
+        // Combine mouse and controller input, allowing for both to be used
+        float finalXRotation = mouseXRotation + controllerXRotation;
+        float finalYRotation = mouseYRotation + controllerYRotation;
+
+        // Apply horizontal rotation
+        transform.Rotate(0, finalXRotation, 0);
+
+        // Apply vertical rotation with clamping
+        verticalRotation -= finalYRotation;
         verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
+
+        // Apply to camera
         playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
     }
 
