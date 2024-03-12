@@ -102,6 +102,7 @@ public class HubController : MonoBehaviourPunCallbacks
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         levelInfo.SetActive(true);
+        levelInfo.transform.GetChild(4).GetComponent<Button>().Select();
         levelTitle.text = levelTitles[levelChoice];
         levelImage.sprite = levelChoices[levelChoice];
         levelDescription.text = levelDescriptions[levelChoice];
@@ -243,7 +244,7 @@ public class HubController : MonoBehaviourPunCallbacks
     #region callbacks
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.GameVersion = "0.2";
+        PhotonNetwork.GameVersion = "0.25";
         connectionText.text = "Connected to master, attempting to connecting to master lobby...";
 
         //we need to check which lobby to join
@@ -267,6 +268,7 @@ public class HubController : MonoBehaviourPunCallbacks
         if (gameNumberField.transform.parent.gameObject.activeSelf == false)
         {
             multiplayerOptions.SetActive(true);
+            multiplayerOptions.transform.GetChild(1).GetComponent<Button>().Select();
         }
         connectionUI.SetActive(false);
         connectionUI.transform.GetChild(0).gameObject.SetActive(false);
@@ -287,6 +289,7 @@ public class HubController : MonoBehaviourPunCallbacks
         connectionText.text = null;
         connectionUI.transform.GetChild(1).gameObject.SetActive(false);
         gameRoomUI.SetActive(true);
+        gameRoomUI.transform.GetChild(3).GetComponent<Button>().Select();
         gameRoomUI.transform.GetChild(1).gameObject.SetActive(false);
 
         //create new list
