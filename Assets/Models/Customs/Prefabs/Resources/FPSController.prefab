@@ -1462,6 +1462,7 @@ MonoBehaviour:
   canRun: 1
   canMove: 0
   mouseSensitivity: 2
+  controllerSensitivity: 350
   upDownRange: 60
   interactableDistance: 5
   observerObject: {fileID: 1773574973811153699, guid: 3f18bc40ee900b14d80ded82a2e96819, type: 3}

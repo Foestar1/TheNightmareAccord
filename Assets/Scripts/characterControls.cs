@@ -28,6 +28,9 @@ public class characterControls : MonoBehaviourPunCallbacks
     [Tooltip("Mouse sensitivity for the camera")]
     [SerializeField]
     private float mouseSensitivity = 2.0f;
+    [Tooltip("Controller sensitivity for the camera")]
+    [SerializeField]
+    private float controllerSensitivity = 350.0f;
     [Tooltip("The range of motion for the camera's up and down")]
     [SerializeField]
     private float upDownRange = 80.0f;
@@ -425,8 +428,8 @@ public class characterControls : MonoBehaviourPunCallbacks
         float mouseYRotation = Input.GetAxis(mouseYInput) * mouseSensitivity;
 
         // Controller input (assuming you have set up "RightStickHorizontal" and "RightStickVertical" in the Input Manager)
-        float controllerXRotation = Input.GetAxis("RightStickHorizontal") * mouseSensitivity;
-        float controllerYRotation = Input.GetAxis("RightStickVertical") * mouseSensitivity;
+        float controllerXRotation = Input.GetAxis("RightStickHorizontal") * controllerSensitivity * Time.deltaTime;
+        float controllerYRotation = Input.GetAxis("RightStickVertical") * controllerSensitivity * Time.deltaTime;
 
         // Combine mouse and controller input, allowing for both to be used
         float finalXRotation = mouseXRotation + controllerXRotation;
