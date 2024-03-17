@@ -33,6 +33,18 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_28de85506601443d82b6148f21ccc69c:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_6d0f902902b04ba687ee00a51db7ba6d:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_786b67b3efe14204b2f06f9afb9d8cf1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -107,9 +119,29 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Boolean_d3c978b0d14a4f66be175a9b89855be0: 0
+    - Vector1_55003dfa023448c3bffa42f3ca4a99a4: 1
+    - Vector1_6269b1025b26473ca8bc61634f34b537: 0.95
+    - Vector1_687f54e8c371429f86b9eaab0e7dfe3e: 0.05
+    - Vector1_6c82dffdd68049bcb019d3a9c64c92a0: 0.2
+    - Vector1_6f56a0970372485390c6587863c2374e: -3.5
+    - Vector1_dada42ebfac44076897b6de67441ba32: 0.3
+    - _A: 1
     - _AlphaClip: 0
+    - _BUILTIN_AlphaClip: 0
+    - _BUILTIN_Blend: 0
+    - _BUILTIN_CullMode: 2
+    - _BUILTIN_DstBlend: 0
+    - _BUILTIN_QueueControl: -1
+    - _BUILTIN_QueueOffset: 0
+    - _BUILTIN_SrcBlend: 1
+    - _BUILTIN_Surface: 1
+    - _BUILTIN_ZTest: 4
+    - _BUILTIN_ZWrite: 0
+    - _BUILTIN_ZWriteControl: 0
     - _Blend: 0
     - _BumpScale: 1
+    - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -120,7 +152,12 @@ Material:
     - _DstBlend: 0
     - _Emissiveness: 0
     - _EnvironmentReflections: 1
+    - _FoamAmount: 0.17
+    - _FoamCutoff: 1
+    - _FoamSpeed: 0.3
+    - _Foam_Scale: 30
     - _Fresnel: 1
+    - _GeneralWaveSpeed: 0.01
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -142,16 +179,29 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _Tiling1: 50
+    - _Tiling2: 10
+    - _TilingWave: 50
     - _VoronoiSpeed: 1
+    - _WaterTransparency: 1
+    - _WaveHeight: 0.01
     - _WaveSize: 0.13
     - _WaveSpeed: 0.05
+    - _WaveSpeedA: 0.5
+    - _WaveSpeedB: 0.5
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
+    - Color_36218622185947c6a5ae36366d8e21d8: {r: 0.03921569, g: 0.09803919, b: 0.27450976, a: 0.7058824}
+    - Color_93e06cd551a5449091bcde90b46765a0: {r: 0.03804734, g: 0.5490196, b: 0.5490196, a: 0.1960784}
+    - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 10, g: 10, b: 0, a: 0}
     - _BaseColor: {r: 0, g: 0.14714816, b: 0.21698111, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0.038047332, g: 0.6443139, b: 0.8962264, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamColor: {r: 0.9568628, g: 1, b: 0.9960785, a: 1}
     - _RippleColor: {r: 0.0625, g: 0.0625, b: 0.0625, a: 0}
     - _Ripplecolor: {r: 0, g: 0, b: 0, a: 0}
     - _Ripples: {r: 0, g: 0.2, b: 0, a: 0}

@@ -37,19 +37,20 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Ship_Wood_Dark
-  m_Shader: {fileID: -6465566751694194690, guid: a593087705ff05f458d095b8c7f24752,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: a593087705ff05f458d095b8c7f24752, type: 3}
   m_ValidKeywords:
+  - _ALPHATEST_ON
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip
+  m_InvalidKeywords:
   - _DISABLE_SSR_TRANSPARENT
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2225
   stringTagMap:
     MotionVector: User
+    RenderType: TransparentCutout
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
@@ -126,7 +127,7 @@ Material:
     - _BlendMode: 0
     - _CastShadows: 1
     - _ConservativeDepthOffsetEnable: 0
-    - _Cull: 2
+    - _Cull: 0
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
@@ -197,7 +198,7 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Emissive_Tint: {r: 1, g: 1, b: 1, a: 1}
     - _Sat_Bright_Cont: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
-    - _UV_Tiling: {r: 1, g: 1, b: 1, a: 0}
+    - _UV_Tiling: {r: 30, g: 30, b: 30, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8481139697079758516
 MonoBehaviour:
