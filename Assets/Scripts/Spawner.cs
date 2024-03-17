@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
@@ -72,12 +73,6 @@ public class Spawner : MonoBehaviourPunCallbacks
     [Tooltip("The player prefab model")]
     [SerializeField]
     private GameObject playerPrefab;
-    [Tooltip("The player losing animations")]
-    [SerializeField]
-    private GameObject playerLostAnimations;
-    [Tooltip("The player winning animation")]
-    [SerializeField]
-    private GameObject playerWinAnimations;
     [Tooltip("All the spawn points the player can spawn at")]
     [SerializeField]
     private List<Transform> playerSpawnPoints;
@@ -286,6 +281,7 @@ public class Spawner : MonoBehaviourPunCallbacks
                 goalTrackerUI.SetActive(false);
                 teddyUI.SetActive(false);
                 endScoreboard.SetActive(true);
+                endScoreboard.transform.GetChild(5).GetComponent<Button>().Select();
             }
         }
     }
@@ -337,6 +333,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         goalTrackerUI.SetActive(false);
         teddyUI.SetActive(false);
         endScoreboard.SetActive(true);
+        endScoreboard.transform.GetChild(5).GetComponent<Button>().Select();
     }
 
     public void timerControl()
@@ -430,6 +427,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         goalTrackerUI.SetActive(false);
         teddyUI.SetActive(false);
         endScoreboard.SetActive(true);
+        endScoreboard.transform.GetChild(5).GetComponent<Button>().Select();
     }
 
     [PunRPC]
@@ -481,6 +479,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         goalTrackerUI.SetActive(false);
         teddyUI.SetActive(false);
         endScoreboard.SetActive(true);
+        endScoreboard.transform.GetChild(5).GetComponent<Button>().Select();
     }
     #endregion
 }

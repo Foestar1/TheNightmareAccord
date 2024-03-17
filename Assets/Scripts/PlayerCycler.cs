@@ -42,7 +42,9 @@ public class PlayerCycler : MonoBehaviour
         if (cameraTransform != null)
         {
             float mouseX = Input.GetAxis("Mouse X");
-            cameraTransform.RotateAround(transform.position, Vector3.up, mouseX * orbitSensitivity * Time.deltaTime);
+            float controllerXRotation = Input.GetAxis("RightStickHorizontal");
+            float finalXRotation = mouseX + controllerXRotation;
+            cameraTransform.RotateAround(transform.position, Vector3.up, finalXRotation * orbitSensitivity * Time.deltaTime);
             AdjustCameraDistance();
         }
     }

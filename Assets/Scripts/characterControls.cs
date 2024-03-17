@@ -28,6 +28,9 @@ public class characterControls : MonoBehaviourPunCallbacks
     [Tooltip("Mouse sensitivity for the camera")]
     [SerializeField]
     private float mouseSensitivity = 2.0f;
+    [Tooltip("Controller sensitivity for the camera")]
+    [SerializeField]
+    private float controllerSensitivity = 350.0f;
     [Tooltip("The range of motion for the camera's up and down")]
     [SerializeField]
     private float upDownRange = 80.0f;
@@ -38,21 +41,13 @@ public class characterControls : MonoBehaviourPunCallbacks
     private GameObject interactionButton;
     [SerializeField]
     private GameObject observerObject;
-
-    [Header("Inputs Customization")]
-    [Tooltip("The input button for horizontal character movement")]
-    [SerializeField]
-    private string horizontalMoveInput = "Horizontal";
-    [Tooltip("The input button for vertical character movement")]
-    [SerializeField]
-    private string verticalMoveInput = "Vertical";
-    [Tooltip("The input button for horizontal camera control")]
-    [SerializeField]
-    private string mouseXInput = "Mouse X";
-    [Tooltip("The input button for vertical camera control")]
-    [SerializeField]
-    private string mouseYInput = "Mouse Y";
     private float verticalRotation;
+
+    //[Header("World References")]
+    //[Tooltip("Our players view camera")]
+    //[SerializeField]
+    private HubController hubControlObject;
+    private Spawner spawnerObject;
 
     [Header("Player References")]
     [Tooltip("Our players view camera")]
@@ -100,9 +95,17 @@ public class characterControls : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {
+            //enable the smoothsync for lag
             this.GetComponent<SmoothSyncPUN2>().enabled = true;
+            //if it's ours do stuff
             if (this.photonView.IsMine)
             {
+                //spawner object
+                if (SceneManager.GetActiveScene().name != "DreamHub")
+                {
+                    spawnerObject = GameObject.Find("SpawnControls").GetComponent<Spawner>();
+                }
+                //check the scene for farClipPlane change
                 if (SceneManager.GetActiveScene().name == "Doubloon Dash")
                 {
                     playerCamera.farClipPlane = 10000;
@@ -111,7 +114,19 @@ public class characterControls : MonoBehaviourPunCallbacks
         }
         else
         {
+            //hub control part
+            if (SceneManager.GetActiveScene().name == "DreamHub")
+            {
+                hubControlObject = GameObject.Find("HubController").GetComponent<HubController>();
+            }
+            //spawner object
+            if (SceneManager.GetActiveScene().name != "DreamHub")
+            {
+                spawnerObject = GameObject.Find("SpawnControls").GetComponent<Spawner>();
+            }
+            //players lives
             playerLives = 3;
+            //scene check for farClipPlane change
             if (SceneManager.GetActiveScene().name == "Doubloon Dash")
             {
                 playerCamera.farClipPlane = 10000;
@@ -219,6 +234,9 @@ public class characterControls : MonoBehaviourPunCallbacks
             }
             else
             {
+                targetedObject = null;
+                playerCrosshair.GetComponent<Image>().color = CrosshairColors[0];
+                interactionButton.SetActive(false);
                 characterController.SimpleMove(Vector3.zero);
                 HandleAnimation();
             }
@@ -239,7 +257,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     int playerPWID = this.photonView.ViewID;
                     int playerGhostPWID = myPlayerObject.GetPhotonView().ViewID;
                     this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
+                    spawnerObject.soloDeaths++;
                     var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
                     observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
                     myPlayerObject.GetComponent<LinkedPlayer>().linkedObserver = observerObjectCamera;
@@ -260,7 +278,7 @@ public class characterControls : MonoBehaviourPunCallbacks
                     int playerPWID = this.photonView.ViewID;
                     int playerGhostPWID = myPlayerObject.GetPhotonView().ViewID;
                     this.photonView.RPC("playerDied", RpcTarget.All, playerPWID, playerGhostPWID);
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
+                    spawnerObject.soloDeaths++;
                     var observerObjectCamera = Instantiate(observerObject, this.transform.position, this.transform.rotation);
                     observerObjectCamera.transform.GetChild(0).gameObject.SetActive(true);
                     myPlayerObject.GetComponent<LinkedPlayer>().linkedObserver = observerObjectCamera;
@@ -280,8 +298,8 @@ public class characterControls : MonoBehaviourPunCallbacks
                     ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(false);
                     Instantiate(lightExplosion, playerCamera.transform.position, playerCamera.transform.rotation);
 
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
+                    spawnerObject.soloDeaths++;
+                    spawnerObject.totalDeaths++;
                     currentCooldownTime = 0;
                     Image fillImage = teddyUI.transform.GetChild(1).transform.GetComponent<Image>();
                     fillImage.fillAmount = 0; // Ensure the fill amount is set to 0 at the end
@@ -290,10 +308,10 @@ public class characterControls : MonoBehaviourPunCallbacks
                     StartCoroutine(UpdateDead());
                 }else if (playerLives == 1) {
                     isDead = true;
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().openScoreboardLost();
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().timerRunning = false;
+                    spawnerObject.soloDeaths++;
+                    spawnerObject.totalDeaths++;
+                    spawnerObject.openScoreboardLost();
+                    spawnerObject.timerRunning = false;
                     Destroy(this.gameObject);
                 }
             }
@@ -312,18 +330,18 @@ public class characterControls : MonoBehaviourPunCallbacks
                     isDead = true;
                     var ghostSpiritSpot = Instantiate(playerDeathSpirit, this.transform.position, this.transform.rotation);
                     ghostSpiritSpot.transform.GetChild(0).gameObject.SetActive(false);
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
+                    spawnerObject.soloDeaths++;
+                    spawnerObject.totalDeaths++;
                     playerLives--;
                     StartCoroutine(UpdateDead());
                 }
                 else if (playerLives == 1)
                 {
                     isDead = true;
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().soloDeaths++;
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().openScoreboardLost();
-                    GameObject.Find("SpawnControls").GetComponent<Spawner>().timerRunning = false;
+                    spawnerObject.soloDeaths++;
+                    spawnerObject.totalDeaths++;
+                    spawnerObject.openScoreboardLost();
+                    spawnerObject.timerRunning = false;
                     Destroy(this.gameObject);
                 }
             }
@@ -408,8 +426,8 @@ public class characterControls : MonoBehaviourPunCallbacks
             }
         }
 
-        float verticalSpeed = Input.GetAxis(verticalMoveInput) * movementSpeed;
-        float horizontalSpeed = Input.GetAxis(horizontalMoveInput) * movementSpeed;
+        float verticalSpeed = Input.GetAxis("Vertical") * movementSpeed;
+        float horizontalSpeed = Input.GetAxis("Horizontal") * movementSpeed;
 
         Vector3 speed = new Vector3(horizontalSpeed, 0, verticalSpeed);
         speed = transform.rotation * speed;
@@ -417,14 +435,29 @@ public class characterControls : MonoBehaviourPunCallbacks
         speed += Physics.gravity * 2;
         characterController.SimpleMove(speed);
     }
-    
+
     private void HandleRotation()
     {
-        float mouseXRotation = Input.GetAxis(mouseXInput) * mouseSensitivity;
-        transform.Rotate(0, mouseXRotation, 0);
+        // Determine input source: Mouse or Controller
+        float mouseXRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseYRotation = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        verticalRotation -= Input.GetAxis(mouseYInput) * mouseSensitivity;
+        // Controller input (assuming you have set up "RightStickHorizontal" and "RightStickVertical" in the Input Manager)
+        float controllerXRotation = Input.GetAxis("RightStickHorizontal") * controllerSensitivity * Time.deltaTime;
+        float controllerYRotation = Input.GetAxis("RightStickVertical") * controllerSensitivity * Time.deltaTime;
+
+        // Combine mouse and controller input, allowing for both to be used
+        float finalXRotation = mouseXRotation + controllerXRotation;
+        float finalYRotation = mouseYRotation + controllerYRotation;
+
+        // Apply horizontal rotation
+        transform.Rotate(0, finalXRotation, 0);
+
+        // Apply vertical rotation with clamping
+        verticalRotation -= finalYRotation;
         verticalRotation = Mathf.Clamp(verticalRotation, -upDownRange, upDownRange);
+
+        // Apply to camera
         playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
     }
 
@@ -507,12 +540,18 @@ public class characterControls : MonoBehaviourPunCallbacks
                 //the section for the hub
                 if (!canRun)
                 {
-                    if (targetedObject.name == "PetalsLament")
+                    if (targetedObject.name == "PetalsLament" && hubControlObject.canOpen)
                     {
                         interactionButton.SetActive(false);
                         canMove = false;
-                        GameObject.Find("HubController").GetComponent<HubController>().levelChoice = 0;
-                        GameObject.Find("HubController").GetComponent<HubController>().openLevelInfo();
+                        hubControlObject.levelChoice = 0;
+                        hubControlObject.openLevelInfo();
+                    }
+                    if (targetedObject.name == "ClothingNightstand" && hubControlObject.canOpen)
+                    {
+                        interactionButton.SetActive(false);
+                        canMove = false;
+                        hubControlObject.openCustomizationMenu();
                     }
                 }
                 #endregion
@@ -529,14 +568,14 @@ public class characterControls : MonoBehaviourPunCallbacks
                             int photonViewNumber = targetedObject.GetPhotonView().ViewID;
                             //send RPC to remove a flower
                             this.photonView.RPC("minusGoal", RpcTarget.All, photonViewNumber);
-                            GameObject.Find("SpawnControls").GetComponent<Spawner>().soloObjectives++;
+                            spawnerObject.soloObjectives++;
                         }
                         else
                         {
                             targetedObject.SetActive(false);
-                            GameObject.Find("SpawnControls").GetComponent<Spawner>().goalsNotFound--;
-                            GameObject.Find("SpawnControls").GetComponent<Spawner>().soloObjectives++;
-                            GameObject.Find("SpawnControls").GetComponent<Spawner>().totalObjectives++;
+                            spawnerObject.goalsNotFound--;
+                            spawnerObject.soloObjectives++;
+                            spawnerObject.totalObjectives++;
                         }
                     }
                 }

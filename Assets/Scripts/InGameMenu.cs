@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
@@ -92,6 +93,7 @@ public class InGameMenu : MonoBehaviourPunCallbacks
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 inGameMenu.SetActive(true);
+                inGameMenu.transform.GetChild(0).GetComponent<Button>().Select();
                 canOpen = false;
             }
         }

@@ -1462,6 +1462,7 @@ MonoBehaviour:
   canRun: 1
   canMove: 0
   mouseSensitivity: 2
+  controllerSensitivity: 350
   upDownRange: 60
   interactableDistance: 5
   observerObject: {fileID: 1773574973811153699, guid: 3f18bc40ee900b14d80ded82a2e96819, type: 3}
@@ -1488,7 +1489,6 @@ MonoBehaviour:
   characterHairStuff:
   - {fileID: 1209879089571262184}
   playerDeathSpirit: {fileID: 1773574973811153699, guid: 7ee42c69542c02c4e9bb26b430dc84ff, type: 3}
-  playerLostAnimations: {fileID: 2476902621862603299, guid: 7464c1799f31ea042b62628c4cd6d00e, type: 3}
   TeddyObject: {fileID: 2020765270886030702}
   lightExplosion: {fileID: 7195407350128338894, guid: 2263f56a14ea8e042b854347b7c60d57, type: 3}
   teddyCooldownTime: 60
