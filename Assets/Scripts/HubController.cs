@@ -24,7 +24,6 @@ public class HubController : MonoBehaviourPunCallbacks
     private TextMeshProUGUI levelDescription;
     [SerializeField]
     private TextMeshProUGUI timerStat;
-
     [Tooltip("The title choices for level title")]
     [SerializeField]
     private string[] levelTitles;
@@ -63,6 +62,10 @@ public class HubController : MonoBehaviourPunCallbacks
     [Tooltip("The desired game private room to join")]
     [SerializeField]
     private TMP_InputField gameNumberField;
+    [Tooltip("The UI for the character customization screen")]
+    [SerializeField]
+    private GameObject characterCustomizationUI;
+    public bool canOpen { get; set; }
 
     [Header("Player Stuff")]
     [Tooltip("The player gameobject")]
@@ -71,9 +74,18 @@ public class HubController : MonoBehaviourPunCallbacks
     [Tooltip("The players name prefab for room listing")]
     [SerializeField]
     private GameObject playerNamePrefab;
+    [Tooltip("The hidden player gameobject for customization")]
+    [SerializeField]
+    private GameObject hiddenPlayerObject;
+    public int rotatingPlayer { get; set; }
     #endregion
 
     #region built in functions
+    private void Awake()
+    {
+        canOpen = true;
+    }
+
     private void Update()
     {
         if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
@@ -93,12 +105,23 @@ public class HubController : MonoBehaviourPunCallbacks
                 }
             }
         }
+
+        if (rotatingPlayer == -1)
+        {
+            hiddenPlayerObject.transform.Rotate(Vector3.up, 50f * Time.deltaTime);
+        }
+        else if (rotatingPlayer == 1)
+        {
+            hiddenPlayerObject.transform.Rotate(Vector3.up, -50f * Time.deltaTime);
+        }
     }
     #endregion
 
     #region custom functions
+    #region UI and such custom functions
     public void openLevelInfo()
     {
+        canOpen = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         levelInfo.SetActive(true);
@@ -126,6 +149,7 @@ public class HubController : MonoBehaviourPunCallbacks
 
     public void closeLevelInfo()
     {
+        StartCoroutine(canOpenReset());
         playerObject.GetComponent<characterControls>().canMove = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -134,6 +158,48 @@ public class HubController : MonoBehaviourPunCallbacks
         levelImage.sprite = null;
         levelDescription.text = null;
         timerStat.text = "---";
+    }
+
+    public void openCustomizationMenu()
+    {
+        canOpen = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        characterCustomizationUI.SetActive(true);
+        characterCustomizationUI.transform.GetChild(0).GetComponent<Button>().Select();
+    }
+
+    public void closeCustomizationMenu()
+    {
+        characterCustomizationUI.SetActive(false);
+        StartCoroutine(canOpenReset());
+        playerObject.GetComponent<characterControls>().canMove = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void rotatePlayerLeft()
+    {
+        if (rotatingPlayer != -1)
+        {
+            rotatingPlayer = -1;
+        }
+    }
+
+    public void rotatePlayerRight()
+    {
+        if (rotatingPlayer != 1)
+        {
+            rotatingPlayer = 1;
+        }
+    }
+
+    public void resetRotatePlayer()
+    {
+        if (rotatingPlayer != 0)
+        {
+            rotatingPlayer = 0;
+        }
     }
 
     public void loadTheLevel()
@@ -153,7 +219,9 @@ public class HubController : MonoBehaviourPunCallbacks
             SceneManager.LoadScene("Petal's Lament");
         }
     }
+    #endregion
 
+    #region multiplayer customs
     public void timeToConnect()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -239,6 +307,7 @@ public class HubController : MonoBehaviourPunCallbacks
             this.photonView.RPC("playerReady", RpcTarget.All, PhotonNetwork.LocalPlayer.UserId.ToString());
         }
     }
+    #endregion
     #endregion
 
     #region callbacks
@@ -350,6 +419,14 @@ public class HubController : MonoBehaviourPunCallbacks
         {
             createPrivateGame();
         }
+    }
+    #endregion
+
+    #region coroutines
+    private IEnumerator canOpenReset()
+    {
+        yield return new WaitForSeconds(.3f);
+        canOpen = true;
     }
     #endregion
 
