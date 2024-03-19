@@ -127,6 +127,7 @@ public class InGameMenu : MonoBehaviourPunCallbacks
 
     public void exitToMenu()
     {
+        Destroy(GameObject.Find("PersistantSaveAndLoad").gameObject);
         if (PhotonNetwork.IsConnectedAndReady)
         {
             PhotonNetwork.Disconnect();
