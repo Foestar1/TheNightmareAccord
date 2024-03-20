@@ -5,7 +5,13 @@ public class ButtonCustomizer : MonoBehaviour
     private SaveAndLoadData saverObject;
 
     [SerializeField]
+    private Renderer[] playerObjects;
+
+    [SerializeField]
     private GameObject[] headsList;
+
+    [SerializeField]
+    private Texture[] jammiesList;
 
     private void OnEnable()
     {
@@ -20,6 +26,7 @@ public class ButtonCustomizer : MonoBehaviour
         }
     }
 
+    #region head stuff
     public void headRightButton()
     {
         //get the current head
@@ -69,6 +76,59 @@ public class ButtonCustomizer : MonoBehaviour
 
         //Set the new head and save it
         saverObject.chosenHead = currentHead;
+        saverObject.saveInfo();
+    }
+    #endregion
+
+    public void jammiesRightButton()
+    {
+        //get the current head
+        int currentJammies = saverObject.chosenJammies;
+
+        // Increment the index. If it goes past the end, cycle back to 0.
+        if (currentJammies < jammiesList.Length - 1)
+        {
+            currentJammies++;
+        }
+        else
+        {
+            currentJammies = 0;
+        }
+
+        // Enable the new current jammie.
+        foreach(Renderer jammieRend in playerObjects)
+        {
+            jammieRend.GetComponent<Renderer>().material.mainTexture = jammiesList[currentJammies];
+        }
+
+        //Set the new head and save it
+        saverObject.chosenJammies = currentJammies;
+        saverObject.saveInfo();
+    }
+
+    public void jammiesLeftButton()
+    {
+        //get the current head
+        int currentJammies = saverObject.chosenJammies;
+
+        // Increment the index. If it goes past the end, cycle back to 0.
+        if (currentJammies > 0)
+        {
+            currentJammies--;
+        }
+        else
+        {
+            currentJammies = jammiesList.Length - 1;
+        }
+
+        // Enable the new current jammie.
+        foreach (Renderer jammieRend in playerObjects)
+        {
+            jammieRend.GetComponent<Renderer>().material.mainTexture = jammiesList[currentJammies];
+        }
+
+        //Set the new head and save it
+        saverObject.chosenJammies = currentJammies;
         saverObject.saveInfo();
     }
 }

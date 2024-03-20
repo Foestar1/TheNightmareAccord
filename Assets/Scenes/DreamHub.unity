@@ -13814,12 +13814,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f7916253dc8514bb216b2a31a0cbd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjects:
+  - {fileID: 1169014421618849871}
+  - {fileID: 1209879090228371448}
   headsList:
   - {fileID: 1368516852}
   - {fileID: 3419035801177593237}
   - {fileID: 5629628986770033186}
   - {fileID: 1172666736875200304}
   - {fileID: 2310786689434148324}
+  jammiesList:
+  - {fileID: 2800000, guid: ccaee3c60e7a401429be045170548555, type: 3}
+  - {fileID: 2800000, guid: 36790d59116b6984d8ba0cb9761d1fca, type: 3}
+  - {fileID: 2800000, guid: 3f776deb1ec632141a9200d08f218080, type: 3}
+  - {fileID: 2800000, guid: 409017d4eb7072b49b6459faf94c5823, type: 3}
 --- !u!1 &992924953
 GameObject:
   m_ObjectHideFlags: 0
@@ -17929,7 +17937,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1292055076}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 991900110}
+        m_TargetAssemblyTypeName: ButtonCustomizer, Assembly-CSharp
+        m_MethodName: jammiesRightButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1292055076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23059,6 +23079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1791261161}
   - component: {fileID: 1791261162}
+  - component: {fileID: 1791261165}
   - component: {fileID: 1791261163}
   - component: {fileID: 1791261164}
   m_Layer: 0
@@ -23229,6 +23250,23 @@ MonoBehaviour:
   sceneViewId: 18
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1791261165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791261160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7f55f0001694440a803ad8e13d4e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jammieChoices:
+  - {fileID: 2800000, guid: ccaee3c60e7a401429be045170548555, type: 3}
+  - {fileID: 2800000, guid: 36790d59116b6984d8ba0cb9761d1fca, type: 3}
+  - {fileID: 2800000, guid: 3f776deb1ec632141a9200d08f218080, type: 3}
+  - {fileID: 2800000, guid: 409017d4eb7072b49b6459faf94c5823, type: 3}
 --- !u!1 &1794750788
 GameObject:
   m_ObjectHideFlags: 0
@@ -28498,7 +28536,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2029169376}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 991900110}
+        m_TargetAssemblyTypeName: ButtonCustomizer, Assembly-CSharp
+        m_MethodName: jammiesLeftButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2029169376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30176,6 +30226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4561500797980847911}
   - component: {fileID: 1169014421618849871}
+  - component: {fileID: 4561500797980847914}
   - component: {fileID: 4561500797980847912}
   - component: {fileID: 4561500797980847913}
   m_Layer: 2
@@ -30466,6 +30517,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40d382e54107abb4e83e9a964d945dee, type: 3}
+--- !u!137 &1209879090228371448 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1858985782631558003, guid: 40d382e54107abb4e83e9a964d945dee, type: 3}
+  m_PrefabInstance: {fileID: 1209879090228371447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1212442391838499919
 GameObject:
   m_ObjectHideFlags: 0
@@ -33144,6 +33200,23 @@ MonoBehaviour:
   sceneViewId: 33
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4561500797980847914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029486161847632245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7f55f0001694440a803ad8e13d4e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jammieChoices:
+  - {fileID: 2800000, guid: ccaee3c60e7a401429be045170548555, type: 3}
+  - {fileID: 2800000, guid: 36790d59116b6984d8ba0cb9761d1fca, type: 3}
+  - {fileID: 2800000, guid: 3f776deb1ec632141a9200d08f218080, type: 3}
+  - {fileID: 2800000, guid: 409017d4eb7072b49b6459faf94c5823, type: 3}
 --- !u!1 &4561533709325998637
 GameObject:
   m_ObjectHideFlags: 0

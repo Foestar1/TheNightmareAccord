@@ -464,6 +464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3943157774793849883}
   - component: {fileID: 1858985782631558003}
+  - component: {fileID: 3092267497289500839}
   - component: {fileID: 6239756942580163345}
   - component: {fileID: 1423151501857382324}
   m_Layer: 6
@@ -565,6 +566,23 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.037913203, y: 0.043827057, z: -0.15339771}
     m_Extent: {x: 1.5861522, y: 2.1582427, z: 1.0504138}
   m_DirtyAABB: 0
+--- !u!114 &3092267497289500839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557362105871553097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7f55f0001694440a803ad8e13d4e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jammieChoices:
+  - {fileID: 2800000, guid: ccaee3c60e7a401429be045170548555, type: 3}
+  - {fileID: 2800000, guid: 36790d59116b6984d8ba0cb9761d1fca, type: 3}
+  - {fileID: 2800000, guid: 3f776deb1ec632141a9200d08f218080, type: 3}
+  - {fileID: 2800000, guid: 409017d4eb7072b49b6459faf94c5823, type: 3}
 --- !u!114 &6239756942580163345
 MonoBehaviour:
   m_ObjectHideFlags: 0
