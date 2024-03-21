@@ -1838,6 +1838,9 @@ MonoBehaviour:
   - {fileID: 7660647468500239169}
   characterHairStuff:
   - {fileID: 1209879089571262184}
+  - {fileID: 1209879089736508648}
+  - {fileID: 1209879089032463659}
+  - {fileID: 1209879090304438670}
   playerDeathSpirit: {fileID: 1773574973811153699, guid: 7ee42c69542c02c4e9bb26b430dc84ff, type: 3}
   TeddyObject: {fileID: 2020765270886030702}
   lightExplosion: {fileID: 7195407350128338894, guid: 2263f56a14ea8e042b854347b7c60d57, type: 3}
