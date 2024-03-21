@@ -24,6 +24,7 @@ public class SaveAndLoadData : MonoBehaviour
     public int chosenTop { get; set; } //will have to list the top choices somewhere
     public int chosenJammies { get; set; } //will have to list the jammies choices somewhere
     public int chosenFeet { get; set; } //will have to list the feet choices somewhere
+    public string chosenRegion { get; set; } //the region actual string needed to connect to specified region
 
     private bool needToSave;
     #endregion
@@ -51,6 +52,7 @@ public class SaveAndLoadData : MonoBehaviour
         PlayerPrefs.SetInt("chosenTop", chosenTop);
         PlayerPrefs.SetInt("chosenJammies", chosenJammies);
         PlayerPrefs.SetInt("chosenFeet", chosenFeet);
+        PlayerPrefs.SetString("chosenRegion", chosenRegion);
         PlayerPrefs.Save();
     }
 
@@ -77,6 +79,7 @@ public class SaveAndLoadData : MonoBehaviour
         chosenTop = PlayerPrefs.GetInt("chosenTop");
         chosenJammies = PlayerPrefs.GetInt("chosenJammies");
         chosenFeet = PlayerPrefs.GetInt("chosenFeet");
+        chosenRegion = PlayerPrefs.GetString("chosenRegion");
     }
 
     public void Awake()
@@ -107,6 +110,7 @@ public class SaveAndLoadData : MonoBehaviour
             chosenTop = 0;
             chosenJammies = 0;
             chosenFeet = 0;
+            chosenRegion = "us";
             saveInfo();
         }
         else
@@ -156,6 +160,14 @@ public class SaveAndLoadData : MonoBehaviour
             if (SkinColor == null || SkinColor == "")
             {
                 SkinColor = "896557";
+                needToSave = true;
+            }
+            #endregion
+
+            #region region check
+            if (chosenRegion == null || chosenRegion == "")
+            {
+                chosenRegion = "us";
                 needToSave = true;
             }
             #endregion

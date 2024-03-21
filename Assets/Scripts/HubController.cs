@@ -130,6 +130,7 @@ public class HubController : MonoBehaviourPunCallbacks
         levelImage.sprite = levelChoices[levelChoice];
         levelDescription.text = levelDescriptions[levelChoice];
         SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        levelInfo.transform.GetChild(9).gameObject.GetComponent<TextMeshProUGUI>().text = saver.chosenRegion;
         if (levelChoice == 0)
         {
             //timer stat
@@ -225,6 +226,8 @@ public class HubController : MonoBehaviourPunCallbacks
     public void timeToConnect()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = saver.chosenRegion;
         PhotonNetwork.ConnectUsingSettings();
     }
 

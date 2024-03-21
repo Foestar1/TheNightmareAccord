@@ -99,4 +99,25 @@ public class MainMenu : MonoBehaviour
     {
         Application.OpenURL("https://discord.gg/sWjUvQ5uUr");
     }
+
+    public void setRegionUS()
+    {
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        saver.chosenRegion = "us";
+        saver.saveInfo();
+    }
+
+    public void setRegionEU()
+    {
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        saver.chosenRegion = "eu";
+        saver.saveInfo();
+    }
+
+    public void setRegionASIA()
+    {
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        saver.chosenRegion = "asia";
+        saver.saveInfo();
+    }
 }

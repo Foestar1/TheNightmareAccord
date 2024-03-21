@@ -63,11 +63,19 @@ public class ButtonColor : MonoBehaviour
         if (isEyeColor)
         {
             selectedColor = this.GetComponent<Image>().color;
+            hexColor = ColorUtility.ToHtmlStringRGBA(this.GetComponent<Image>().color);
+
+            //time to save
+            saverObject.EyesColor = hexColor;
         }
 
         if (isSkinColor)
         {
             selectedColor = this.GetComponent<Image>().color;
+            hexColor = ColorUtility.ToHtmlStringRGBA(this.GetComponent<Image>().color);
+
+            //time to save
+            saverObject.SkinColor = hexColor;
         }
 
         saverObject.saveInfo();
