@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class ButtonCustomizer : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class ButtonCustomizer : MonoBehaviour
     [SerializeField]
     private Texture[] jammiesList;
 
+    [SerializeField]
+    private TextMeshProUGUI playerNameButton;
+
     private void OnEnable()
     {
         doTheStuff();
@@ -24,6 +28,8 @@ public class ButtonCustomizer : MonoBehaviour
         {
             saverObject = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
         }
+
+        playerNameButton.text = saverObject.multiplayerNickname;
     }
 
     #region head stuff

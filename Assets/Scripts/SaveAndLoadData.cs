@@ -25,6 +25,7 @@ public class SaveAndLoadData : MonoBehaviour
     public int chosenJammies { get; set; } //will have to list the jammies choices somewhere
     public int chosenFeet { get; set; } //will have to list the feet choices somewhere
     public string chosenRegion { get; set; } //the region actual string needed to connect to specified region
+    public string multiplayerNickname { get; set; } //our multiplayer nickname
 
     private bool needToSave;
     #endregion
@@ -53,6 +54,7 @@ public class SaveAndLoadData : MonoBehaviour
         PlayerPrefs.SetInt("chosenJammies", chosenJammies);
         PlayerPrefs.SetInt("chosenFeet", chosenFeet);
         PlayerPrefs.SetString("chosenRegion", chosenRegion);
+        PlayerPrefs.SetString("multiplayerNickname", multiplayerNickname);
         PlayerPrefs.Save();
     }
 
@@ -80,6 +82,7 @@ public class SaveAndLoadData : MonoBehaviour
         chosenJammies = PlayerPrefs.GetInt("chosenJammies");
         chosenFeet = PlayerPrefs.GetInt("chosenFeet");
         chosenRegion = PlayerPrefs.GetString("chosenRegion");
+        multiplayerNickname = PlayerPrefs.GetString("multiplayerNickname");
     }
 
     public void Awake()
@@ -111,6 +114,7 @@ public class SaveAndLoadData : MonoBehaviour
             chosenJammies = 0;
             chosenFeet = 0;
             chosenRegion = "us";
+            multiplayerNickname = "Player";
             saveInfo();
         }
         else
@@ -163,11 +167,21 @@ public class SaveAndLoadData : MonoBehaviour
                 needToSave = true;
             }
             #endregion
+            #endregion
 
+            #region other checks
             #region region check
             if (chosenRegion == null || chosenRegion == "")
             {
                 chosenRegion = "us";
+                needToSave = true;
+            }
+            #endregion
+
+            #region multiplayer nickname check
+            if (multiplayerNickname == null || multiplayerNickname == "")
+            {
+                multiplayerNickname = "Player";
                 needToSave = true;
             }
             #endregion
