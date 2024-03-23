@@ -323,7 +323,7 @@ public class HubController : MonoBehaviourPunCallbacks
         {
             SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
             saver.multiplayerNickname = playerNicknameField.text;
-            playerNicknameButton.transform.GetChild(0).GetComponent<Text>().text = saver.multiplayerNickname;
+            playerNicknameButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = saver.multiplayerNickname;
             saver.saveInfo();
         }
     }
