@@ -183,6 +183,9 @@ public class Spawner : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.IsMasterClient && playersReady == PhotonNetwork.CurrentRoom.PlayerCount && !spawnedPlayers)
             {
+                //start the timer for everyone!!!
+                this.photonView.RPC("activateTimer", RpcTarget.All);
+                //spawn the players!!!
                 spawnedPlayers = true;
                 foreach (Player player in PhotonNetwork.PlayerList)
                 {
@@ -368,6 +371,12 @@ public class Spawner : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
+    void activateTimer()
+    {
+        timerRunning = true;
+    }
+
+    [PunRPC]
     void activateUIAndPlayer(int pointID)
     {
         PhotonView tempView = PhotonView.Find(pointID);
@@ -376,7 +385,6 @@ public class Spawner : MonoBehaviourPunCallbacks
         goalTrackerUI.SetActive(true);
         teddyUI.SetActive(true);
         var myPlayerObject = PhotonNetwork.Instantiate(this.playerPrefab.name, tempView.gameObject.transform.position, tempView.gameObject.transform.rotation, 0);
-        timerRunning = true;
     }
 
     [PunRPC]

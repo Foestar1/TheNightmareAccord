@@ -55,6 +55,8 @@ MonoBehaviour:
   - markPlayerIDExplosion
   - reviveTime
   - wraithDead
+  - sendData
+  - activateTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

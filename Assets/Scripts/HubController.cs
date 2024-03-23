@@ -62,6 +62,12 @@ public class HubController : MonoBehaviourPunCallbacks
     [Tooltip("The desired game private room to join")]
     [SerializeField]
     private TMP_InputField gameNumberField;
+    [Tooltip("The input field for the players nickname")]
+    [SerializeField]
+    private TMP_InputField playerNicknameField;
+    [Tooltip("The button for the players the nickname")]
+    [SerializeField]
+    private Button playerNicknameButton;
     [Tooltip("The UI for the character customization screen")]
     [SerializeField]
     private GameObject characterCustomizationUI;
@@ -130,6 +136,7 @@ public class HubController : MonoBehaviourPunCallbacks
         levelImage.sprite = levelChoices[levelChoice];
         levelDescription.text = levelDescriptions[levelChoice];
         SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        levelInfo.transform.GetChild(9).gameObject.GetComponent<TextMeshProUGUI>().text = saver.chosenRegion;
         if (levelChoice == 0)
         {
             //timer stat
@@ -225,6 +232,8 @@ public class HubController : MonoBehaviourPunCallbacks
     public void timeToConnect()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = saver.chosenRegion;
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -307,6 +316,17 @@ public class HubController : MonoBehaviourPunCallbacks
             this.photonView.RPC("playerReady", RpcTarget.All, PhotonNetwork.LocalPlayer.UserId.ToString());
         }
     }
+
+    public void setPlayersNickname()
+    {
+        if (playerNicknameField.text != null || playerNicknameField.text != "")
+        {
+            SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+            saver.multiplayerNickname = playerNicknameField.text;
+            playerNicknameButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = saver.multiplayerNickname;
+            saver.saveInfo();
+        }
+    }
     #endregion
     #endregion
 
@@ -331,7 +351,8 @@ public class HubController : MonoBehaviourPunCallbacks
         //the line below is temporary
         if (PhotonNetwork.NickName == null || PhotonNetwork.NickName == "")
         {
-            PhotonNetwork.NickName = "Player" + Random.Range(0, 100);
+            SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+            PhotonNetwork.NickName = saver.multiplayerNickname;
         }
         connectionText.text = "";
         if (gameNumberField.transform.parent.gameObject.activeSelf == false)

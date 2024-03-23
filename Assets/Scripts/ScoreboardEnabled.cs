@@ -66,6 +66,7 @@ public class ScoreboardEnabled : MonoBehaviourPunCallbacks
         //timer stat
         if (spawnerObject.gameLost)
         {
+            winLossImage.sprite = winLoseSprites[1];
             timerStat.text = "---";
         }
         else

@@ -127,6 +127,7 @@ public class InGameMenu : MonoBehaviourPunCallbacks
 
     public void exitToMenu()
     {
+        Destroy(GameObject.Find("PersistantSaveAndLoad").gameObject);
         if (PhotonNetwork.IsConnectedAndReady)
         {
             PhotonNetwork.Disconnect();
@@ -144,5 +145,26 @@ public class InGameMenu : MonoBehaviourPunCallbacks
             UnityEditor.EditorApplication.isPlaying = false;
         #endif
             Application.Quit();
+    }
+
+    public void setRegionUS()
+    {
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        saver.chosenRegion = "us";
+        saver.saveInfo();
+    }
+
+    public void setRegionEU()
+    {
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        saver.chosenRegion = "eu";
+        saver.saveInfo();
+    }
+
+    public void setRegionASIA()
+    {
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        saver.chosenRegion = "asia";
+        saver.saveInfo();
     }
 }
