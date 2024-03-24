@@ -106,7 +106,7 @@ public class SaveAndLoadData : MonoBehaviour
             headColor = "3A3025";
             topColor = "3A3025";
             JammiesColor = "006C5C";
-            FeetColor = "3A3025";
+            FeetColor = "006C5C";
             EyesColor = "845335";
             SkinColor = "896557";
             chosenHead = 0;

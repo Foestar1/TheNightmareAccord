@@ -58,6 +58,11 @@ public class ButtonColor : MonoBehaviour
         if (isSlippersAccessory)
         {
             selectedColor = this.GetComponent<Image>().color;
+            hexColor = ColorUtility.ToHtmlStringRGBA(this.GetComponent<Image>().color);
+
+            //time to save
+            hexColor = hexColor.Substring(0, 6); // Remove the alpha component
+            saverObject.FeetColor = hexColor;
         }
 
         if (isEyeColor)

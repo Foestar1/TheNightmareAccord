@@ -15,6 +15,18 @@ public class ButtonCustomizer : MonoBehaviour
     private Texture[] jammiesList;
 
     [SerializeField]
+    private GameObject[] slippersList;
+
+    [SerializeField]
+    private GameObject[] slippersList2;
+
+    [SerializeField]
+    private GameObject[] slippersList3;
+
+    [SerializeField]
+    private GameObject[] slippersList4;
+
+    [SerializeField]
     private TextMeshProUGUI playerNameButton;
 
     private void OnEnable()
@@ -86,6 +98,7 @@ public class ButtonCustomizer : MonoBehaviour
     }
     #endregion
 
+    #region jammies stuff
     public void jammiesRightButton()
     {
         //get the current head
@@ -137,4 +150,71 @@ public class ButtonCustomizer : MonoBehaviour
         saverObject.chosenJammies = currentJammies;
         saverObject.saveInfo();
     }
+    #endregion
+
+    #region slippers stuff
+    public void slippersRightButton()
+    {
+        //get the current head
+        int currentFeet = saverObject.chosenFeet;
+
+        // Disable the current head.
+        slippersList[currentFeet].SetActive(false);
+        slippersList2[currentFeet].SetActive(false);
+        slippersList3[currentFeet].SetActive(false);
+        slippersList4[currentFeet].SetActive(false);
+
+        // Increment the index. If it goes past the end, cycle back to 0.
+        if (currentFeet < slippersList.Length - 1)
+        {
+            currentFeet++;
+        }
+        else
+        {
+            currentFeet = 0;
+        }
+
+        // Enable the new current head.
+        slippersList[currentFeet].SetActive(true);
+        slippersList2[currentFeet].SetActive(true);
+        slippersList3[currentFeet].SetActive(true);
+        slippersList4[currentFeet].SetActive(true);
+
+        //Set the new head and save it
+        saverObject.chosenFeet = currentFeet;
+        saverObject.saveInfo();
+    }
+
+    public void slippersLeftButton()
+    {
+        //get the current head
+        int currentFeet = saverObject.chosenFeet;
+
+        // Disable the current head.
+        slippersList[currentFeet].SetActive(false);
+        slippersList2[currentFeet].SetActive(false);
+        slippersList3[currentFeet].SetActive(false);
+        slippersList4[currentFeet].SetActive(false);
+
+        // Increment the index. If it goes past the end, cycle back to 0.
+        if (currentFeet > 0)
+        {
+            currentFeet--;
+        }
+        else
+        {
+            currentFeet = slippersList.Length - 1;
+        }
+
+        // Enable the new current head.
+        slippersList[currentFeet].SetActive(true);
+        slippersList2[currentFeet].SetActive(true);
+        slippersList3[currentFeet].SetActive(true);
+        slippersList4[currentFeet].SetActive(true);
+
+        //Set the new head and save it
+        saverObject.chosenFeet = currentFeet;
+        saverObject.saveInfo();
+    }
+    #endregion
 }
