@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 using Smooth;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class characterControls : MonoBehaviourPunCallbacks
 {
@@ -305,6 +306,8 @@ public class characterControls : MonoBehaviourPunCallbacks
                     fillImage.fillAmount = 0; // Ensure the fill amount is set to 0 at the end
                     teddyOnCooldown = false;
                     playerLives--;
+                    GameObject playersLivesUI = GameObject.Find("PlayerLives");
+                    playersLivesUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = playerLives.ToString();
                     StartCoroutine(UpdateDead());
                 }else if (playerLives == 1) {
                     isDead = true;
@@ -333,6 +336,8 @@ public class characterControls : MonoBehaviourPunCallbacks
                     spawnerObject.soloDeaths++;
                     spawnerObject.totalDeaths++;
                     playerLives--;
+                    GameObject playersLivesUI = GameObject.Find("PlayerLives");
+                    playersLivesUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = playerLives.ToString();
                     StartCoroutine(UpdateDead());
                 }
                 else if (playerLives == 1)

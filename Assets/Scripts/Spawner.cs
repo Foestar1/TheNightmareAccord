@@ -78,6 +78,9 @@ public class Spawner : MonoBehaviourPunCallbacks
     private List<Transform> playerSpawnPoints;
     private int playersReady;
     private bool spawnedPlayers;
+    [Tooltip("The players singleplayer lives UI")]
+    [SerializeField]
+    private Image livesUI;
     #endregion
 
     #region unity functions
@@ -112,6 +115,8 @@ public class Spawner : MonoBehaviourPunCallbacks
             teddyUI.SetActive(true);
             var point = Random.Range(0, playerSpawnPoints.Count);
             var newPlayerListing = Instantiate(playerPrefab, playerSpawnPoints[point].position, playerSpawnPoints[point].rotation);
+            livesUI.gameObject.SetActive(true);
+            livesUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "3";
         }
     }
 
@@ -336,6 +341,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         goalTrackerUI.SetActive(false);
         teddyUI.SetActive(false);
         endScoreboard.SetActive(true);
+        livesUI.gameObject.SetActive(false);
         endScoreboard.transform.GetChild(5).GetComponent<Button>().Select();
     }
 
