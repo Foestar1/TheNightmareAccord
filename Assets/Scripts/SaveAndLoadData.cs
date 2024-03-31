@@ -26,6 +26,10 @@ public class SaveAndLoadData : MonoBehaviour
     public int chosenFeet { get; set; } //will have to list the feet choices somewhere
     public string chosenRegion { get; set; } //the region actual string needed to connect to specified region
     public string multiplayerNickname { get; set; } //our multiplayer nickname
+    public int perk1Learned { get; set; }//0 for no, 1 for yes
+    public int perk2Learned { get; set; }//0 for no, 1 for yes
+    public int perk3Learned { get; set; }//0 for no, 1 for yes
+    public int perk4Learned { get; set; }//0 for no, 1 for yes
 
     private bool needToSave;
     #endregion
@@ -55,6 +59,10 @@ public class SaveAndLoadData : MonoBehaviour
         PlayerPrefs.SetInt("chosenFeet", chosenFeet);
         PlayerPrefs.SetString("chosenRegion", chosenRegion);
         PlayerPrefs.SetString("multiplayerNickname", multiplayerNickname);
+        PlayerPrefs.SetInt("perk1Learned", perk1Learned);
+        PlayerPrefs.SetInt("perk2Learned", perk2Learned);
+        PlayerPrefs.SetInt("perk3Learned", perk3Learned);
+        PlayerPrefs.SetInt("perk4Learned", perk4Learned);
         PlayerPrefs.Save();
     }
 
@@ -67,7 +75,7 @@ public class SaveAndLoadData : MonoBehaviour
         musicVolume = PlayerPrefs.GetFloat("MusicVolume");
         level1Complete = PlayerPrefs.GetInt("Level1Complete");
         level1CompleteSecondary = PlayerPrefs.GetInt("level1CompleteSecondary");
-        level1CompleteSpeed = PlayerPrefs.GetInt("level1CompleteSpeed");
+        level1CompleteSpeed = PlayerPrefs.GetFloat("level1CompleteSpeed");
         level2Complete = PlayerPrefs.GetInt("Level2Complete");
         level3Complete = PlayerPrefs.GetInt("Level3Complete");
         level4Complete = PlayerPrefs.GetInt("Level4Complete");
@@ -83,6 +91,10 @@ public class SaveAndLoadData : MonoBehaviour
         chosenFeet = PlayerPrefs.GetInt("chosenFeet");
         chosenRegion = PlayerPrefs.GetString("chosenRegion");
         multiplayerNickname = PlayerPrefs.GetString("multiplayerNickname");
+        perk1Learned = PlayerPrefs.GetInt("perk1Learned");
+        perk2Learned = PlayerPrefs.GetInt("perk2Learned");
+        perk3Learned = PlayerPrefs.GetInt("perk3Learned");
+        perk4Learned = PlayerPrefs.GetInt("perk4Learned");
     }
 
     public void Awake()
@@ -115,6 +127,10 @@ public class SaveAndLoadData : MonoBehaviour
             chosenFeet = 0;
             chosenRegion = "us";
             multiplayerNickname = "Player";
+            perk1Learned = 0;
+            perk2Learned = 0;
+            perk3Learned = 0;
+            perk4Learned = 0;
             saveInfo();
         }
         else

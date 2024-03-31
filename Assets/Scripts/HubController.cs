@@ -71,6 +71,9 @@ public class HubController : MonoBehaviourPunCallbacks
     [Tooltip("The UI for the character customization screen")]
     [SerializeField]
     private GameObject characterCustomizationUI;
+    [Tooltip("The UI for the Teddy customization screen and perks")]
+    [SerializeField]
+    private GameObject teddyCustomizationUI;
     public bool canOpen { get; set; }
 
     [Header("Player Stuff")]
@@ -179,6 +182,24 @@ public class HubController : MonoBehaviourPunCallbacks
     public void closeCustomizationMenu()
     {
         characterCustomizationUI.SetActive(false);
+        StartCoroutine(canOpenReset());
+        playerObject.GetComponent<characterControls>().canMove = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void openTeddyMenu()
+    {
+        canOpen = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        teddyCustomizationUI.SetActive(true);
+        teddyCustomizationUI.transform.GetChild(0).GetComponent<Button>().Select();
+    }
+
+    public void closeTeddyMenu()
+    {
+        teddyCustomizationUI.SetActive(false);
         StartCoroutine(canOpenReset());
         playerObject.GetComponent<characterControls>().canMove = true;
         Cursor.visible = false;

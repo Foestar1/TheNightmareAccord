@@ -47,11 +47,16 @@ public class MainMenu : MonoBehaviour
     public void deleteGameButton()
     {
         //PlayerPrefs.DeleteAll();
-        gamesData.haveSavedGame = 0;
         gamesData.level1Complete = 0;
+        gamesData.level1CompleteSecondary = 0;
+        gamesData.level1CompleteSpeed = 0;
         gamesData.level2Complete = 0;
         gamesData.level3Complete = 0;
         gamesData.level4Complete = 0;
+        gamesData.perk1Learned = 0;
+        gamesData.perk2Learned = 0;
+        gamesData.perk3Learned = 0;
+        gamesData.perk4Learned = 0;
         gamesData.saveInfo();
     }
 

@@ -253,14 +253,21 @@ public class Spawner : MonoBehaviourPunCallbacks
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                timerRunning = false;
                 gameWon = true;
                 mainStartingCamera.gameObject.SetActive(true);
+                SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
 
                 //which scene are we in
                 if (SceneManager.GetActiveScene().name == "Petal's Lament")
                 {
-                    GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().level1Complete = 1;
-                    GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().saveInfo();
+                    saver.level1Complete = 1;
+                    //save timer if needed
+                    if (saver.level1CompleteSpeed == 0 || saver.level1CompleteSpeed > gameTimer)
+                    {
+                        saver.level1CompleteSpeed = gameTimer;
+                    }
+                    saver.saveInfo();
                 }
 
                 //clear out the enemies
@@ -452,12 +459,18 @@ public class Spawner : MonoBehaviourPunCallbacks
         mainStartingCamera.gameObject.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+
         //which scene are we in
         if (SceneManager.GetActiveScene().name == "Petal's Lament")
         {
-            GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().level1Complete = 1;
-            GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>().saveInfo();
+            saver.level1Complete = 1;
+            //save timer if needed
+            if (saver.level1CompleteSpeed == 0 || saver.level1CompleteSpeed > gameTimer)
+            {
+                saver.level1CompleteSpeed = gameTimer;
+            }
+            saver.saveInfo();
         }
 
         //clear out the enemies

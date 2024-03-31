@@ -49,6 +49,7 @@ public class characterControls : MonoBehaviourPunCallbacks
     //[SerializeField]
     private HubController hubControlObject;
     private Spawner spawnerObject;
+    private SaveAndLoadData saver;
 
     [Header("Player References")]
     [Tooltip("Our players view camera")]
@@ -111,6 +112,26 @@ public class characterControls : MonoBehaviourPunCallbacks
                 {
                     playerCamera.farClipPlane = 10000;
                 }
+                //save and loader
+                if (saver == null)
+                {
+                    saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+                }
+                //check our cooldown
+                if (saver.perk1Learned == 1)
+                {
+                    teddyCooldownTime = 30f;
+                }
+                //check our cooldown
+                if (saver.perk3Learned == 1)
+                {
+                    this.photonView.RPC("changeDiscoveryRange", RpcTarget.All);
+                }
+                //check our speed
+                if (saver.perk4Learned == 1)
+                {
+                    runSpeed = 11.5f;
+                }
             }
         }
         else
@@ -131,6 +152,26 @@ public class characterControls : MonoBehaviourPunCallbacks
             if (SceneManager.GetActiveScene().name == "Doubloon Dash")
             {
                 playerCamera.farClipPlane = 10000;
+            }
+            //save and loader
+            if (saver == null)
+            {
+                saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+            }
+            //check our cooldown
+            if (saver.perk1Learned == 1)
+            {
+                teddyCooldownTime = 30f;
+            }
+            //check our cooldown
+            if (saver.perk3Learned == 1)
+            {
+                TeddyObject.transform.GetChild(1).GetChild(0).transform.localScale = new Vector3(.5f, .5f, .5f);
+            }
+            //check our speed
+            if (saver.perk4Learned == 1)
+            {
+                runSpeed = 11.5f;
             }
         }
     }
@@ -423,11 +464,11 @@ public class characterControls : MonoBehaviourPunCallbacks
         {
             if (!playerSlowed)
             {
-                movementSpeed = 5;
+                movementSpeed = runSpeed / 2;
             }
             else
             {
-                movementSpeed = 5 / 2;
+                movementSpeed = (runSpeed / 2) / 2;
             }
         }
 
@@ -558,6 +599,12 @@ public class characterControls : MonoBehaviourPunCallbacks
                         canMove = false;
                         hubControlObject.openCustomizationMenu();
                     }
+                    if (targetedObject.name == "Plushie" && hubControlObject.canOpen)
+                    {
+                        interactionButton.SetActive(false);
+                        canMove = false;
+                        hubControlObject.openTeddyMenu();
+                    }
                 }
                 #endregion
 
@@ -681,6 +728,12 @@ public class characterControls : MonoBehaviourPunCallbacks
         GameObject.Find("SpawnControls").GetComponent<Spawner>().totalDeaths++;
         PhotonView.Find(playerGhostPWID).GetComponent<LinkedPlayer>().linkedPlayer = PhotonView.Find(playerPWID).gameObject;
         PhotonView.Find(playerPWID).gameObject.SetActive(false);
+    }
+
+    [PunRPC]
+    void changeDiscoveryRange()
+    {
+        TeddyObject.transform.GetChild(1).GetChild(0).transform.localScale = new Vector3(.5f, .5f, .5f);
     }
     #endregion
 }

@@ -75,17 +75,12 @@ public class ScoreboardEnabled : MonoBehaviourPunCallbacks
             int s = (int)spawnerObject.gameTimer - m * 60;
             timerStat.text = m.ToString() + ":" + s.ToString();
         }
-        //save timer if needed
-        saveAndLoadObject = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
-        if (saveAndLoadObject.level1CompleteSpeed == 0 || saveAndLoadObject.level1CompleteSpeed > spawnerObject.gameTimer)
-        {
-            saveAndLoadObject.level1CompleteSpeed = spawnerObject.gameTimer;
-            saveAndLoadObject.saveInfo();
-        }
     }
 
     public void leaveGame()
     {
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        Destroy(saver.gameObject);
         if (PhotonNetwork.IsConnectedAndReady)
         {
             PhotonNetwork.Disconnect();

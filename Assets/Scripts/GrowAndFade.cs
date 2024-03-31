@@ -19,6 +19,25 @@ public class GrowAndFade : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            if (this.photonView.IsMine)
+            {
+                if (saver.perk2Learned == 1)
+                {
+                    this.photonView.RPC("changeSize", RpcTarget.All);
+                }
+            }
+        }
+        else
+        {
+            if (saver.perk2Learned == 1)
+            {
+                maxSize = 37.5f;
+            }
+        }
+
         material = GetComponent<Renderer>().material;
         originalBaseColor = material.GetColor("_BaseColor");
         originalEmissionColor = material.GetColor("_EmissionColor");
@@ -75,5 +94,11 @@ public class GrowAndFade : MonoBehaviourPunCallbacks
         Color baseColor = originalBaseColor;
         baseColor.a = alpha;
         material.SetColor("_BaseColor", baseColor);
+    }
+
+    [PunRPC]
+    void changeSize()
+    {
+        maxSize = 37.5f;
     }
 }

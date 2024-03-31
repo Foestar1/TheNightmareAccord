@@ -2722,6 +2722,7 @@ GameObject:
   - component: {fileID: 4953688554966097132}
   - component: {fileID: 4707770474479130150}
   - component: {fileID: 229274896968170424}
+  - component: {fileID: 1139118564372160104}
   m_Layer: 2
   m_Name: CatSlipper
   m_TagString: Untagged
@@ -2813,6 +2814,28 @@ MonoBehaviour:
   isSlippersAccessory: 1
   isEyeColor: 0
   isSkinColor: 0
+--- !u!114 &1139118564372160104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2294548077430060281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2460584246064803120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,6 +2848,7 @@ GameObject:
   - component: {fileID: 4915397966751994163}
   - component: {fileID: 3476377762824641807}
   - component: {fileID: 7418178869813598212}
+  - component: {fileID: 2843740503426059876}
   m_Layer: 2
   m_Name: PiggySlipper
   m_TagString: Untagged
@@ -2916,6 +2940,28 @@ MonoBehaviour:
   isSlippersAccessory: 1
   isEyeColor: 0
   isSkinColor: 0
+--- !u!114 &2843740503426059876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2460584246064803120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2524198425210045043
 GameObject:
   m_ObjectHideFlags: 0
@@ -3268,6 +3314,7 @@ GameObject:
   - component: {fileID: 300009322168173307}
   - component: {fileID: 2441323315310734604}
   - component: {fileID: 1503526009845232778}
+  - component: {fileID: 2695172930914259439}
   m_Layer: 2
   m_Name: BunnySlipper
   m_TagString: Untagged
@@ -3359,6 +3406,28 @@ MonoBehaviour:
   isSlippersAccessory: 1
   isEyeColor: 0
   isSkinColor: 0
+--- !u!114 &2695172930914259439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2957965128036217228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3081147805289519904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3946,6 +4015,7 @@ GameObject:
   - component: {fileID: 7919813441544112419}
   - component: {fileID: 2339182701537914448}
   - component: {fileID: 3316505908408650943}
+  - component: {fileID: 9130492789267794163}
   m_Layer: 2
   m_Name: BearSlipper
   m_TagString: Untagged
@@ -4036,6 +4106,28 @@ MonoBehaviour:
   isSlippersAccessory: 1
   isEyeColor: 0
   isSkinColor: 0
+--- !u!114 &9130492789267794163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331064550850421353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4414685644919342120
 GameObject:
   m_ObjectHideFlags: 0
@@ -4143,6 +4235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3662348875169897537}
   - component: {fileID: 850847268250226337}
+  - component: {fileID: 5772150518660604308}
   m_Layer: 2
   m_Name: PlayerSlippersR
   m_TagString: Untagged
@@ -4192,6 +4285,28 @@ MonoBehaviour:
   - {fileID: 3856231602598341631}
   - {fileID: 3800035718101608972}
   - {fileID: 278060639852125231}
+--- !u!114 &5772150518660604308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775430963151679474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4997060991376606187
 GameObject:
   m_ObjectHideFlags: 0
@@ -5938,6 +6053,7 @@ GameObject:
   - component: {fileID: 7411841577879241212}
   - component: {fileID: 4874995865643842401}
   - component: {fileID: 3628804451888633018}
+  - component: {fileID: 6090725301223480797}
   m_Layer: 2
   m_Name: CatSlipper
   m_TagString: Untagged
@@ -6029,6 +6145,28 @@ MonoBehaviour:
   isSlippersAccessory: 1
   isEyeColor: 0
   isSkinColor: 0
+--- !u!114 &6090725301223480797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411095373716525913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7435941312344276576
 GameObject:
   m_ObjectHideFlags: 0
@@ -6070,6 +6208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5284353676307918166}
   - component: {fileID: 8514595147984436138}
+  - component: {fileID: 7681217115035401222}
   m_Layer: 2
   m_Name: PlayerSlippersL
   m_TagString: Untagged
@@ -6119,6 +6258,28 @@ MonoBehaviour:
   - {fileID: 4997060991376606187}
   - {fileID: 6833219036854162742}
   - {fileID: 4318726707053937625}
+--- !u!114 &7681217115035401222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7482111948176222259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7505978061657535813
 GameObject:
   m_ObjectHideFlags: 0
@@ -6377,6 +6538,7 @@ GameObject:
   - component: {fileID: 5345931039257211945}
   - component: {fileID: 7349335736104242580}
   - component: {fileID: 1410390831434551514}
+  - component: {fileID: 5878429177002744466}
   m_Layer: 2
   m_Name: PiggySlipper
   m_TagString: Untagged
@@ -6468,6 +6630,28 @@ MonoBehaviour:
   isSlippersAccessory: 1
   isEyeColor: 0
   isSkinColor: 0
+--- !u!114 &5878429177002744466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608940626489511334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7708649885485841819
 GameObject:
   m_ObjectHideFlags: 0
@@ -6881,6 +7065,7 @@ GameObject:
   - component: {fileID: 3064191514272989807}
   - component: {fileID: 4531544108333195575}
   - component: {fileID: 7396114289136316675}
+  - component: {fileID: 3077361410006818497}
   m_Layer: 2
   m_Name: BunnySlipper
   m_TagString: Untagged
@@ -6972,6 +7157,28 @@ MonoBehaviour:
   isSlippersAccessory: 1
   isEyeColor: 0
   isSkinColor: 0
+--- !u!114 &3077361410006818497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7987945246128393289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &8114447203863917836
 GameObject:
   m_ObjectHideFlags: 0
@@ -6984,6 +7191,7 @@ GameObject:
   - component: {fileID: 2806276637291488380}
   - component: {fileID: 4126550703416949805}
   - component: {fileID: 8195380009875706813}
+  - component: {fileID: 2697642325969754591}
   m_Layer: 2
   m_Name: BearSlipper
   m_TagString: Untagged
@@ -7074,6 +7282,28 @@ MonoBehaviour:
   isSlippersAccessory: 1
   isEyeColor: 0
   isSkinColor: 0
+--- !u!114 &2697642325969754591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8114447203863917836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &8174029897987480832
 GameObject:
   m_ObjectHideFlags: 0
