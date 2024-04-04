@@ -59,6 +59,7 @@ MonoBehaviour:
   - activateTimer
   - changeSize
   - changeDiscoveryRange
+  - changePlushie
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

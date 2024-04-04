@@ -166,7 +166,7 @@ public class characterControls : MonoBehaviourPunCallbacks
             //check our cooldown
             if (saver.perk3Learned == 1)
             {
-                TeddyObject.transform.GetChild(1).GetChild(0).transform.localScale = new Vector3(.5f, .5f, .5f);
+                TeddyObject.transform.GetChild(0).GetChild(0).transform.localScale = new Vector3(.5f, .5f, .5f);
             }
             //check our speed
             if (saver.perk4Learned == 1)
@@ -733,7 +733,7 @@ public class characterControls : MonoBehaviourPunCallbacks
     [PunRPC]
     void changeDiscoveryRange()
     {
-        TeddyObject.transform.GetChild(1).GetChild(0).transform.localScale = new Vector3(.5f, .5f, .5f);
+        TeddyObject.transform.GetChild(0).GetChild(0).transform.localScale = new Vector3(.5f, .5f, .5f);
     }
     #endregion
 }

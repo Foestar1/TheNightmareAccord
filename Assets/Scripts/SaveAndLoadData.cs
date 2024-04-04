@@ -30,6 +30,7 @@ public class SaveAndLoadData : MonoBehaviour
     public int perk2Learned { get; set; }//0 for no, 1 for yes
     public int perk3Learned { get; set; }//0 for no, 1 for yes
     public int perk4Learned { get; set; }//0 for no, 1 for yes
+    public int chosenPlushie { get; set; } //0-Teddy,1-Turtle,2-Penguin,3-Bunny
 
     private bool needToSave;
     #endregion
@@ -63,6 +64,7 @@ public class SaveAndLoadData : MonoBehaviour
         PlayerPrefs.SetInt("perk2Learned", perk2Learned);
         PlayerPrefs.SetInt("perk3Learned", perk3Learned);
         PlayerPrefs.SetInt("perk4Learned", perk4Learned);
+        PlayerPrefs.SetInt("chosenPlushie", chosenPlushie);
         PlayerPrefs.Save();
     }
 
@@ -95,6 +97,7 @@ public class SaveAndLoadData : MonoBehaviour
         perk2Learned = PlayerPrefs.GetInt("perk2Learned");
         perk3Learned = PlayerPrefs.GetInt("perk3Learned");
         perk4Learned = PlayerPrefs.GetInt("perk4Learned");
+        chosenPlushie = PlayerPrefs.GetInt("chosenPlushie");
     }
 
     public void Awake()
@@ -131,6 +134,7 @@ public class SaveAndLoadData : MonoBehaviour
             perk2Learned = 0;
             perk3Learned = 0;
             perk4Learned = 0;
+            chosenPlushie = 0;
             saveInfo();
         }
         else
