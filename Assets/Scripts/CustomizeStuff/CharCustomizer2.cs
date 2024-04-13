@@ -19,7 +19,7 @@ public class CharCustomizer2 : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject[] childrenObjects;
 
-    private void OnEnable()
+    private void Awake()
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {

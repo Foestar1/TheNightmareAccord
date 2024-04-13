@@ -8,7 +8,7 @@ public class JammieCustomizer : MonoBehaviourPunCallbacks
     [SerializeField]
     private Texture[] jammieChoices;
 
-    private void OnEnable()
+    private void Awake()
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {

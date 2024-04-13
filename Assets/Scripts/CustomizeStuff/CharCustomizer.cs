@@ -21,7 +21,7 @@ public class CharCustomizer : MonoBehaviourPunCallbacks
     [SerializeField]
     private bool isSkinColor;
 
-    private void OnEnable()
+    private void Awake()
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {

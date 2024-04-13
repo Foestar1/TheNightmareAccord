@@ -109,6 +109,7 @@ public class Spawner : MonoBehaviourPunCallbacks
         else
         {
             timerRunning = true;
+            GameObject.Find("Music").GetComponent<MusicController>().gameStarted = true;
             Crosshair.SetActive(true);
             interactionButton.SetActive(true);
             goalTrackerUI.SetActive(true);
@@ -392,6 +393,8 @@ public class Spawner : MonoBehaviourPunCallbacks
     [PunRPC]
     void activateUIAndPlayer(int pointID)
     {
+        spawnedPlayers = true;
+        GameObject.Find("Music").GetComponent<MusicController>().gameStarted = true;
         PhotonView tempView = PhotonView.Find(pointID);
         Crosshair.SetActive(true);
         interactionButton.SetActive(true);
@@ -454,11 +457,11 @@ public class Spawner : MonoBehaviourPunCallbacks
     [PunRPC]
     void gameWasWon()
     {
-        gameWon = true;
-        timerRunning = false;
-        mainStartingCamera.gameObject.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        timerRunning = false;
+        gameWon = true;
+        mainStartingCamera.gameObject.SetActive(true);
         SaveAndLoadData saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
 
         //which scene are we in
@@ -480,25 +483,18 @@ public class Spawner : MonoBehaviourPunCallbacks
             Destroy(enemyObject.gameObject);
         }
 
-        //clear out the player cycler objects
-        List<GameObject> playerCyclerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerCycler"));
-        foreach (GameObject cycleObject in playerCyclerObjects)
-        {
-            Destroy(cycleObject.gameObject);
-        }
-
         //clear out the ghost spirits of lost players
-        List<GameObject> playerSpiritObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
-        foreach (GameObject playersGhost in playerSpiritObjects)
+        List<GameObject> playerSpiritsObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerSpirit"));
+        foreach (GameObject playersGhost in playerSpiritsObjects)
         {
             Destroy(playersGhost.gameObject);
         }
 
         //clear out the players who are alive
         List<GameObject> playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
-        foreach (GameObject playerAlive in playerObjects)
+        foreach (GameObject playersAlive in playerObjects)
         {
-            Destroy(playerAlive.gameObject);
+            Destroy(playersAlive.gameObject);
         }
 
         Crosshair.SetActive(false);

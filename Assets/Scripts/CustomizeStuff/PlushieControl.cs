@@ -17,10 +17,7 @@ public class PlushieControl : MonoBehaviourPunCallbacks
         {
             saver = GameObject.Find("PersistantSaveAndLoad").GetComponent<SaveAndLoadData>();
         }
-    }
 
-    private void OnEnable()
-    {
         if (PhotonNetwork.IsConnectedAndReady)
         {
             if (this.photonView.IsMine)
